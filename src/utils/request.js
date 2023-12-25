@@ -24,11 +24,11 @@ export default function request(_options) {
       ...randomHeaders(),
     },
     withCredentials: true,
-    ..._options,
     validateStatus: (status) => {
       return status === 200;
     },
+    method: "GET",
+    ..._options,
   };
-  console.log(options);
   return instanceAxios(options);
 }
