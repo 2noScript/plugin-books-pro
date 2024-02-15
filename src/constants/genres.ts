@@ -211,6 +211,8 @@ const nettruyen: genre[] = [
   },
 ];
 
+const truyenqq: genre[] = [];
+
 const toonily: genre[] = [
   {
     name: "Action",
@@ -324,5 +326,6 @@ const toonily: genre[] = [
 
 export default {
   nettruyen,
+  truyenqq,
   toonily,
 };

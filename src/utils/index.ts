@@ -1,7 +1,9 @@
 import puppeteer from "puppeteer-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
+import AnonymizeUaPlugin from "puppeteer-extra-plugin-anonymize-ua";
 import { parse } from "node-html-parser";
 puppeteer.use(StealthPlugin());
+puppeteer.use(AnonymizeUaPlugin());
 
 export const getHtmlParser = async (baseUrl: string) => {
   try {
