@@ -8,4 +8,11 @@ export const comicSuppliers: suppliers = {
     icon: "",
     logo: "",
   },
+  TRUYENQQ: {
+    name: "truyenqq",
+    language: ["vi"],
+    locale: "vi_VN",
+    icon: "",
+    logo: "",
+  },
 };

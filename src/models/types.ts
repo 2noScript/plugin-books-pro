@@ -14,6 +14,11 @@ export type supplier = {
   locale: "vi_VN";
 };
 
+export type FLAG_COMIC = "NETTRUYEN" | "TRUYENQQ";
 export type suppliers = {
-  [key: string]: supplier;
+  [key in FLAG_COMIC]: supplier;
 };
+
+// export type TYPE_LOAD_COMIC={
+//   [key in FLAG_COMIC]:
+// }
