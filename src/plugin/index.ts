@@ -1,2 +1,2 @@
-export { NeTruyen } from "./nettruyen";
-export { TruyenQQ } from "./truyenqq";
+export { Nettruyen } from "./nettruyen";
+// export { TruyenQQ } from "./truyenqq";

@@ -19,3 +19,5 @@ export const getHtmlParser = async (baseUrl: string) => {
     throw error;
   }
 };
+
+export const browser = puppeteer.launch({ headless: true });

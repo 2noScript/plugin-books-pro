@@ -1,12 +1,13 @@
-import { suppliers } from "../models/types";
+import { type_suppliers } from "../models/types";
 
-export const comicSuppliers: suppliers = {
+export const comicSuppliers: type_suppliers = {
   NETTRUYEN: {
     name: "nettruyen",
     language: ["vi"],
     locale: "vi_VN",
     icon: "",
     logo: "",
+    source: "https://www.nettruyenss.com",
   },
   TRUYENQQ: {
     name: "truyenqq",
@@ -14,5 +15,6 @@ export const comicSuppliers: suppliers = {
     locale: "vi_VN",
     icon: "",
     logo: "",
+    source: "https://truyenqqvn.com",
   },
 };

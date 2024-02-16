@@ -1,8 +1,9 @@
-import { ComicBase } from "../models/base";
-import { genre } from "../models/types";
+import { BaseComic } from "../models/base";
 import genres from "../constants/genres";
-export class NeTruyen extends ComicBase {
-  getTag(): genre[] {
-    return genres.nettruyen;
+
+export class Nettruyen extends BaseComic {
+  constructor(baseUrl: string) {
+    super(baseUrl);
+    this.all_genres = genres.nettruyen;
   }
 }

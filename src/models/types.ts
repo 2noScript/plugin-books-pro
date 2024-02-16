@@ -6,19 +6,16 @@ export type genre = {
 
 type TYPE_LANGUAGE = "vi" | "en";
 
-export type supplier = {
-  name: string;
+export type type_supplier = {
+  name: "nettruyen" | "truyenqq";
   logo: string;
   icon: string;
   language: TYPE_LANGUAGE[];
   locale: "vi_VN";
+  source: string;
 };
 
 export type FLAG_COMIC = "NETTRUYEN" | "TRUYENQQ";
-export type suppliers = {
-  [key in FLAG_COMIC]: supplier;
+export type type_suppliers = {
+  [key in FLAG_COMIC]: type_supplier;
 };
-
-// export type TYPE_LOAD_COMIC={
-//   [key in FLAG_COMIC]:
-// }
