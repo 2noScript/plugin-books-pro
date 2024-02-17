@@ -11,8 +11,12 @@ export class Comic {
         return new Nettruyen(supplier.source);
       // case "truyenqq":
       //   return new TruyenQQ(supplier.source);
+      default:
+        return new Nettruyen(supplier.source);
     }
   }
 }
 
 const cm = new Comic().build(comicSuppliers.NETTRUYEN);
+
+console.log(cm.getAllGenres().then((e) => console.log(e)));

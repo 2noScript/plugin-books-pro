@@ -15,7 +15,7 @@ export type responseListComic = {
   }[];
 };
 
-export type genre = {
+export type TGenre = {
   url?: string;
   name: string;
   path: string;
@@ -36,7 +36,7 @@ export type responseDetailComic = {
   author: string;
   title: string;
   status: string;
-  genres: genre[];
+  genres: TGenre[];
   views?: string;
   rate?: string;
   rate_number?: string;
@@ -67,7 +67,6 @@ export type constructorParams = {
 export interface AbstractComicFactory {
   baseUrl: string;
   browser?: Promise<Browser>;
-  all_genres: genre[];
 
   getListLatestUpdate(page?: number): Promise<responseListComic>;
 
@@ -82,11 +81,13 @@ export interface AbstractComicFactory {
   ): Promise<responseChapter>;
 
   getListByGenre(
-    genre: genre,
+    genre: TGenre,
     page?: number,
     status?: any,
     sort?: any
   ): Promise<responseListComic>;
+
+  getAllGenres(): Promise<TGenre[]>;
 
   search(keyword: string, page?: number): Promise<responseListComic>;
 }
@@ -124,8 +125,7 @@ const defaultResponseChapter: responseChapter = {
 
 export class BaseComic implements AbstractComicFactory {
   baseUrl: string;
-  browser?: Promise<Browser>;
-  all_genres!: genre[];
+  browser: Promise<Browser>;
 
   constructor(baseUrl: string) {
     this.baseUrl = baseUrl;
@@ -155,11 +155,14 @@ export class BaseComic implements AbstractComicFactory {
   }
 
   async getListByGenre(
-    genre: genre,
+    genre: TGenre,
     page?: number,
     status?: any,
     sort?: any
   ): Promise<responseListComic> {
     return defaultResponseListComic;
+  }
+  async getAllGenres(): Promise<TGenre[]> {
+    return [];
   }
 }

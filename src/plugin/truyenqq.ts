@@ -1,4 +1,3 @@
-import genres from "../constants/genres";
 import { AbstractComicFactory } from "../models/base";
 import { genre } from "../models/types";
 // export class TruyenQQ implements AbstractComicFactory {
