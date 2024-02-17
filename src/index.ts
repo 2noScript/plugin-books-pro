@@ -19,4 +19,6 @@ export class Comic {
 
 const cm = new Comic().build(comicSuppliers.NETTRUYEN);
 
-cm.search("he", 1).then((e) => console.log(e));
+// cm.search("he", 1).then((e) => console.log(e));
+
+cm.getListNew(1).then((data) => console.log(data));

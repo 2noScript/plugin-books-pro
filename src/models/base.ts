@@ -9,10 +9,14 @@ import {
 } from "./types";
 
 export interface AbstractComicFactory {
-  baseUrl: string;
-  browser?: Promise<Browser>;
+  getAllGenres(): Promise<genre[]>;
+  search(keyword: string, page?: number): Promise<responseListComic>;
 
   getListLatestUpdate(page?: number): Promise<responseListComic>;
+  getListComplete(page?: number): Promise<responseListComic>;
+  getListNew(page?: number): Promise<responseListComic>;
+
+  getListByGenre(genre: genre, page?: number): Promise<responseListComic>;
 
   getDetailComic(url: string): Promise<responseDetailComic>;
 
@@ -23,17 +27,6 @@ export interface AbstractComicFactory {
     prev_chapter?: chapter,
     next_chapter?: chapter
   ): Promise<responseChapter>;
-
-  getListByGenre(
-    genre: genre,
-    page?: number,
-    status?: any,
-    sort?: any
-  ): Promise<responseListComic>;
-
-  getAllGenres(): Promise<genre[]>;
-
-  search(keyword: string, page?: number): Promise<responseListComic>;
 }
 
 const defaultResponseListComic: responseListComic = {
@@ -68,14 +61,16 @@ const defaultResponseChapter: responseChapter = {
 };
 
 export class BaseComic implements AbstractComicFactory {
-  baseUrl: string;
-  browser: Promise<Browser>;
+  protected baseUrl: string;
+  protected browser: Promise<Browser>;
 
   constructor(baseUrl: string) {
     this.baseUrl = baseUrl;
     this.browser = browser;
   }
-
+  async getAllGenres(): Promise<genre[]> {
+    return [];
+  }
   async search(keyword: string, page = 1): Promise<responseListComic> {
     return defaultResponseListComic;
   }
@@ -83,7 +78,19 @@ export class BaseComic implements AbstractComicFactory {
   async getListLatestUpdate(page?: number): Promise<responseListComic> {
     return defaultResponseListComic;
   }
+  async getListComplete(page?: number): Promise<responseListComic> {
+    return defaultResponseListComic;
+  }
+  async getListNew(page?: number): Promise<responseListComic> {
+    return defaultResponseListComic;
+  }
 
+  async getListByGenre(
+    genre: genre,
+    page?: number
+  ): Promise<responseListComic> {
+    return defaultResponseListComic;
+  }
   async getDetailComic(url: string): Promise<responseDetailComic> {
     return defaultResponseDetailComic;
   }
@@ -96,17 +103,5 @@ export class BaseComic implements AbstractComicFactory {
     next_chapter?: chapter
   ): Promise<responseChapter> {
     return defaultResponseChapter;
-  }
-
-  async getListByGenre(
-    genre: genre,
-    page?: number,
-    status?: any,
-    sort?: any
-  ): Promise<responseListComic> {
-    return defaultResponseListComic;
-  }
-  async getAllGenres(): Promise<genre[]> {
-    return [];
   }
 }
