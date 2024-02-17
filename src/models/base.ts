@@ -1,68 +1,12 @@
 import { Browser } from "puppeteer";
 import { browser } from "../utils";
-
-export type responseListComic = {
-  totalData: number;
-  canNext: boolean;
-  canPrev: boolean;
-  totalPage?: number;
-  currentPage: number;
-  data: {
-    _id: number;
-    image_thumbnail: string;
-    title: string;
-    href: string;
-  }[];
-};
-
-export type TGenre = {
-  url?: string;
-  name: string;
-  path: string;
-};
-
-export type chapter = {
-  path: string;
-  url: string;
-  parent_href: string;
-  title?: string;
-  last_update?: string;
-  views?: string;
-};
-
-export type responseDetailComic = {
-  path: string;
-  url: string;
-  author: string;
-  title: string;
-  status: string;
-  genres: TGenre[];
-  views?: string;
-  rate?: string;
-  rate_number?: string;
-  follows?: string;
-  chapters: chapter[];
-};
-
-export type image_chapter = {
-  _id: number;
-  src_origin: string;
-  src_cdn?: string;
-  alt: string;
-};
-
-export type responseChapter = {
-  url?: string;
-  path?: string;
-  title: string;
-  chapter_data: image_chapter[];
-  prev_chapter: chapter | null;
-  next_chapter: chapter | null;
-};
-
-export type constructorParams = {
-  baseUrl?: string;
-};
+import {
+  chapter,
+  genre,
+  responseChapter,
+  responseDetailComic,
+  responseListComic,
+} from "./types";
 
 export interface AbstractComicFactory {
   baseUrl: string;
@@ -81,13 +25,13 @@ export interface AbstractComicFactory {
   ): Promise<responseChapter>;
 
   getListByGenre(
-    genre: TGenre,
+    genre: genre,
     page?: number,
     status?: any,
     sort?: any
   ): Promise<responseListComic>;
 
-  getAllGenres(): Promise<TGenre[]>;
+  getAllGenres(): Promise<genre[]>;
 
   search(keyword: string, page?: number): Promise<responseListComic>;
 }
@@ -155,14 +99,14 @@ export class BaseComic implements AbstractComicFactory {
   }
 
   async getListByGenre(
-    genre: TGenre,
+    genre: genre,
     page?: number,
     status?: any,
     sort?: any
   ): Promise<responseListComic> {
     return defaultResponseListComic;
   }
-  async getAllGenres(): Promise<TGenre[]> {
+  async getAllGenres(): Promise<genre[]> {
     return [];
   }
 }

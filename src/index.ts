@@ -1,5 +1,5 @@
 import { type_supplier } from "./models/types";
-import { Nettruyen } from "./plugin";
+import { NetTruyen } from "./plugin";
 
 import { comicSuppliers } from "./constants/suppliers";
 
@@ -8,11 +8,11 @@ export class Comic {
   build(supplier: type_supplier) {
     switch (supplier.name) {
       case "nettruyen":
-        return new Nettruyen(supplier.source);
+        return new NetTruyen(supplier.source);
       // case "truyenqq":
       //   return new TruyenQQ(supplier.source);
       default:
-        return new Nettruyen(supplier.source);
+        return new NetTruyen(supplier.source);
     }
   }
 }

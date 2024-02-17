@@ -1,27 +1,24 @@
-import { BaseComic, TGenre, responseListComic } from "../models/base";
+import { BaseComic } from "../models/base";
+import { genre, responseListComic } from "../models/types";
 import { getHtmlParser, removeVietnameseAccent } from "../utils";
 
-export class Nettruyen extends BaseComic {
-  constructor(baseUrl: string) {
-    super(baseUrl);
-  }
-
-  async getAllGenres(): Promise<TGenre[]> {
+export class NetTruyen extends BaseComic {
+  async getAllGenres(): Promise<genre[]> {
     const root = await getHtmlParser(this.baseUrl + "/tim-truyen");
     const genresRaw = root.querySelectorAll(
       "#ctl00_divRight .ModuleContent ul.nav li a"
     );
-    let all_Genres: TGenre[] = [];
-    genresRaw.forEach((genre) => {
+    let all_Genres: genre[] = [];
+    genresRaw.forEach((item) => {
       if (
-        !removeVietnameseAccent(genre.innerText)
+        !removeVietnameseAccent(item.innerText)
           .toLowerCase()
           .includes("tat ca the loai")
       ) {
         all_Genres.push({
-          name: genre.innerText,
-          path: genre.getAttribute("href")?.replace(this.baseUrl, "") ?? "",
-          url: genre.getAttribute("href") ?? "",
+          name: item.innerText,
+          path: item.getAttribute("href")?.replace(this.baseUrl, "") ?? "",
+          url: item.getAttribute("href") ?? "",
         });
       }
     });
