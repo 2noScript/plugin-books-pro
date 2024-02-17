@@ -33,10 +33,17 @@ const cm = new Comic().build(comicSuppliers.NETTRUYEN);
 //   2
 // ).then((data) => console.log(data));
 
-cm.getDetailComic({
-  _id: 245511,
-  image_thumbnail:
-    "//st.nettruyenss.com/data/comics/231/every-time-we-meet-eye-to-eye-i-fall-in-6064.jpg",
-  title: "Truyện tranh Every Time We Meet Eye to Eye, I Fall in Love with Her",
-  href: "/truyen-tranh/chien-binh-cach-mang-nguoi-cho-con-trinh-104944",
+// cm.getDetailComic({
+//   _id: 245511,
+//   image_thumbnail:
+//     "//st.nettruyenss.com/data/comics/231/every-time-we-meet-eye-to-eye-i-fall-in-6064.jpg",
+//   name: "Truyện tranh Every Time We Meet Eye to Eye, I Fall in Love with Her",
+//   href: "/truyen-tranh/chien-binh-cach-mang-nguoi-cho-con-trinh-104944",
+// }).then((data) => console.log(data));
+
+cm.getDataChapter({
+  path: "/truyen-tranh/chien-binh-cach-mang-nguoi-cho-con-trinh/chap-1/1113759",
+  url: "https://www.nettruyenss.com/truyen-tranh/chien-binh-cach-mang-nguoi-cho-con-trinh/chap-1/1113759",
+  title: "",
+  chap_name: "1",
 }).then((data) => console.log(data));

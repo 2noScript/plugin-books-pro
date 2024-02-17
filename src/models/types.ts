@@ -17,7 +17,7 @@ export type type_suppliers = {
 export type itemComic = {
   _id: number;
   image_thumbnail: string;
-  title: string;
+  name: string;
   href: string;
 };
 
@@ -39,7 +39,7 @@ export type genre = {
 export type chapter = {
   path: string;
   url: string;
-  title?: string;
+  title: string;
   chap_name: string;
   last_update?: string;
   views?: string;
@@ -49,7 +49,7 @@ export type responseDetailComic = {
   path: string;
   url: string;
   author: string[];
-  title: string;
+  name: string;
   status: "process" | "complete" | null;
   genres: genre[];
   views?: string;
@@ -71,6 +71,5 @@ export type responseChapter = {
   path?: string;
   title: string;
   chapter_data: image_chapter[];
-  prev_chapter: chapter | null;
-  next_chapter: chapter | null;
+  chap_name: string;
 };

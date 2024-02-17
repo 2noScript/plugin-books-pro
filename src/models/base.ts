@@ -21,13 +21,7 @@ export interface AbstractComicFactory {
 
   getDetailComic(comic: itemComic): Promise<responseDetailComic>;
 
-  getDataChapter(
-    url_chapter: string,
-    url?: string,
-    path?: string,
-    prev_chapter?: chapter,
-    next_chapter?: chapter
-  ): Promise<responseChapter>;
+  getDataChapter(itemChap: chapter): Promise<responseChapter>;
 }
 
 const defaultResponseListComic: responseListComic = {
@@ -43,7 +37,7 @@ const defaultResponseDetailComic: responseDetailComic = {
   path: "",
   url: "",
   author: [],
-  title: "",
+  name: "",
   status: null,
   genres: [],
   views: "",
@@ -57,8 +51,7 @@ const defaultResponseChapter: responseChapter = {
   path: "",
   title: "",
   chapter_data: [],
-  prev_chapter: null,
-  next_chapter: null,
+  chap_name: "",
 };
 
 export class BaseComic implements AbstractComicFactory {
@@ -96,13 +89,7 @@ export class BaseComic implements AbstractComicFactory {
     return defaultResponseDetailComic;
   }
 
-  async getDataChapter(
-    url_chapter: string,
-    url?: string,
-    path?: string,
-    prev_chapter?: chapter,
-    next_chapter?: chapter
-  ): Promise<responseChapter> {
+  async getDataChapter(itemChap: chapter): Promise<responseChapter> {
     return defaultResponseChapter;
   }
 }

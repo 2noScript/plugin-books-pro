@@ -16,7 +16,8 @@ export const getHtmlParser = async (baseUrl: string, _sleep: number = 0) => {
     const htmlContent = await page.content();
     await sleep(_sleep);
     const root = parse(htmlContent);
-    browser.close();
+    await page.close();
+    await browser.close();
     return root;
   } catch (error) {
     throw error;

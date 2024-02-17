@@ -3,6 +3,7 @@ import {
   chapter,
   genre,
   itemComic,
+  responseChapter,
   responseDetailComic,
   responseListComic,
 } from "../models/types";
@@ -29,7 +30,7 @@ export class NetTruyen extends BaseComic {
           a?.querySelector("img")?.getAttribute("data-original") ??
           a?.querySelector("img")?.getAttribute("src") ??
           "",
-        title:
+        name:
           a?.getAttribute("title") ??
           a?.querySelector("img")?.getAttribute("alt") ??
           "",
@@ -149,7 +150,7 @@ export class NetTruyen extends BaseComic {
             ?.getAttribute("href")
             ?.replace(this.baseUrl, ""),
           url: chap.querySelector("a")?.getAttribute("href"),
-          title: chap_text.length > 2 ? chap_text.pop()?.trim() : "",
+          title: chap_text.length > 1 ? chap_text.pop()?.trim() : "",
           chap_name: chap_text[0].toLowerCase().replace("chapter", "").trim(),
         };
       }) as chapter[];
@@ -157,7 +158,7 @@ export class NetTruyen extends BaseComic {
       path: comic.href,
       url: this.baseUrl + comic.href,
       author,
-      title: comic.title,
+      name: comic.name,
       status,
       genres,
       views,
@@ -165,6 +166,25 @@ export class NetTruyen extends BaseComic {
       rate_number,
       follows,
       chapters,
+    };
+  }
+  async getDataChapter(itemChap: chapter): Promise<responseChapter> {
+    const root = await getHtmlParser(this.baseUrl + itemChap.path);
+    const chap_name = root
+      .querySelectorAll("#ctl00_divCenter .reading-detail .page-chapter img")
+      .map((item) => ({
+        _id: Number(item.getAttribute("data-index")),
+        src_origin:
+          item.getAttribute("data-original") ?? item.getAttribute("src") ?? "",
+        src_cdn: item.getAttribute("data-cdn") ?? "",
+        alt: item.getAttribute("alt")?.trim() ?? "",
+      }));
+    return {
+      url: itemChap.url,
+      path: itemChap.path,
+      title: itemChap.title,
+      chapter_data: chap_name,
+      chap_name: itemChap.chap_name,
     };
   }
 }
