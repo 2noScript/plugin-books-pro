@@ -3,6 +3,7 @@ import { browser } from "../utils";
 import {
   chapter,
   genre,
+  itemComic,
   responseChapter,
   responseDetailComic,
   responseListComic,
@@ -18,7 +19,7 @@ export interface AbstractComicFactory {
 
   getListByGenre(genre: genre, page?: number): Promise<responseListComic>;
 
-  getDetailComic(url: string): Promise<responseDetailComic>;
+  getDetailComic(comic: itemComic): Promise<responseDetailComic>;
 
   getDataChapter(
     url_chapter: string,
@@ -41,9 +42,9 @@ const defaultResponseListComic: responseListComic = {
 const defaultResponseDetailComic: responseDetailComic = {
   path: "",
   url: "",
-  author: "",
+  author: [],
   title: "",
-  status: "",
+  status: null,
   genres: [],
   views: "",
   rate: "",
@@ -91,7 +92,7 @@ export class BaseComic implements AbstractComicFactory {
   ): Promise<responseListComic> {
     return defaultResponseListComic;
   }
-  async getDetailComic(url: string): Promise<responseDetailComic> {
+  async getDetailComic(comic: itemComic): Promise<responseDetailComic> {
     return defaultResponseDetailComic;
   }
 
