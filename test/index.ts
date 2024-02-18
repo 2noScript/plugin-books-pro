@@ -1,8 +1,6 @@
 import { Comic } from "../src";
 import { comicSuppliers } from "../src/constants/suppliers";
 
-const cm = new Comic().build(comicSuppliers.NETTRUYEN);
-
 // cm.search("he", 1);
 
 // cm.getAllGenres().then((data) => console.log(data));
@@ -31,5 +29,3 @@ const cm = new Comic().build(comicSuppliers.NETTRUYEN);
 //   title: "",
 //   chap_name: "1",
 // }).then((data) => console.log(data));
-
-cm.getTopHot().then((data) => console.log(data));

@@ -1,7 +1,10 @@
 import { Comic } from "../src";
-import { comicSuppliers } from "../src/constants/suppliers";
 import fs from "fs";
-const nettruyen = new Comic().build(comicSuppliers.NETTRUYEN);
+import { Suppliers } from "../src/models/types";
+const nettruyen = new Comic().build(
+  Suppliers.NetTuyen,
+  "https://www.nettruyenss.com"
+);
 
 const test = async () => {
   const [

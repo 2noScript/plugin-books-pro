@@ -1,3 +1,4 @@
+import { comicSuppliers } from "../constants/suppliers";
 import { BaseComic } from "../models/base";
 import {
   IChapter,

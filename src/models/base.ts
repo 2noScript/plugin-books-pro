@@ -5,6 +5,7 @@ import {
   IResponseChapter,
   IResponseDetailComic,
   IResponseListComic,
+  IComicInfo,
 } from "./types";
 
 // const defaultResponseListComic: responseListComic = {
@@ -39,9 +40,11 @@ import {
 
 export abstract class BaseComic {
   protected baseUrl: string;
+  public comicInfo: IComicInfo;
 
-  constructor(baseUrl: string) {
-    this.baseUrl = baseUrl;
+  constructor(comicInfo: IComicInfo) {
+    this.baseUrl = comicInfo.source;
+    this.comicInfo = comicInfo;
   }
 
   abstract getAllGenres(): Promise<IGenre[]>;

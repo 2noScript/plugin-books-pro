@@ -1,18 +1,20 @@
-type TYPE_LANGUAGE = "vi" | "en";
+type TYPE_LANGUAGE = "en" | "vi";
+type TYPE_lOCALE = "en_EN" | "vi_VN";
 
-export type type_supplier = {
-  name: "nettruyen" | "truyenqq";
+export enum Suppliers {
+  NetTuyen = "nettruyen",
+  TruyenQQ = "truyenqq",
+}
+
+export interface IComicInfo {
+  key: Suppliers;
+  name: string;
   logo: string;
   icon: string;
   language: TYPE_LANGUAGE[];
-  locale: "vi_VN";
+  locale: TYPE_lOCALE;
   source: string;
-};
-
-export type FLAG_COMIC = "NETTRUYEN" | "TRUYENQQ";
-export type type_suppliers = {
-  [key in FLAG_COMIC]: type_supplier;
-};
+}
 
 export interface IComic {
   _id: number;
