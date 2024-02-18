@@ -1,60 +1,60 @@
 import { Browser } from "puppeteer";
 import { browser } from "../utils";
 import {
-  chapter,
-  genre,
-  itemComic,
-  responseChapter,
-  responseDetailComic,
-  responseListComic,
+  IChapter,
+  IGenre,
+  IComic,
+  IResponseChapter,
+  IResponseDetailComic,
+  IResponseListComic,
 } from "./types";
 
 export interface AbstractComicFactory {
-  getAllGenres(): Promise<genre[]>;
-  search(keyword: string, page?: number): Promise<responseListComic>;
+  getAllGenres(): Promise<IGenre[]>;
+  search(keyword: string, page?: number): Promise<IResponseListComic>;
 
-  getListLatestUpdate(page?: number): Promise<responseListComic>;
-  getListComplete(page?: number): Promise<responseListComic>;
-  getListNew(page?: number): Promise<responseListComic>;
+  getListLatestUpdate(page?: number): Promise<IResponseListComic>;
+  getListComplete(page?: number): Promise<IResponseListComic>;
+  getListNew(page?: number): Promise<IResponseListComic>;
 
-  getListByGenre(genre: genre, page?: number): Promise<responseListComic>;
+  getListByGenre(genre: IGenre, page?: number): Promise<IResponseListComic>;
 
-  getDetailComic(comic: itemComic): Promise<responseDetailComic>;
+  getDetailComic(comic: IComic): Promise<IResponseDetailComic>;
 
-  getDataChapter(itemChap: chapter): Promise<responseChapter>;
+  getDataChapter(itemChap: IChapter): Promise<IResponseChapter>;
 }
 
-const defaultResponseListComic: responseListComic = {
-  totalData: 0,
-  canNext: false,
-  canPrev: false,
-  totalPage: 0,
-  currentPage: 0,
-  data: [],
-};
+// const defaultResponseListComic: responseListComic = {
+//   totalData: 0,
+//   canNext: false,
+//   canPrev: false,
+//   totalPage: 0,
+//   currentPage: 0,
+//   data: [],
+// };
 
-const defaultResponseDetailComic: responseDetailComic = {
-  path: "",
-  url: "",
-  author: [],
-  name: "",
-  status: null,
-  genres: [],
-  views: "",
-  rate: "",
-  rate_number: "",
-  follows: "",
-  chapters: [],
-};
-const defaultResponseChapter: responseChapter = {
-  url: "",
-  path: "",
-  title: "",
-  chapter_data: [],
-  chap_name: "",
-};
+// const defaultResponseDetailComic: responseDetailComic = {
+//   path: "",
+//   url: "",
+//   author: [],
+//   name: "",
+//   status: null,
+//   genres: [],
+//   views: "",
+//   rate: "",
+//   rate_number: "",
+//   follows: "",
+//   chapters: [],
+// };
+// const defaultResponseChapter: responseChapter = {
+//   url: "",
+//   path: "",
+//   title: "",
+//   chapter_data: [],
+//   chap_name: "",
+// };
 
-export class BaseComic implements AbstractComicFactory {
+export abstract class BaseComic {
   protected baseUrl: string;
   protected browser: Promise<Browser>;
 
@@ -62,34 +62,19 @@ export class BaseComic implements AbstractComicFactory {
     this.baseUrl = baseUrl;
     this.browser = browser;
   }
-  async getAllGenres(): Promise<genre[]> {
-    return [];
-  }
-  async search(keyword: string, page = 1): Promise<responseListComic> {
-    return defaultResponseListComic;
-  }
 
-  async getListLatestUpdate(page?: number): Promise<responseListComic> {
-    return defaultResponseListComic;
-  }
-  async getListComplete(page?: number): Promise<responseListComic> {
-    return defaultResponseListComic;
-  }
-  async getListNew(page?: number): Promise<responseListComic> {
-    return defaultResponseListComic;
-  }
+  abstract getAllGenres(): Promise<IGenre[]>;
+  abstract search(keyword: string, page?: number): Promise<IResponseListComic>;
 
-  async getListByGenre(
-    genre: genre,
+  abstract getListLatestUpdate(page?: number): Promise<IResponseListComic>;
+  abstract getListComplete(page?: number): Promise<IResponseListComic>;
+  abstract getListNew(page?: number): Promise<IResponseListComic>;
+
+  abstract getListByGenre(
+    genre: IGenre,
     page?: number
-  ): Promise<responseListComic> {
-    return defaultResponseListComic;
-  }
-  async getDetailComic(comic: itemComic): Promise<responseDetailComic> {
-    return defaultResponseDetailComic;
-  }
+  ): Promise<IResponseListComic>;
 
-  async getDataChapter(itemChap: chapter): Promise<responseChapter> {
-    return defaultResponseChapter;
-  }
+  abstract getDetailComic(comic: IComic): Promise<IResponseDetailComic>;
+  abstract getDataChapter(itemChap: IChapter): Promise<IResponseChapter>;
 }

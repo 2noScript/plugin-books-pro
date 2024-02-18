@@ -21,7 +21,7 @@ const cm = new Comic().build(comicSuppliers.NETTRUYEN);
 
 // cm.search("he", 1);
 
-cm.getAllGenres().then((data) => console.log(data));
+// cm.getAllGenres().then((data) => console.log(data));
 // cm.getListNew(1).then((data) => console.log(data));
 
 // cm.getListByGenre(
@@ -41,9 +41,9 @@ cm.getAllGenres().then((data) => console.log(data));
 //   href: "/truyen-tranh/chien-binh-cach-mang-nguoi-cho-con-trinh-104944",
 // }).then((data) => console.log(data));
 
-// cm.getDataChapter({
-//   path: "/truyen-tranh/chien-binh-cach-mang-nguoi-cho-con-trinh/chap-1/1113759",
-//   url: "https://www.nettruyenss.com/truyen-tranh/chien-binh-cach-mang-nguoi-cho-con-trinh/chap-1/1113759",
-//   title: "",
-//   chap_name: "1",
-// }).then((data) => console.log(data));
+cm.getDataChapter({
+  path: "/truyen-tranh/chien-binh-cach-mang-nguoi-cho-con-trinh/chap-1/1113759",
+  url: "https://www.nettruyenss.com/truyen-tranh/chien-binh-cach-mang-nguoi-cho-con-trinh/chap-1/1113759",
+  title: "",
+  chap_name: "1",
+}).then((data) => console.log(data));

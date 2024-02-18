@@ -1,18 +1,18 @@
 import { BaseComic } from "../models/base";
 import {
-  chapter,
-  genre,
-  itemComic,
-  responseChapter,
-  responseDetailComic,
-  responseListComic,
+  IChapter,
+  IGenre,
+  IComic,
+  IResponseChapter,
+  IResponseDetailComic,
+  IResponseListComic,
 } from "../models/types";
 import { getHtmlParser } from "../utils";
 import { textMaster } from "text-master-pro";
 
 export class NetTruyen extends BaseComic {
-  private async getListComic(url: string): Promise<responseListComic> {
-    let data: itemComic[] = [];
+  private async getListComic(url: string): Promise<IResponseListComic> {
+    let data: IComic[] = [];
     const root = await getHtmlParser(url);
     const books = root.querySelectorAll("#ctl00_divCenter .items .item");
     const canPrev = !!root.querySelector(".pagination .prev-page");
@@ -49,12 +49,12 @@ export class NetTruyen extends BaseComic {
     };
   }
 
-  async getAllGenres(): Promise<genre[]> {
+  async getAllGenres(): Promise<IGenre[]> {
     const root = await getHtmlParser(this.baseUrl + "/tim-truyen");
     const genresRaw = root.querySelectorAll(
       "#ctl00_divRight .ModuleContent ul.nav li a"
     );
-    let all_Genres: genre[] = [];
+    let all_Genres: IGenre[] = [];
     genresRaw.forEach((item) => {
       if (
         !textMaster(item.innerText)
@@ -71,27 +71,27 @@ export class NetTruyen extends BaseComic {
     return all_Genres;
   }
 
-  async search(keyword: string, page = 1): Promise<responseListComic> {
+  async search(keyword: string, page = 1): Promise<IResponseListComic> {
     return this.getListComic(
       this.baseUrl + `/tim-truyen?keyword=${keyword}&page=${page}`
     );
   }
 
-  async getListLatestUpdate(page = 1): Promise<responseListComic> {
+  async getListLatestUpdate(page = 1): Promise<IResponseListComic> {
     return this.getListComic(this.baseUrl + `/tim-truyen?page=${page}`);
   }
-  async getListComplete(page = 1): Promise<responseListComic> {
+  async getListComplete(page = 1): Promise<IResponseListComic> {
     return this.getListComic(this.baseUrl + `/truyen-full?page=${page}`);
   }
-  async getListNew(page = 1): Promise<responseListComic> {
+  async getListNew(page = 1): Promise<IResponseListComic> {
     return this.getListComic(
       this.baseUrl + `/truyen-full?page=${page}&status=-1&sort=15`
     );
   }
-  async getListByGenre(genre: genre, page = 1): Promise<responseListComic> {
+  async getListByGenre(genre: IGenre, page = 1): Promise<IResponseListComic> {
     return this.getListComic(this.baseUrl + `${genre.path}?page=${page}`);
   }
-  async getDetailComic(comic: itemComic): Promise<responseDetailComic> {
+  async getDetailComic(comic: IComic): Promise<IResponseDetailComic> {
     const root = await getHtmlParser(this.baseUrl + comic.href);
     const author =
       root
@@ -112,7 +112,7 @@ export class NetTruyen extends BaseComic {
         name: g.innerText.trim(),
         url: g.getAttribute("href"),
         path: g.getAttribute("href")?.replace(this.baseUrl, ""),
-      })) as genre[];
+      })) as IGenre[];
 
     const views = root
       .querySelectorAll("#item-detail .row")
@@ -156,7 +156,7 @@ export class NetTruyen extends BaseComic {
           title: chap_text.length > 1 ? chap_text.pop()?.trim() : "",
           chap_name: chap_text[0].toLowerCase().replace("chapter", "").trim(),
         };
-      }) as chapter[];
+      }) as IChapter[];
     return {
       path: comic.href,
       url: this.baseUrl + comic.href,
@@ -171,7 +171,7 @@ export class NetTruyen extends BaseComic {
       chapters,
     };
   }
-  async getDataChapter(itemChap: chapter): Promise<responseChapter> {
+  async getDataChapter(itemChap: IChapter): Promise<IResponseChapter> {
     const root = await getHtmlParser(this.baseUrl + itemChap.path);
     const chap_name = root
       .querySelectorAll("#ctl00_divCenter .reading-detail .page-chapter img")

@@ -14,62 +14,62 @@ export type type_suppliers = {
   [key in FLAG_COMIC]: type_supplier;
 };
 
-export type itemComic = {
+export interface IComic {
   _id: number;
   image_thumbnail: string;
   name: string;
   href: string;
-};
+}
 
-export type responseListComic = {
+export interface IResponseListComic {
   totalData: number;
   canNext: boolean;
   canPrev: boolean;
   totalPage?: number;
   currentPage: number;
-  data: itemComic[];
-};
+  data: IComic[];
+}
 
-export type genre = {
+export interface IGenre {
   url?: string;
   name: string;
   path: string;
-};
+}
 
-export type chapter = {
+export interface IChapter {
   path: string;
   url: string;
   title: string;
   chap_name: string;
   last_update?: string;
   views?: string;
-};
+}
 
-export type responseDetailComic = {
+export interface IResponseDetailComic {
   path: string;
   url: string;
   author: string[];
   name: string;
   status: "process" | "complete" | null;
-  genres: genre[];
+  genres: IGenre[];
   views?: string;
   rate?: string;
   rate_number?: string;
   follows?: string;
-  chapters: chapter[];
-};
+  chapters: IChapter[];
+}
 
-export type image_chapter = {
+export interface IImageChapter {
   _id: number;
   src_origin: string;
   src_cdn?: string;
   alt: string;
-};
+}
 
-export type responseChapter = {
+export interface IResponseChapter {
   url?: string;
   path?: string;
   title: string;
-  chapter_data: image_chapter[];
+  chapter_data: IImageChapter[];
   chap_name: string;
-};
+}
