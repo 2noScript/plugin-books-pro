@@ -1,5 +1,3 @@
-import { Browser } from "puppeteer";
-import { browser } from "../utils";
 import {
   IChapter,
   IGenre,
@@ -41,11 +39,9 @@ import {
 
 export abstract class BaseComic {
   protected baseUrl: string;
-  protected browser: Promise<Browser>;
 
   constructor(baseUrl: string) {
     this.baseUrl = baseUrl;
-    this.browser = browser;
   }
 
   abstract getAllGenres(): Promise<IGenre[]>;
