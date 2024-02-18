@@ -1235,6 +1235,11 @@ tar-stream@^3.1.5:
     fast-fifo "^1.2.0"
     streamx "^2.15.0"
 
+text-master-pro@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/text-master-pro/-/text-master-pro-0.0.3.tgz#0ead5ee8be4ced2de3d56fe02ea24e93cdd01de3"
+  integrity sha512-AD4s7Z2blMCjD+H+YbHhPv0wBynpPy9SUp24YzZZpmd42kGROtH5XE3NnuP7mZ5sSVcUgjxWOo4yYso6DrltMQ==
+
 through@^2.3.8:
   version "2.3.8"
   resolved "https://registry.yarnpkg.com/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"

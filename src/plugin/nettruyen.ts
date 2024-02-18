@@ -7,7 +7,8 @@ import {
   responseDetailComic,
   responseListComic,
 } from "../models/types";
-import { getHtmlParser, removeVietnameseAccent } from "../utils";
+import { getHtmlParser } from "../utils";
+import { textMaster } from "text-master-pro";
 
 export class NetTruyen extends BaseComic {
   private async getListComic(url: string): Promise<responseListComic> {
@@ -56,8 +57,8 @@ export class NetTruyen extends BaseComic {
     let all_Genres: genre[] = [];
     genresRaw.forEach((item) => {
       if (
-        !removeVietnameseAccent(item.innerText)
-          .toLowerCase()
+        !textMaster(item.innerText)
+          .uses(["removeVietnameseDiacritics", "toLowerCase"])
           .includes("tat ca the loai")
       ) {
         all_Genres.push({
@@ -96,10 +97,10 @@ export class NetTruyen extends BaseComic {
       root
         .querySelectorAll("#item-detail li.author.row a")
         .map((au) => au.innerText.trim()) ?? [];
-    let status: any = removeVietnameseAccent(
+    let status: any = textMaster(
       root.querySelectorAll("#item-detail li.status.row p").pop()?.innerText ??
         ""
-    ).toLowerCase();
+    ).uses(["toLowerCase", "removeVietnameseDiacritics"]);
 
     if (status === "dang tien hanh") status = "process";
     else if (status === "hoan thanh") status = "complete";
@@ -118,8 +119,10 @@ export class NetTruyen extends BaseComic {
       .find(
         (item) =>
           item.querySelector(".fa.fa-eye") ||
-          removeVietnameseAccent(item.querySelector("p")?.innerText ?? "") ===
-            "luot xem"
+          textMaster(item.querySelector("p")?.innerText ?? "").uses([
+            "removeVietnameseDiacritics",
+            "toLowerCase",
+          ]) === "luot xem"
       )
       ?.querySelectorAll("p")
       .pop()?.innerText;
