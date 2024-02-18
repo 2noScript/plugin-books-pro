@@ -9,21 +9,6 @@ import {
   IResponseListComic,
 } from "./types";
 
-export interface AbstractComicFactory {
-  getAllGenres(): Promise<IGenre[]>;
-  search(keyword: string, page?: number): Promise<IResponseListComic>;
-
-  getListLatestUpdate(page?: number): Promise<IResponseListComic>;
-  getListComplete(page?: number): Promise<IResponseListComic>;
-  getListNew(page?: number): Promise<IResponseListComic>;
-
-  getListByGenre(genre: IGenre, page?: number): Promise<IResponseListComic>;
-
-  getDetailComic(comic: IComic): Promise<IResponseDetailComic>;
-
-  getDataChapter(itemChap: IChapter): Promise<IResponseChapter>;
-}
-
 // const defaultResponseListComic: responseListComic = {
 //   totalData: 0,
 //   canNext: false,
@@ -69,6 +54,8 @@ export abstract class BaseComic {
   abstract getListLatestUpdate(page?: number): Promise<IResponseListComic>;
   abstract getListComplete(page?: number): Promise<IResponseListComic>;
   abstract getListNew(page?: number): Promise<IResponseListComic>;
+  abstract getTopHot(): Promise<IResponseListComic>; // limit 15
+  abstract getTopWeek(): Promise<IResponseListComic>; // limit 15
 
   abstract getListByGenre(
     genre: IGenre,

@@ -88,6 +88,33 @@ export class NetTruyen extends BaseComic {
       this.baseUrl + `/truyen-full?page=${page}&status=-1&sort=15`
     );
   }
+  async getTopHot(): Promise<IResponseListComic> {
+    const topHotData = await this.getListComic(this.baseUrl + "/hot");
+    const data = topHotData.data.slice(0, 15);
+    return {
+      ...topHotData,
+      canNext: false,
+      canPrev: false,
+      totalPage: 1,
+      totalData: data.length,
+      data,
+    };
+  }
+
+  async getTopWeek(): Promise<IResponseListComic> {
+    const topWeekData = await this.getListComic(
+      this.baseUrl + "/tim-truyen?status=-1&sort=12"
+    );
+    const data = topWeekData.data.slice(0, 15);
+    return {
+      ...topWeekData,
+      canNext: false,
+      canPrev: false,
+      totalPage: 1,
+      totalData: data.length,
+      data,
+    };
+  }
   async getListByGenre(genre: IGenre, page = 1): Promise<IResponseListComic> {
     return this.getListComic(this.baseUrl + `${genre.path}?page=${page}`);
   }
