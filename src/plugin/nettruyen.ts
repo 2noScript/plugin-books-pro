@@ -1,4 +1,3 @@
-import { comicSuppliers } from "../constants/suppliers";
 import { BaseComic } from "../models/base";
 import {
   IChapter,
@@ -185,6 +184,7 @@ export class NetTruyen extends BaseComic {
           chap_name: chap_text[0].toLowerCase().replace("chapter", "").trim(),
         };
       }) as IChapter[];
+
     return {
       path: comic.href,
       url: this.baseUrl + comic.href,

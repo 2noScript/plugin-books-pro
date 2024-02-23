@@ -1,4 +1,5 @@
-import { puppeteerCustom } from "../utils";
+import _ from "lodash";
+
 import { BaseComic } from "../models/base";
 import {
   IGenre,
@@ -11,6 +12,7 @@ import {
 import { getHtmlParser } from "../utils";
 import { textMaster } from "text-master-pro";
 
+const { cloneDeep } = _;
 export class TruyenQQ extends BaseComic {
   private async getListComic(url: string): Promise<IResponseListComic> {
     let data: IComic[] = [];
@@ -25,15 +27,31 @@ export class TruyenQQ extends BaseComic {
         _id: Number(item?.getAttribute("href")?.split("-")?.pop()),
         image_thumbnail: item.querySelector("img")?.getAttribute("src") ?? "",
         name: item.querySelector("img")?.getAttribute("alt") ?? "",
-        href: item?.getAttribute("href") ?? "",
+        href: item?.getAttribute("href")?.replace(this.baseUrl, "") ?? "",
       });
     });
 
+    const allPage = root.querySelectorAll("#main_homepage .page_redirect a");
+
+    const canPrev = !!cloneDeep(allPage)
+      .shift()
+      ?.querySelector('span[aria-hidden="true"]');
+
+    const canNext = !!cloneDeep(allPage)
+      .pop()
+      ?.querySelector('span[aria-hidden="true"]');
+    const totalPage = new URL(
+      cloneDeep(allPage).pop()?.getAttribute("href") ?? ""
+    ).pathname
+      ?.split("/")
+      ?.pop()
+      ?.replace(/\D/g, "");
+
     return {
       totalData: data.length,
-      canNext: true,
-      canPrev: true,
-      totalPage: Number(2),
+      canNext,
+      canPrev,
+      totalPage: Number(totalPage),
       currentPage: Number(new URL(url).searchParams.get("page") ?? 1),
       data,
     };
@@ -59,12 +77,9 @@ export class TruyenQQ extends BaseComic {
     });
     return all_Genres;
   }
-  async search(
-    keyword: string,
-    page?: number | undefined
-  ): Promise<IResponseListComic> {
-    return await this.getListComic(
-      this.baseUrl + `/tim-kiem/trang-${page ?? 1}.html?q=${keyword}`
+  async search(keyword: string, page = 1): Promise<IResponseListComic> {
+    return this.getListComic(
+      this.baseUrl + `/tim-kiem/trang-${page ?? 1}.html?q=${keyword ?? ""}`
     );
   }
   getListLatestUpdate(page?: number | undefined): Promise<IResponseListComic> {
@@ -82,11 +97,10 @@ export class TruyenQQ extends BaseComic {
   getTopWeek(): Promise<IResponseListComic> {
     throw new Error("Method not implemented.");
   }
-  getListByGenre(
-    genre: IGenre,
-    page?: number | undefined
-  ): Promise<IResponseListComic> {
-    throw new Error("Method not implemented.");
+  getListByGenre(genre: IGenre, page = 1): Promise<IResponseListComic> {
+    return this.getListComic(
+      this.baseUrl + `${genre.path.replace(".html", "")}/trang-${page}.html`
+    );
   }
   getDetailComic(comic: IComic): Promise<IResponseDetailComic> {
     throw new Error("Method not implemented.");
