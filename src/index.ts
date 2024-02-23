@@ -1,5 +1,5 @@
 import { Suppliers } from "./models/types";
-import { NetTruyen } from "./plugin";
+import { NetTruyen, TruyenQQ } from "./plugin";
 import { getComicInfoBySupplier } from "./utils";
 
 export class Comic {
@@ -9,10 +9,8 @@ export class Comic {
     switch (supplier) {
       case Suppliers.NetTuyen:
         return new NetTruyen(comicInfo);
-      // case "truyenqq":
-      //   return new TruyenQQ(supplier.source);
-      default:
-        return new NetTruyen(comicInfo);
+      case Suppliers.TruyenQQ:
+        return new TruyenQQ(comicInfo);
     }
   }
 }

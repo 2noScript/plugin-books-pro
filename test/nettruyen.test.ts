@@ -44,6 +44,7 @@ const test = async () => {
     }),
   ]);
   return {
+    info: nettruyen.comicInfo,
     getAllGenres,
     search,
     getListLatestUpdate,

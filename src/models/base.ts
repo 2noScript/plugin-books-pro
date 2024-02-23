@@ -1,3 +1,5 @@
+import { Browser, Page } from "puppeteer";
+import { puppeteerCustom } from "../utils";
 import {
   IChapter,
   IGenre,
@@ -7,6 +9,7 @@ import {
   IResponseListComic,
   IComicInfo,
 } from "./types";
+import parse from "node-html-parser";
 
 // const defaultResponseListComic: responseListComic = {
 //   totalData: 0,
@@ -41,10 +44,16 @@ import {
 export abstract class BaseComic {
   protected baseUrl: string;
   public comicInfo: IComicInfo;
+  protected browser: Promise<Browser>;
 
   constructor(comicInfo: IComicInfo) {
     this.baseUrl = comicInfo.source;
     this.comicInfo = comicInfo;
+    this.browser = puppeteerCustom.launch({ headless: true });
+  }
+
+  protected async getRoot(page: Page) {
+    return parse(await page.content());
   }
 
   abstract getAllGenres(): Promise<IGenre[]>;
