@@ -5,4 +5,6 @@ const truyenqq = new Comic().build(
   "https://truyenqqvn.com"
 );
 
-truyenqq.getAllGenres().then((data) => console.log(data));
+// truyenqq.getAllGenres().then((data) => console.log(data));
+
+truyenqq.search("z").then((data) => console.log(data));
