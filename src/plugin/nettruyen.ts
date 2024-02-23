@@ -13,7 +13,11 @@ import { textMaster } from "text-master-pro";
 export class NetTruyen extends BaseComic {
   private async getListComic(url: string): Promise<IResponseListComic> {
     let data: IComic[] = [];
-    const root = await getHtmlParser(url);
+    const page = await (await this.browser).newPage();
+    await page.goto(url);
+    await page.reload();
+    const root = await this.getRoot(page);
+    await page.close();
     const books = root.querySelectorAll("#ctl00_divCenter .items .item");
     const canPrev = !!root.querySelector(".pagination .prev-page");
     const canNext = !!root.querySelector(".pagination .next-page");
@@ -50,7 +54,11 @@ export class NetTruyen extends BaseComic {
   }
 
   async getAllGenres(): Promise<IGenre[]> {
-    const root = await getHtmlParser(this.baseUrl + "/tim-truyen");
+    const page = await (await this.browser).newPage();
+    await page.goto(this.baseUrl + "/tim-truyen");
+    await page.reload();
+    const root = await this.getRoot(page);
+    await page.close();
     const genresRaw = root.querySelectorAll(
       "#ctl00_divRight .ModuleContent ul.nav li a"
     );
@@ -58,8 +66,8 @@ export class NetTruyen extends BaseComic {
     genresRaw.forEach((item) => {
       if (
         !textMaster(item.innerText)
-          .uses(["removeVietnameseDiacritics", "toLowerCase"])
-          .includes("tat ca the loai")
+          .uses(["removeVietnameseDiacritics", "toLowerCase", "removeSpace"])
+          .includes("tatcatheloai")
       ) {
         all_Genres.push({
           name: item.innerText,
@@ -119,7 +127,11 @@ export class NetTruyen extends BaseComic {
     return this.getListComic(this.baseUrl + `${genre.path}?page=${page}`);
   }
   async getDetailComic(comic: IComic): Promise<IResponseDetailComic> {
-    const root = await getHtmlParser(this.baseUrl + comic.href);
+    const page = await (await this.browser).newPage();
+    await page.goto(this.baseUrl + comic.href);
+    await page.reload();
+    const root = await this.getRoot(page);
+    await page.close();
     const author =
       root
         .querySelectorAll("#item-detail li.author.row a")
@@ -127,10 +139,10 @@ export class NetTruyen extends BaseComic {
     let status: any = textMaster(
       root.querySelectorAll("#item-detail li.status.row p").pop()?.innerText ??
         ""
-    ).uses(["toLowerCase", "removeVietnameseDiacritics"]);
+    ).uses(["toLowerCase", "removeVietnameseDiacritics", "removeSpace"]);
 
-    if (status === "dang tien hanh") status = "process";
-    else if (status === "hoan thanh") status = "complete";
+    if (status === "dangtienhanh") status = "process";
+    else if (status === "hoanthanh") status = "complete";
     else status = null;
 
     const genres = root
@@ -149,7 +161,8 @@ export class NetTruyen extends BaseComic {
           textMaster(item.querySelector("p")?.innerText ?? "").uses([
             "removeVietnameseDiacritics",
             "toLowerCase",
-          ]) === "luot xem"
+            "removeSpace",
+          ]) === "luotxem"
       )
       ?.querySelectorAll("p")
       .pop()?.innerText;

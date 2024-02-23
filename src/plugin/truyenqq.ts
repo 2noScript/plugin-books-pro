@@ -57,7 +57,11 @@ export class TruyenQQ extends BaseComic {
     };
   }
   async getAllGenres(): Promise<IGenre[]> {
-    const root = await getHtmlParser(this.baseUrl);
+    const page = await (await this.browser).newPage();
+    await page.goto(this.baseUrl);
+    await page.reload();
+    const root = await this.getRoot(page);
+    await page.close();
     const genresRaw = root
       .querySelectorAll("#header_left_menu li")
       .find(

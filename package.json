@@ -10,15 +10,17 @@
     "build": "tsc",
     "dev": "nodemon --exec ts-node src/index.ts",
     "test-nettruyen": "ts-node test/nettruyen.test.ts",
-    "test": "nodemon --exec ts-node test/index.ts"
+    "test": "nodemon --exec ts-node test/index.ts",
+    "prepare": "yarn  build"
   },
   "dependencies": {
+    "fake-browser-headers": "^0.0.2",
     "lodash": "^4.17.21",
     "node-html-parser": "^6.1.11",
+    "playwright-core": "^1.41.2",
     "puppeteer": "^22.0.0",
     "puppeteer-extra": "^3.3.6",
     "puppeteer-extra-plugin-adblocker": "^2.13.6",
-    "puppeteer-extra-plugin-anonymize-ua": "^2.4.6",
     "puppeteer-extra-plugin-recaptcha": "^3.6.8",
     "puppeteer-extra-plugin-stealth": "^2.11.2",
     "text-master-pro": "^0.0.4"
