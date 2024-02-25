@@ -9,7 +9,6 @@ import {
   IChapter,
   IResponseChapter,
 } from "../models/types";
-import { getHtmlParser } from "../utils";
 import { textMaster } from "text-master-pro";
 
 const { cloneDeep } = _;

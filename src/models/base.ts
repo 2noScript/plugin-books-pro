@@ -1,5 +1,6 @@
 import { Browser, Page } from "puppeteer";
-import { puppeteerCustom } from "../utils";
+import { SuperFetch, getBrowser } from "../utils";
+
 import {
   IChapter,
   IGenre,
@@ -11,45 +12,16 @@ import {
 } from "./types";
 import parse from "node-html-parser";
 
-// const defaultResponseListComic: responseListComic = {
-//   totalData: 0,
-//   canNext: false,
-//   canPrev: false,
-//   totalPage: 0,
-//   currentPage: 0,
-//   data: [],
-// };
-
-// const defaultResponseDetailComic: responseDetailComic = {
-//   path: "",
-//   url: "",
-//   author: [],
-//   name: "",
-//   status: null,
-//   genres: [],
-//   views: "",
-//   rate: "",
-//   rate_number: "",
-//   follows: "",
-//   chapters: [],
-// };
-// const defaultResponseChapter: responseChapter = {
-//   url: "",
-//   path: "",
-//   title: "",
-//   chapter_data: [],
-//   chap_name: "",
-// };
-
 export abstract class BaseComic {
   protected baseUrl: string;
   public comicInfo: IComicInfo;
   protected browser: Promise<Browser>;
-
+  protected sf: SuperFetch;
   constructor(comicInfo: IComicInfo) {
     this.baseUrl = comicInfo.source;
     this.comicInfo = comicInfo;
-    this.browser = puppeteerCustom.launch({ headless: true });
+    this.browser = getBrowser();
+    this.sf = new SuperFetch();
   }
 
   protected async getRoot(page: Page) {

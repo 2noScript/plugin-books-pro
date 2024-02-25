@@ -1,15 +1,17 @@
-import { DEFAULT_INTERCEPT_RESOLUTION_PRIORITY } from "puppeteer";
+import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
+import { browserHeader } from "fake-browser-headers";
+
+import { Browser, DEFAULT_INTERCEPT_RESOLUTION_PRIORITY } from "puppeteer";
 import puppeteer from "puppeteer-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
-import RecaptchaPlugin from "puppeteer-extra-plugin-recaptcha";
 import AdblockerPlugin from "puppeteer-extra-plugin-adblocker";
+import chromeium from "chrome-aws-lambda";
 
 import { parse } from "node-html-parser";
 import { IComicInfo, Suppliers } from "../models/types";
 import { comicSuppliers } from "../constants/suppliers";
 import randomUserAgent from "./puppeteer-plugin";
 puppeteer.use(StealthPlugin());
-puppeteer.use(RecaptchaPlugin());
 puppeteer.use(
   AdblockerPlugin({
     interceptResolutionPriority: DEFAULT_INTERCEPT_RESOLUTION_PRIORITY,
@@ -48,7 +50,14 @@ export const getHtmlParser = async (
   }
 };
 
-export const puppeteerCustom = puppeteer;
+export const getBrowser = async (): Promise<Browser> => {
+  const browser = await puppeteer.launch({
+    headless: true,
+    executablePath:
+      process.env.CHROME_EXECUTABLE_PATH || (await chromeium.executablePath),
+  });
+  return browser;
+};
 
 export const getComicInfoBySupplier = (
   supplier: Suppliers,
@@ -60,3 +69,40 @@ export const getComicInfoBySupplier = (
     source: baseUrl,
   } as IComicInfo;
 };
+
+const axiosInstance: AxiosInstance = axios.create();
+axiosInstance.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
+axiosInstance.defaults.headers.common["Content-Type"] =
+  "application/json;charset=UTF-8";
+
+export class SuperFetch {
+  async getClient(options: AxiosRequestConfig) {
+    return axiosInstance({
+      ...options,
+      headers: {
+        "X-Requested-With": "XMLHttpRequest",
+        ...browserHeader(),
+        ...options.headers,
+      },
+    });
+  }
+  async getRootDomByClient(options: AxiosRequestConfig) {
+    const hope = 5;
+    for (let i = 0; i < hope; i++) {
+      const { data, status } = await this.getClient(options);
+      if (status === 200 && data) return parse(data);
+    }
+    return parse("");
+  }
+  async getClientByProxy(options: {
+    url: string;
+    load?: string;
+  }): Promise<{ message: string; content: string; err?: any }> {
+    const { data } = await this.getClient({
+      method: "GET",
+      url: "https://hidden-context.vercel.app/proxy",
+      params: options,
+    });
+    return data;
+  }
+}

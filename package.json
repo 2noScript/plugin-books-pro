@@ -14,14 +14,15 @@
     "prepare": "yarn  build"
   },
   "dependencies": {
+    "axios": "^1.6.7",
+    "chrome-aws-lambda": "^10.1.0",
     "fake-browser-headers": "^0.0.2",
     "lodash": "^4.17.21",
     "node-html-parser": "^6.1.11",
-    "playwright-core": "^1.41.2",
     "puppeteer": "^22.0.0",
+    "puppeteer-core": "^22.2.0",
     "puppeteer-extra": "^3.3.6",
     "puppeteer-extra-plugin-adblocker": "^2.13.6",
-    "puppeteer-extra-plugin-recaptcha": "^3.6.8",
     "puppeteer-extra-plugin-stealth": "^2.11.2",
     "text-master-pro": "^0.0.4"
   },
