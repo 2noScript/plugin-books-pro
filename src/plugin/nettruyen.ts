@@ -7,17 +7,12 @@ import {
   IResponseDetailComic,
   IResponseListComic,
 } from "../models/types";
-import { getHtmlParser } from "../utils";
-import { textMaster } from "text-master-pro";
 
 export class NetTruyen extends BaseComic {
   private async getListComic(url: string): Promise<IResponseListComic> {
     let data: IComic[] = [];
-    const page = await (await this.browser).newPage();
-    await page.goto(url);
-    await page.reload();
-    const root = await this.getRoot(page);
-    await page.close();
+    const root = await this.getHtmlParseByUrl(url);
+
     const books = root.querySelectorAll("#ctl00_divCenter .items .item");
     const canPrev = !!root.querySelector(".pagination .prev-page");
     const canNext = !!root.querySelector(".pagination .next-page");
@@ -54,18 +49,14 @@ export class NetTruyen extends BaseComic {
   }
 
   async getAllGenres(): Promise<IGenre[]> {
-    const page = await (await this.browser).newPage();
-    await page.goto(this.baseUrl + "/tim-truyen");
-    await page.reload();
-    const root = await this.getRoot(page);
-    await page.close();
+    const root = await this.getHtmlParseByUrl(this.baseUrl + "/tim-truyen");
     const genresRaw = root.querySelectorAll(
       "#ctl00_divRight .ModuleContent ul.nav li a"
     );
     let all_Genres: IGenre[] = [];
     genresRaw.forEach((item) => {
       if (
-        !textMaster(item.innerText)
+        !this.textMaster(item.innerText)
           .uses(["removeVietnameseDiacritics", "toLowerCase", "removeSpace"])
           .includes("tatcatheloai")
       ) {
@@ -127,16 +118,12 @@ export class NetTruyen extends BaseComic {
     return this.getListComic(this.baseUrl + `${genre.path}?page=${page}`);
   }
   async getDetailComic(comic: IComic): Promise<IResponseDetailComic> {
-    const page = await (await this.browser).newPage();
-    await page.goto(this.baseUrl + comic.href);
-    await page.reload();
-    const root = await this.getRoot(page);
-    await page.close();
+    const root = await this.getHtmlParseByUrl(this.baseUrl + comic.href);
     const author =
       root
         .querySelectorAll("#item-detail li.author.row a")
         .map((au) => au.innerText.trim()) ?? [];
-    let status: any = textMaster(
+    let status: any = this.textMaster(
       root.querySelectorAll("#item-detail li.status.row p").pop()?.innerText ??
         ""
     ).uses(["toLowerCase", "removeVietnameseDiacritics", "removeSpace"]);
@@ -158,7 +145,7 @@ export class NetTruyen extends BaseComic {
       .find(
         (item) =>
           item.querySelector(".fa.fa-eye") ||
-          textMaster(item.querySelector("p")?.innerText ?? "").uses([
+          this.textMaster(item.querySelector("p")?.innerText ?? "").uses([
             "removeVietnameseDiacritics",
             "toLowerCase",
             "removeSpace",
@@ -213,7 +200,7 @@ export class NetTruyen extends BaseComic {
     };
   }
   async getDataChapter(itemChap: IChapter): Promise<IResponseChapter> {
-    const root = await getHtmlParser(this.baseUrl + itemChap.path);
+    const root = await this.getHtmlParseByUrl(this.baseUrl + itemChap.path);
     const chap_name = root
       .querySelectorAll("#ctl00_divCenter .reading-detail .page-chapter img")
       .map((item) => ({

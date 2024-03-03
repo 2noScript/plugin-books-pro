@@ -9,17 +9,12 @@ import {
   IChapter,
   IResponseChapter,
 } from "../models/types";
-import { textMaster } from "text-master-pro";
 
 const { cloneDeep } = _;
 export class TruyenQQ extends BaseComic {
   private async getListComic(url: string): Promise<IResponseListComic> {
     let data: IComic[] = [];
-    const page = await (await this.browser).newPage();
-    await page.goto(url);
-    await page.reload();
-    const root = await this.getRoot(page);
-    await page.close();
+    const root = await this.getHtmlParseByUrl(url);
     const books = root.querySelectorAll("#main_homepage .book_avatar a");
     books.forEach((item) => {
       data.push({
@@ -31,7 +26,6 @@ export class TruyenQQ extends BaseComic {
     });
 
     const allPage = root.querySelectorAll("#main_homepage .page_redirect a");
-
     const canPrev = !!cloneDeep(allPage)
       .shift()
       ?.querySelector('span[aria-hidden="true"]');
@@ -56,16 +50,12 @@ export class TruyenQQ extends BaseComic {
     };
   }
   async getAllGenres(): Promise<IGenre[]> {
-    const page = await (await this.browser).newPage();
-    await page.goto(this.baseUrl);
-    await page.reload();
-    const root = await this.getRoot(page);
-    await page.close();
+    const root = await this.getHtmlParseByUrl(this.baseUrl);
     const genresRaw = root
       .querySelectorAll("#header_left_menu li")
       .find(
         (item) =>
-          !!textMaster(item.innerText)
+          !!this.textMaster(item.innerText)
             .uses(["removeVietnameseDiacritics", "toLowerCase", "removeSpace"])
             .includes("theloai")
       )

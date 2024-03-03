@@ -23,19 +23,19 @@ async function sleep(s: number) {
   return new Promise((resolve) => setTimeout(resolve, s * 1000));
 }
 
-interface IOptionsHtmlParser {
+export interface IOptionsHtmlParser {
   sleep?: number;
   reloadCount?: number;
 }
 
 export const getHtmlParser = async (
-  baseUrl: string,
+  url: string,
   options?: IOptionsHtmlParser
 ) => {
   try {
     const browser = await puppeteer.launch({ headless: true });
     const page = await browser.newPage();
-    await page.goto(baseUrl, { waitUntil: "load" });
+    await page.goto(url, { waitUntil: "load" });
     await sleep(options?.sleep ?? 0);
     for (let i = 0; i < (options?.reloadCount ?? 0); i++) {
       await page.reload();
