@@ -1,22 +1,14 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 import { browserHeader } from "fake-browser-headers";
-
-import { Browser, DEFAULT_INTERCEPT_RESOLUTION_PRIORITY } from "puppeteer";
 import puppeteer from "puppeteer-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
-import AdblockerPlugin from "puppeteer-extra-plugin-adblocker";
-import chromeium from "chrome-aws-lambda";
-
 import { parse } from "node-html-parser";
 import { IComicInfo, Suppliers } from "../models/types";
 import { comicSuppliers } from "../constants/suppliers";
 import randomUserAgent from "./puppeteer-plugin";
+import { Browser } from "puppeteer";
 puppeteer.use(StealthPlugin());
-puppeteer.use(
-  AdblockerPlugin({
-    interceptResolutionPriority: DEFAULT_INTERCEPT_RESOLUTION_PRIORITY,
-  })
-);
+
 puppeteer.use(randomUserAgent());
 
 async function sleep(s: number) {
@@ -50,13 +42,19 @@ export const getHtmlParser = async (
   }
 };
 
-export const getBrowser = async (): Promise<Browser> => {
-  const browser = await puppeteer.launch({
-    headless: true,
-    executablePath:
-      process.env.CHROME_EXECUTABLE_PATH || (await chromeium.executablePath),
-  });
-  return browser;
+export const getBrowser = async () => {
+  let browser: Browser;
+  return {
+    start: async () => {
+      browser = await puppeteer.launch({
+        headless: true,
+      });
+      return browser;
+    },
+    end: async () => {
+      if (!!browser) await browser.close();
+    },
+  };
 };
 
 export const getComicInfoBySupplier = (

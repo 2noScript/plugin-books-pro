@@ -3,7 +3,7 @@ import fs from "fs";
 import { Suppliers } from "../src/models/types";
 const nettruyen = new Comic().build(
   Suppliers.NetTuyen,
-  "https://www.nettruyenss.com"
+  "https://www.nettruyenbb.com"
 );
 
 const test = async () => {
@@ -58,12 +58,13 @@ const test = async () => {
 };
 
 test().then((data) => {
+  console.log(data);
   const jsonData = JSON.stringify(data);
-  fs.writeFile("test/nettruyten-test.json", jsonData, (err) => {
-    if (err) {
-      console.error("write data fail", err);
-      return;
-    }
-    console.log("write data success");
-  });
+  // fs.writeFile("test/nettruyten-test.json", jsonData, (err) => {
+  //   if (err) {
+  //     console.error("write data fail", err);
+  //     return;
+  //   }
+  //   console.log("write data success");
+  // });
 });

@@ -8,10 +8,9 @@ const truyenqq = new Comic().build(
 
 const sf = new SuperFetch();
 
-const nettruyen = new Comic().build(
-  Suppliers.NetTuyen,
-  "https://www.nettruyenbb.com"
-);
+const cm = new Comic();
+
+const nettruyen = cm.build(Suppliers.NetTuyen, "https://www.nettruyenff.com");
 // truyenqq.getAllGenres().then((data) => console.log(data));
 
 // truyenqq.search("z").then((data) => console.log(""));
@@ -31,4 +30,4 @@ const nettruyen = new Comic().build(
 //   url: "https://truyenqqvn.com/truyen-tranh/berserk-of-gluttony-4268",
 // }).then((res) => console.log(res?.data));
 
-truyenqq.getAllGenres().then((data) => console.log(data));
+nettruyen.getAllGenres().then((data) => console.log(data));

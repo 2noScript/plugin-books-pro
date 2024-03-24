@@ -22,7 +22,7 @@ export abstract class BaseComic {
   public comicInfo: IComicInfo;
 
   protected baseUrl: string;
-  protected browser: Promise<Browser>;
+  protected browser: any;
   protected sf: SuperFetch;
   protected textMaster: (txt: string) => any;
 
