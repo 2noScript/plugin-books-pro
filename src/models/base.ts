@@ -22,14 +22,13 @@ export abstract class BaseComic {
   public comicInfo: IComicInfo;
 
   protected baseUrl: string;
-  protected browser: any;
+  protected browser!: Browser;
   protected sf: SuperFetch;
   protected textMaster: (txt: string) => any;
 
   constructor(comicInfo: IComicInfo) {
     this.baseUrl = comicInfo.source;
     this.comicInfo = comicInfo;
-    this.browser = getBrowser();
     this.sf = new SuperFetch();
     this.textMaster = textMaster;
   }
@@ -38,7 +37,17 @@ export abstract class BaseComic {
     return parse(await page.content());
   }
   protected async getHtmlParseByUrl(url: string, options?: IOptionsHtmlParser) {
-    return getHtmlParser(url, options);
+    return getHtmlParser(this.browser, url, options);
+  }
+
+  public async initialize() {
+    this.browser = await getBrowser();
+  }
+
+  public async destroy() {
+    if (!!this.browser) {
+      await this.browser.close();
+    }
   }
 
   abstract getAllGenres(): Promise<IGenre[]>;

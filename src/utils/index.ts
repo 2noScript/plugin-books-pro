@@ -21,13 +21,15 @@ export interface IOptionsHtmlParser {
 }
 
 export const getHtmlParser = async (
+  browser: Browser,
   url: string,
   options?: IOptionsHtmlParser
 ) => {
   try {
-    const browser = await puppeteer.launch({ headless: true });
     const page = await browser.newPage();
-    await page.goto(url, { waitUntil: "load" });
+    page.setDefaultNavigationTimeout(120000);
+
+    await page.goto(url, { waitUntil: "domcontentloaded" });
     await sleep(options?.sleep ?? 0);
     for (let i = 0; i < (options?.reloadCount ?? 0); i++) {
       await page.reload();
@@ -35,26 +37,20 @@ export const getHtmlParser = async (
     const htmlContent = await page.content();
     const root = parse(htmlContent);
     await page.close();
-    await browser.close();
     return root;
   } catch (error) {
-    throw error;
+    console.log({
+      url,
+      error,
+    });
+    return parse("");
   }
 };
 
-export const getBrowser = async () => {
-  let browser: Browser;
-  return {
-    start: async () => {
-      browser = await puppeteer.launch({
-        headless: true,
-      });
-      return browser;
-    },
-    end: async () => {
-      if (!!browser) await browser.close();
-    },
-  };
+export const getBrowser = async (): Promise<Browser> => {
+  return await puppeteer.launch({
+    headless: false,
+  });
 };
 
 export const getComicInfoBySupplier = (

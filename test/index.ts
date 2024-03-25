@@ -1,5 +1,6 @@
 import { Comic, Suppliers } from "../src";
 import { SuperFetch } from "../src/utils";
+import fs from "fs";
 
 const truyenqq = new Comic().build(
   Suppliers.TruyenQQ,
@@ -10,24 +11,26 @@ const sf = new SuperFetch();
 
 const cm = new Comic();
 
-const nettruyen = cm.build(Suppliers.NetTuyen, "https://www.nettruyenff.com");
-// truyenqq.getAllGenres().then((data) => console.log(data));
+const nettruyen = cm.build(Suppliers.NetTuyen, "https://nettruyenco.vn");
 
-// truyenqq.search("z").then((data) => console.log(""));
+const app = async () => {
+  const processList: any = [];
+  await nettruyen.initialize();
+  for (let i = 1; i <= 300; i++) {
+    processList.push(nettruyen.getListLatestUpdate(i));
+  }
+  const data = await Promise.all(processList);
 
-// truyenqq
-//   .getListByGenre({
-//     url: "https://truyenqqvn.com/the-loai/webtoon-55.html",
-//     name: "Webtoon",
-//     path: "/the-loai/webtoon-55.html",
-//   })
-//   .then((data) => console.log(data));
+  const jsonData = JSON.stringify(data);
+  fs.writeFile("test/test.json", jsonData, (err) => {
+    if (err) {
+      console.error("write data fail", err);
+      return;
+    }
+    console.log("write data success");
+  });
+  await nettruyen.destroy();
+  console.log("done");
+};
 
-// nettruyen.getListLatestUpdate().then((data) => console.log(data));
-
-// sf.getClient({
-//   method: "GET",
-//   url: "https://truyenqqvn.com/truyen-tranh/berserk-of-gluttony-4268",
-// }).then((res) => console.log(res?.data));
-
-nettruyen.getAllGenres().then((data) => console.log(data));
+app();
