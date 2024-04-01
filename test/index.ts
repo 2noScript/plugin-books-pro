@@ -15,13 +15,19 @@ const nettruyen = cm.build(Suppliers.NetTuyen, "https://nettruyenco.vn");
 
 const app = async () => {
   const processList: any = [];
-  await nettruyen.initialize();
-  for (let i = 1; i <= 300; i++) {
-    processList.push(nettruyen.getListLatestUpdate(i));
+  for (let i = 1; i <= 10; i++) {
+    processList.push(
+      nettruyen.getDetailComic({
+        _id: 8660,
+        image_thumbnail: "https://cdnnvd.com/nettruyen/thumb/vo-nghich.jpg",
+        name: "Truyện tranh Võ Nghịch",
+        href: "/truyen-tranh/vo-nghich-8660",
+      })
+    );
   }
   const data = await Promise.all(processList);
 
-  const jsonData = JSON.stringify(data);
+  const jsonData = JSON.stringify(data, null, 2);
   fs.writeFile("test/test.json", jsonData, (err) => {
     if (err) {
       console.error("write data fail", err);
@@ -29,7 +35,6 @@ const app = async () => {
     }
     console.log("write data success");
   });
-  await nettruyen.destroy();
   console.log("done");
 };
 

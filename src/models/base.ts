@@ -1,10 +1,4 @@
 import { Browser, Page } from "puppeteer";
-import {
-  IOptionsHtmlParser,
-  SuperFetch,
-  getBrowser,
-  getHtmlParser,
-} from "../utils";
 import { textMaster } from "text-master-pro";
 
 import {
@@ -20,36 +14,23 @@ import parse from "node-html-parser";
 
 export abstract class BaseComic {
   public comicInfo: IComicInfo;
-
   protected baseUrl: string;
-  protected browser!: Browser;
-  protected sf: SuperFetch;
+  protected page!: Page;
+
   protected textMaster: (txt: string) => any;
 
   constructor(comicInfo: IComicInfo) {
     this.baseUrl = comicInfo.source;
     this.comicInfo = comicInfo;
-    this.sf = new SuperFetch();
     this.textMaster = textMaster;
   }
 
-  protected async getHtmlParseByPage(page: Page) {
-    return parse(await page.content());
+  protected getHtmlParser(raw: string) {
+    return parse(raw);
   }
-  protected async getHtmlParseByUrl(url: string, options?: IOptionsHtmlParser) {
-    return getHtmlParser(this.browser, url, options);
+  protected async getPage() {
+    return;
   }
-
-  public async initialize() {
-    this.browser = await getBrowser();
-  }
-
-  public async destroy() {
-    if (!!this.browser) {
-      await this.browser.close();
-    }
-  }
-
   abstract getAllGenres(): Promise<IGenre[]>;
   abstract search(keyword: string, page?: number): Promise<IResponseListComic>;
 

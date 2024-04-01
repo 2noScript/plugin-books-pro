@@ -28,8 +28,8 @@ export const getHtmlParser = async (
   try {
     const page = await browser.newPage();
     page.setDefaultNavigationTimeout(120000);
-
-    await page.goto(url, { waitUntil: "domcontentloaded" });
+    await page.setViewport({ width: 375, height: 667 });
+    await page.goto(url, { waitUntil: "load" });
     await sleep(options?.sleep ?? 0);
     for (let i = 0; i < (options?.reloadCount ?? 0); i++) {
       await page.reload();
