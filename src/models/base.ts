@@ -1,6 +1,5 @@
-import { Browser, Page } from "puppeteer";
 import { textMaster } from "text-master-pro";
-
+import _ from "lodash";
 import {
   IChapter,
   IGenre,
@@ -10,27 +9,27 @@ import {
   IResponseListComic,
   IComicInfo,
 } from "./types";
-import parse from "node-html-parser";
+import { SuperBrowser, callbackPageHandle } from "../utils/superBrowser";
 
 export abstract class BaseComic {
   public comicInfo: IComicInfo;
   protected baseUrl: string;
-  protected page!: Page;
-
   protected textMaster: (txt: string) => any;
+  private browser: SuperBrowser;
+  protected _: any;
 
   constructor(comicInfo: IComicInfo) {
     this.baseUrl = comicInfo.source;
     this.comicInfo = comicInfo;
     this.textMaster = textMaster;
+    this.browser = new SuperBrowser();
+    this._ = _;
   }
 
-  protected getHtmlParser(raw: string) {
-    return parse(raw);
+  protected async getHtmlParse(url: string, callback?: callbackPageHandle) {
+    return this.browser.getHtmlParser(url, callback);
   }
-  protected async getPage() {
-    return;
-  }
+
   abstract getAllGenres(): Promise<IGenre[]>;
   abstract search(keyword: string, page?: number): Promise<IResponseListComic>;
 

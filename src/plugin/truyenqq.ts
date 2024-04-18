@@ -1,5 +1,3 @@
-import _ from "lodash";
-
 import { BaseComic } from "../models/base";
 import {
   IGenre,
@@ -10,11 +8,10 @@ import {
   IResponseChapter,
 } from "../models/types";
 
-const { cloneDeep } = _;
 export class TruyenQQ extends BaseComic {
   private async getListComic(url: string): Promise<IResponseListComic> {
     let data: IComic[] = [];
-    const root = await this.getHtmlParseByUrl(url);
+    const root = await this.getHtmlParse(url);
     const books = root.querySelectorAll("#main_homepage .book_avatar a");
     books.forEach((item) => {
       data.push({
@@ -26,15 +23,15 @@ export class TruyenQQ extends BaseComic {
     });
 
     const allPage = root.querySelectorAll("#main_homepage .page_redirect a");
-    const canPrev = !!cloneDeep(allPage)
+    const canPrev = !!this._.cloneDeep(allPage)
       .shift()
       ?.querySelector('span[aria-hidden="true"]');
 
-    const canNext = !!cloneDeep(allPage)
+    const canNext = !!this._.cloneDeep(allPage)
       .pop()
       ?.querySelector('span[aria-hidden="true"]');
     const totalPage = new URL(
-      cloneDeep(allPage).pop()?.getAttribute("href") ?? ""
+      this._.cloneDeep(allPage).pop()?.getAttribute("href") ?? ""
     ).pathname
       ?.split("/")
       ?.pop()
@@ -50,7 +47,7 @@ export class TruyenQQ extends BaseComic {
     };
   }
   async getAllGenres(): Promise<IGenre[]> {
-    const root = await this.getHtmlParseByUrl(this.baseUrl);
+    const root = await this.getHtmlParse(this.baseUrl);
     const genresRaw = root
       .querySelectorAll("#header_left_menu li")
       .find(

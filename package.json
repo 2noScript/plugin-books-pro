@@ -12,7 +12,7 @@
     "test-nettruyen": "ts-node test/nettruyen.test.ts",
     "test": "ts-node test/index.ts",
     "prepare": "yarn  build",
-    "br":"nodemon --exec ts-node test/testBrowser.ts"
+    "br": "nodemon --exec ts-node test/testBrowser.ts"
   },
   "dependencies": {
     "axios": "^1.6.7",
@@ -25,8 +25,10 @@
     "text-master-pro": "^0.0.4"
   },
   "devDependencies": {
+    "@types/jest": "^29.5.12",
     "@types/lodash": "^4.14.202",
     "nodemon": "^3.0.3",
+    "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   }

@@ -1,9 +1,8 @@
-import { Comic } from "../src";
+import { Comic, Suppliers } from "../src";
 import fs from "fs";
-import { Suppliers } from "../src/models/types";
 const nettruyen = new Comic().build(
   Suppliers.NetTuyen,
-  "https://www.nettruyenbb.com"
+  "https://nettruyenco.vn"
 );
 
 const test = async () => {
@@ -27,7 +26,7 @@ const test = async () => {
     nettruyen.getListByGenre({
       name: "Soft Yuri",
       path: "/tim-truyen/soft-yuri",
-      url: "https://www.nettruyenss.com/tim-truyen/soft-yuri",
+      url: "https://nettruyenco.vn/tim-truyen/soft-yuri",
     }),
     nettruyen.getDetailComic({
       _id: 245511,
@@ -38,13 +37,13 @@ const test = async () => {
     }),
     nettruyen.getDataChapter({
       path: "/truyen-tranh/chien-binh-cach-mang-nguoi-cho-con-trinh/chap-1/1113759",
-      url: "https://www.nettruyenss.com/truyen-tranh/chien-binh-cach-mang-nguoi-cho-con-trinh/chap-1/1113759",
+      url: "https://nettruyenco.vn/truyen-tranh/chien-binh-cach-mang-nguoi-cho-con-trinh/chap-1/1113759",
       title: "",
       chap_name: "1",
     }),
   ]);
   return {
-    info: nettruyen.comicInfo,
+    // info: nettruyen.comicInfo,
     getAllGenres,
     search,
     getListLatestUpdate,
@@ -57,14 +56,16 @@ const test = async () => {
   };
 };
 
-test().then((data) => {
-  console.log(data);
-  const jsonData = JSON.stringify(data);
-  // fs.writeFile("test/nettruyten-test.json", jsonData, (err) => {
-  //   if (err) {
-  //     console.error("write data fail", err);
-  //     return;
-  //   }
-  //   console.log("write data success");
-  // });
-});
+// test().then((data) => {
+//   console.log(data);
+//   const jsonData = JSON.stringify(data);
+//   fs.writeFile("test/nettruyten-test.json", jsonData, (err) => {
+//     if (err) {
+//       console.error("write data fail", err);
+//       return;
+//     }
+//     console.log("write data success");
+//   });
+// });
+
+nettruyen.getAllGenres().then((data) => console.log(data));
