@@ -1,8 +1,8 @@
 import { BaseComic } from "../models/base";
 import {
   IChapter,
-  IGenre,
   IComic,
+  IGenre,
   IResponseChapter,
   IResponseDetailComic,
   IResponseListComic,
@@ -12,7 +12,6 @@ export class NetTruyen extends BaseComic {
   private async getListComic(url: string): Promise<IResponseListComic> {
     let data: IComic[] = [];
     const root = await this.getHtmlParse(url);
-
     const books = root.querySelectorAll("#ctl00_divCenter .items .item");
     const canPrev = !!root.querySelector(".pagination .prev-page");
     const canNext = !!root.querySelector(".pagination .next-page");
@@ -26,7 +25,7 @@ export class NetTruyen extends BaseComic {
       const a = book.querySelector(".image a");
       data.push({
         _id: Number(a?.getAttribute("href")?.split("-")?.pop()),
-        image_thumbnail:
+        imageThumbnail:
           a?.querySelector("img")?.getAttribute("data-original") ??
           a?.querySelector("img")?.getAttribute("src") ??
           "",
@@ -34,7 +33,7 @@ export class NetTruyen extends BaseComic {
           a?.getAttribute("title") ??
           a?.querySelector("img")?.getAttribute("alt") ??
           "",
-        href: a?.getAttribute("href")?.replace(this.baseUrl, "") ?? "",
+        path: a?.getAttribute("href")?.replace(this.baseUrl, "") ?? "",
       });
     });
 
@@ -60,10 +59,16 @@ export class NetTruyen extends BaseComic {
           .uses(["removeVietnameseDiacritics", "toLowerCase", "removeSpace"])
           .includes("tatcatheloai")
       ) {
+        const name = item.innerText;
+        const rawName = this.textMaster(name).uses([
+          "removeVietnameseDiacritics",
+          "toLowerCase",
+          "removeSpace",
+        ]);
         all_Genres.push({
-          name: item.innerText,
+          _genreId: this.generateIdentifier(rawName),
+          name,
           path: item.getAttribute("href")?.replace(this.baseUrl, "") ?? "",
-          url: item.getAttribute("href") ?? "",
         });
       }
     });
@@ -118,7 +123,7 @@ export class NetTruyen extends BaseComic {
     return this.getListComic(this.baseUrl + `${genre.path}?page=${page}`);
   }
   async getDetailComic(comic: IComic): Promise<IResponseDetailComic> {
-    const root = await this.getHtmlParse(this.baseUrl + comic.href);
+    const root = await this.getHtmlParse(this.baseUrl + comic.path);
     const author =
       root
         .querySelectorAll("#item-detail li.author.row a")
@@ -166,7 +171,7 @@ export class NetTruyen extends BaseComic {
         "#item-detail span[itemprop='aggregateRating'] span[itemprop='bestRating']"
       )?.innerText;
 
-    const rate_number = root.querySelector(
+    const rateNumber = root.querySelector(
       "#item-detail span[itemprop='aggregateRating'] span[itemprop='ratingCount']"
     )?.innerText;
 
@@ -181,41 +186,41 @@ export class NetTruyen extends BaseComic {
             ?.replace(this.baseUrl, ""),
           url: chap.querySelector("a")?.getAttribute("href"),
           title: chap_text.length > 1 ? chap_text.pop()?.trim() : "",
-          chap_name: chap_text[0].toLowerCase().replace("chapter", "").trim(),
+          chapName: chap_text[0].toLowerCase().replace("chapter", "").trim(),
         };
       }) as IChapter[];
 
     return {
-      path: comic.href,
-      url: this.baseUrl + comic.href,
+      path: comic.path,
+      url: this.baseUrl + comic.path,
       author,
       name: comic.name,
       status,
       genres,
       views,
       rate,
-      rate_number,
+      rateNumber,
       follows,
       chapters,
     };
   }
   async getDataChapter(itemChap: IChapter): Promise<IResponseChapter> {
     const root = await this.getHtmlParse(this.baseUrl + itemChap.path);
-    const chap_name = root
+    const chapData = root
       .querySelectorAll("#ctl00_divCenter .reading-detail .page-chapter img")
       .map((item) => ({
         _id: Number(item.getAttribute("data-index")),
-        src_origin:
+        srcOrigin:
           item.getAttribute("data-original") ?? item.getAttribute("src") ?? "",
-        src_cdn: item.getAttribute("data-cdn") ?? "",
+        srcCdn: item.getAttribute("data-cdn") ?? "",
         alt: item.getAttribute("alt")?.trim() ?? "",
       }));
     return {
       url: itemChap.url,
       path: itemChap.path,
       title: itemChap.title,
-      chapter_data: chap_name,
-      chap_name: itemChap.chap_name,
+      chapterData: chapData,
+      chapName: itemChap.chapName,
     };
   }
 }

@@ -18,9 +18,9 @@ export interface IComicInfo {
 
 export interface IComic {
   _id: number;
-  image_thumbnail: string;
+  imageThumbnail: string;
   name: string;
-  href: string;
+  path: string;
 }
 
 export interface IResponseListComic {
@@ -36,13 +36,14 @@ export interface IGenre {
   url?: string;
   name: string;
   path: string;
+  _genreId: string;
 }
 
 export interface IChapter {
   path: string;
   url: string;
   title: string;
-  chap_name: string;
+  chapName: string;
   last_update?: string;
   views?: string;
 }
@@ -56,15 +57,15 @@ export interface IResponseDetailComic {
   genres: IGenre[];
   views?: string;
   rate?: string;
-  rate_number?: string;
+  rateNumber?: string;
   follows?: string;
   chapters: IChapter[];
 }
 
 export interface IImageChapter {
   _id: number;
-  src_origin: string;
-  src_cdn?: string;
+  srcOrigin: string;
+  srcCdn?: string;
   alt: string;
 }
 
@@ -72,6 +73,6 @@ export interface IResponseChapter {
   url?: string;
   path?: string;
   title: string;
-  chapter_data: IImageChapter[];
-  chap_name: string;
+  chapterData: IImageChapter[];
+  chapName: string;
 }

@@ -42,7 +42,8 @@ export class SuperBrowser {
 
     if (callback) await callback(page, this.useScroll, this.useSleep);
     const content = await page.content();
-    await page.close();
+    // trick flash get data
+    page.close();
     return parse(content);
   }
 

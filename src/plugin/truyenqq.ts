@@ -16,9 +16,9 @@ export class TruyenQQ extends BaseComic {
     books.forEach((item) => {
       data.push({
         _id: Number(item?.getAttribute("href")?.split("-")?.pop()),
-        image_thumbnail: item.querySelector("img")?.getAttribute("src") ?? "",
+        imageThumbnail: item.querySelector("img")?.getAttribute("src") ?? "",
         name: item.querySelector("img")?.getAttribute("alt") ?? "",
-        href: item?.getAttribute("href")?.replace(this.baseUrl, "") ?? "",
+        path: item?.getAttribute("href")?.replace(this.baseUrl, "") ?? "",
       });
     });
 
@@ -60,6 +60,7 @@ export class TruyenQQ extends BaseComic {
     let all_Genres: IGenre[] = [];
     genresRaw?.forEach((item) => {
       all_Genres.push({
+        _genreId: "HOLD",
         url: item.getAttribute("href"),
         name: item.innerText.trim(),
         path: item.getAttribute("href")?.replace(this.baseUrl, "") ?? "",
