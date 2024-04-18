@@ -18,7 +18,6 @@ export abstract class BaseComic {
   protected textMaster: (txt: string) => any;
   private browser: SuperBrowser;
   protected _: any;
-  protected generateIdentifier: (text: string) => string;
 
   constructor(comicInfo: IComicInfo) {
     this.baseUrl = comicInfo.source;
@@ -26,11 +25,19 @@ export abstract class BaseComic {
     this.textMaster = textMaster;
     this.browser = new SuperBrowser();
     this._ = _;
-    this.generateIdentifier = generateIdentifier;
   }
 
   protected async getHtmlParse(url: string, callback?: callbackPageHandle) {
     return this.browser.getHtmlParser(url, callback);
+  }
+  protected generateId(idName: string) {
+    return generateIdentifier(
+      this.textMaster(idName).uses([
+        "toLowerCase",
+        "removeVietnameseDiacritics",
+        "removeSpace",
+      ])
+    );
   }
 
   abstract getAllGenres(): Promise<IGenre[]>;

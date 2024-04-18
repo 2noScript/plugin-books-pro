@@ -15,7 +15,7 @@ export class TruyenQQ extends BaseComic {
     const books = root.querySelectorAll("#main_homepage .book_avatar a");
     books.forEach((item) => {
       data.push({
-        _id: Number(item?.getAttribute("href")?.split("-")?.pop()),
+        _bookId: "HOLD",
         imageThumbnail: item.querySelector("img")?.getAttribute("src") ?? "",
         name: item.querySelector("img")?.getAttribute("alt") ?? "",
         path: item?.getAttribute("href")?.replace(this.baseUrl, "") ?? "",

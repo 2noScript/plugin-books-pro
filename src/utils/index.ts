@@ -5,5 +5,5 @@ export const generateIdentifier = (text: string) => {
   const hmac = crypto.createHmac("sha256", secretKey);
   hmac.update(text);
   const encodedString = hmac.digest("hex");
-  return encodedString.substring(0, 13);
+  return encodedString.substring(0, 16);
 };

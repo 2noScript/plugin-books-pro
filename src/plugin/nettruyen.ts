@@ -21,18 +21,21 @@ export class NetTruyen extends BaseComic {
         ?.innerText?.split("/")
         ?.pop()
         ?.trim() ?? 1;
+
     books.forEach((book) => {
       const a = book.querySelector(".image a");
+      const name =
+        a?.getAttribute("title") ??
+        a?.querySelector("img")?.getAttribute("alt") ??
+        "";
+
       data.push({
-        _id: Number(a?.getAttribute("href")?.split("-")?.pop()),
+        _bookId: this.generateId(name),
         imageThumbnail:
           a?.querySelector("img")?.getAttribute("data-original") ??
           a?.querySelector("img")?.getAttribute("src") ??
           "",
-        name:
-          a?.getAttribute("title") ??
-          a?.querySelector("img")?.getAttribute("alt") ??
-          "",
+        name,
         path: a?.getAttribute("href")?.replace(this.baseUrl, "") ?? "",
       });
     });
@@ -60,13 +63,9 @@ export class NetTruyen extends BaseComic {
           .includes("tatcatheloai")
       ) {
         const name = item.innerText;
-        const rawName = this.textMaster(name).uses([
-          "removeVietnameseDiacritics",
-          "toLowerCase",
-          "removeSpace",
-        ]);
+
         all_Genres.push({
-          _genreId: this.generateIdentifier(rawName),
+          _genreId: this.generateId(name),
           name,
           path: item.getAttribute("href")?.replace(this.baseUrl, "") ?? "",
         });
@@ -140,8 +139,8 @@ export class NetTruyen extends BaseComic {
     const genres = root
       .querySelectorAll("#item-detail li.kind.row a")
       .map((g) => ({
+        _genreId: this.generateId(g.innerText),
         name: g.innerText.trim(),
-        url: g.getAttribute("href"),
         path: g.getAttribute("href")?.replace(this.baseUrl, ""),
       })) as IGenre[];
 
@@ -184,7 +183,6 @@ export class NetTruyen extends BaseComic {
             .querySelector("a")
             ?.getAttribute("href")
             ?.replace(this.baseUrl, ""),
-          url: chap.querySelector("a")?.getAttribute("href"),
           title: chap_text.length > 1 ? chap_text.pop()?.trim() : "",
           chapName: chap_text[0].toLowerCase().replace("chapter", "").trim(),
         };
@@ -192,7 +190,6 @@ export class NetTruyen extends BaseComic {
 
     return {
       path: comic.path,
-      url: this.baseUrl + comic.path,
       author,
       name: comic.name,
       status,
@@ -201,26 +198,31 @@ export class NetTruyen extends BaseComic {
       rate,
       rateNumber,
       follows,
-      chapters,
+      chapters: this._.reverse(chapters),
     };
   }
   async getDataChapter(itemChap: IChapter): Promise<IResponseChapter> {
     const root = await this.getHtmlParse(this.baseUrl + itemChap.path);
     const chapData = root
       .querySelectorAll("#ctl00_divCenter .reading-detail .page-chapter img")
-      .map((item) => ({
-        _id: Number(item.getAttribute("data-index")),
-        srcOrigin:
-          item.getAttribute("data-original") ?? item.getAttribute("src") ?? "",
-        srcCdn: item.getAttribute("data-cdn") ?? "",
-        alt: item.getAttribute("alt")?.trim() ?? "",
-      }));
+      .map((item, index) => {
+        const src: string[] = [];
+        for (let i = 1; i++; i <= 4) {
+          const imageSrc = item.getAttribute(`data-sv${i}`);
+          if (!imageSrc) break;
+          src.push(imageSrc);
+        }
+        return {
+          _index: index + 1,
+          src,
+        };
+      });
+
     return {
-      url: itemChap.url,
       path: itemChap.path,
       title: itemChap.title,
-      chapterData: chapData,
       chapName: itemChap.chapName,
+      chapterData: chapData,
     };
   }
 }

@@ -17,7 +17,7 @@ export interface IComicInfo {
 }
 
 export interface IComic {
-  _id: number;
+  _bookId: string;
   imageThumbnail: string;
   name: string;
   path: string;
@@ -41,16 +41,14 @@ export interface IGenre {
 
 export interface IChapter {
   path: string;
-  url: string;
   title: string;
   chapName: string;
-  last_update?: string;
+  lastUpdate?: string;
   views?: string;
 }
 
 export interface IResponseDetailComic {
   path: string;
-  url: string;
   author: string[];
   name: string;
   status: "process" | "complete" | null;
@@ -63,14 +61,11 @@ export interface IResponseDetailComic {
 }
 
 export interface IImageChapter {
-  _id: number;
-  srcOrigin: string;
-  srcCdn?: string;
-  alt: string;
+  src: string[];
+  _index: number;
 }
 
 export interface IResponseChapter {
-  url?: string;
   path?: string;
   title: string;
   chapterData: IImageChapter[];
