@@ -1,5 +1,5 @@
 import { Comic, Suppliers } from "../src";
-import fs from "fs";
+import { saveDataToJson } from "../src/utils";
 
 const comic = new Comic();
 
@@ -35,7 +35,18 @@ const nettruyen = comic.build(Suppliers.NetTuyen, "https://nettruyenco.vn");
 //     comic.kill();
 //   });
 
-nettruyen.getTopHot().then((data) => {
-  console.log(data);
-  comic.kill();
-});
+// nettruyen.getTopHot().then((data) => {
+//   console.log(data);
+//   comic.kill();
+// });
+
+nettruyen
+  .getDataChapter({
+    path: "/truyen-tranh/fategrand-order-mortalisstella/chapter-1/286642",
+    title: "",
+    chapName: "1",
+  })
+  .then((data) => {
+    comic.kill();
+    saveDataToJson(data, "test/DataChapter.json");
+  });

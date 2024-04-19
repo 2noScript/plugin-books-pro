@@ -10,7 +10,7 @@
     "build": "tsc",
     "dev": "nodemon --exec ts-node src/index.ts",
     "test-nettruyen": "ts-node test/nettruyen.test.ts",
-    "test": "nodemon --exec ts-node test/index.ts",
+    "test": "ts-node test/index.ts",
     "prepare": "yarn  build",
     "br": "nodemon --exec ts-node test/testBrowser.ts"
   },

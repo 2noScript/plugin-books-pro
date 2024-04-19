@@ -38,6 +38,7 @@ export class SuperBrowser {
     if (!SuperBrowser.instance)
       SuperBrowser.instance = await puppeteer.launch({ headless: true });
     const page = await SuperBrowser.instance.newPage();
+    await page.setDefaultNavigationTimeout(600000);
     await page.goto(url);
 
     if (callback) await callback(page, this.useScroll, this.useSleep);
