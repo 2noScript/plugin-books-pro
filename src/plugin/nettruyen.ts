@@ -201,7 +201,7 @@ export class NetTruyen extends BaseComic {
       .querySelectorAll("#ctl00_divCenter .reading-detail .page-chapter img")
       .map((item, index) => {
         const src: string[] = [];
-        for (let i = 1; i++; i <= 4) {
+        for (let i = 1; i <= 4; i++) {
           const imageSrc = item.getAttribute(`data-sv${i}`);
           if (!imageSrc) break;
           src.push(imageSrc);

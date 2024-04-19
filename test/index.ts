@@ -42,9 +42,9 @@ const nettruyen = comic.build(Suppliers.NetTuyen, "https://nettruyenco.vn");
 
 nettruyen
   .getDataChapter({
-    path: "/truyen-tranh/fategrand-order-mortalisstella/chapter-1/286642",
+    path: "/truyen-tranh/fategrand-order-mortalisstella/chapter-2/286645",
     title: "",
-    chapName: "1",
+    chapName: "2",
   })
   .then((data) => {
     comic.kill();
