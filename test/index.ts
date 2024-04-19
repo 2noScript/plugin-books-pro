@@ -24,13 +24,18 @@ const nettruyen = comic.build(Suppliers.NetTuyen, "https://nettruyenco.vn");
 //     comic.kill();
 //   });
 
-nettruyen
-  .getDataChapter({
-    path: "/truyen-tranh/ta-vuong-phuc-hac-sung-nhap-cot/chuong-1/362483",
-    title: "",
-    chapName: "0",
-  })
-  .then((data) => {
-    console.log(data);
-    comic.kill();
-  });
+// nettruyen
+//   .getDataChapter({
+//     path: "/truyen-tranh/ta-vuong-phuc-hac-sung-nhap-cot/chuong-1/362483",
+//     title: "",
+//     chapName: "0",
+//   })
+//   .then((data) => {
+//     console.log(data);
+//     comic.kill();
+//   });
+
+nettruyen.getTopHot().then((data) => {
+  console.log(data);
+  comic.kill();
+});

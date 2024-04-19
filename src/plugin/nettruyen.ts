@@ -24,16 +24,15 @@ export class NetTruyen extends BaseComic {
 
     books.forEach((book) => {
       const a = book.querySelector(".image a");
+      const imgAvatar = a?.querySelector("img");
       const name =
-        a?.getAttribute("title") ??
-        a?.querySelector("img")?.getAttribute("alt") ??
-        "";
+        a?.getAttribute("title") ?? imgAvatar?.getAttribute("alt") ?? "";
 
       data.push({
         _bookId: this.generateId(name),
         imageThumbnail:
-          a?.querySelector("img")?.getAttribute("data-original") ??
-          a?.querySelector("img")?.getAttribute("src") ??
+          imgAvatar?.getAttribute("data-original") ??
+          imgAvatar?.getAttribute("src") ??
           "",
         name,
         path: a?.getAttribute("href")?.replace(this.baseUrl, "") ?? "",
@@ -57,13 +56,8 @@ export class NetTruyen extends BaseComic {
     );
     let all_Genres: IGenre[] = [];
     genresRaw.forEach((item) => {
-      if (
-        !this.textMaster(item.innerText)
-          .uses(["removeVietnameseDiacritics", "toLowerCase", "removeSpace"])
-          .includes("tatcatheloai")
-      ) {
+      if (!this.cleanText(item.innerText).includes("tatcatheloai")) {
         const name = item.innerText;
-
         all_Genres.push({
           _genreId: this.generateId(name),
           name,
@@ -84,15 +78,19 @@ export class NetTruyen extends BaseComic {
     return this.getListComic(this.baseUrl + `/tim-truyen?page=${page}`);
   }
   async getListComplete(page = 1): Promise<IResponseListComic> {
-    return this.getListComic(this.baseUrl + `/truyen-full?page=${page}`);
+    return this.getListComic(
+      this.baseUrl + `/tim-truyen?page=${page}&status=2&sort=15`
+    );
   }
   async getListNew(page = 1): Promise<IResponseListComic> {
     return this.getListComic(
-      this.baseUrl + `/truyen-full?page=${page}&status=-1&sort=15`
+      this.baseUrl + `/tim-truyen?page=${page}&status=-1&sort=15`
     );
   }
   async getTopHot(): Promise<IResponseListComic> {
-    const topHotData = await this.getListComic(this.baseUrl + "/hot");
+    const topHotData = await this.getListComic(
+      this.baseUrl + "/truyen-tranh-hot"
+    );
     const data = topHotData.data.slice(0, 15);
     return {
       ...topHotData,
@@ -127,10 +125,10 @@ export class NetTruyen extends BaseComic {
       root
         .querySelectorAll("#item-detail li.author.row a")
         .map((au) => au.innerText.trim()) ?? [];
-    let status: any = this.textMaster(
+    let status: any = this.cleanText(
       root.querySelectorAll("#item-detail li.status.row p").pop()?.innerText ??
         ""
-    ).uses(["toLowerCase", "removeVietnameseDiacritics", "removeSpace"]);
+    );
 
     if (status === "dangtienhanh") status = "process";
     else if (status === "hoanthanh") status = "complete";
@@ -149,11 +147,7 @@ export class NetTruyen extends BaseComic {
       .find(
         (item) =>
           item.querySelector(".fa.fa-eye") ||
-          this.textMaster(item.querySelector("p")?.innerText ?? "").uses([
-            "removeVietnameseDiacritics",
-            "toLowerCase",
-            "removeSpace",
-          ]) === "luotxem"
+          this.cleanText(item.querySelector("p")?.innerText ?? "") === "luotxem"
       )
       ?.querySelectorAll("p")
       .pop()?.innerText;

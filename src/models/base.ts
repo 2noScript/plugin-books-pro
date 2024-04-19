@@ -31,15 +31,15 @@ export abstract class BaseComic {
     return this.browser.getHtmlParser(url, callback);
   }
   protected generateId(idName: string) {
-    return generateIdentifier(
-      this.textMaster(idName).uses([
-        "toLowerCase",
-        "removeVietnameseDiacritics",
-        "removeSpace",
-      ])
-    );
+    return generateIdentifier(this.cleanText(idName));
   }
-
+  protected cleanText(text: string) {
+    return this.textMaster(text).uses([
+      "toLowerCase",
+      "removeVietnameseDiacritics",
+      "removeSpace",
+    ]);
+  }
   abstract getAllGenres(): Promise<IGenre[]>;
   abstract search(keyword: string, page?: number): Promise<IResponseListComic>;
 
