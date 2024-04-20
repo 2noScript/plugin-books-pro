@@ -51,7 +51,7 @@ export interface IResponseDetailComic {
   path: string;
   author: string[];
   name: string;
-  status: "process" | "complete" | null;
+  status: "process" | "complete" | "";
   genres: IGenre[];
   views?: string;
   rate?: string;

@@ -48,7 +48,18 @@ export class NetTruyen extends BaseComic {
       data,
     };
   }
-
+  private async getTop(path: string): Promise<IResponseListComic> {
+    const topData = await this.getListComic(this.baseUrl + path);
+    const data = topData.data.slice(0, 15);
+    return {
+      ...topData,
+      canNext: false,
+      canPrev: false,
+      totalPage: 1,
+      totalData: data.length,
+      data,
+    };
+  }
   async getAllGenres(): Promise<IGenre[]> {
     const root = await this.getHtmlParse(this.baseUrl + "/tim-truyen");
     const genresRaw = root.querySelectorAll(
@@ -88,33 +99,11 @@ export class NetTruyen extends BaseComic {
     );
   }
   async getTopHot(): Promise<IResponseListComic> {
-    const topHotData = await this.getListComic(
-      this.baseUrl + "/truyen-tranh-hot"
-    );
-    const data = topHotData.data.slice(0, 15);
-    return {
-      ...topHotData,
-      canNext: false,
-      canPrev: false,
-      totalPage: 1,
-      totalData: data.length,
-      data,
-    };
+    return this.getTop("/truyen-tranh-hot");
   }
 
   async getTopWeek(): Promise<IResponseListComic> {
-    const topWeekData = await this.getListComic(
-      this.baseUrl + "/tim-truyen?status=-1&sort=12"
-    );
-    const data = topWeekData.data.slice(0, 15);
-    return {
-      ...topWeekData,
-      canNext: false,
-      canPrev: false,
-      totalPage: 1,
-      totalData: data.length,
-      data,
-    };
+    return this.getTop("/tim-truyen?status=-1&sort=12");
   }
   async getListByGenre(genre: IGenre, page = 1): Promise<IResponseListComic> {
     return this.getListComic(this.baseUrl + `${genre.path}?page=${page}`);
@@ -131,8 +120,7 @@ export class NetTruyen extends BaseComic {
     );
 
     if (status === "dangtienhanh") status = "process";
-    else if (status === "hoanthanh") status = "complete";
-    else status = null;
+    if (status === "hoanthanh") status = "complete";
 
     const genres = root
       .querySelectorAll("#item-detail li.kind.row a")
