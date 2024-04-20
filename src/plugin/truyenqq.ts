@@ -7,18 +7,22 @@ import {
   IChapter,
   IResponseChapter,
 } from "../models/types";
+import { Page } from "puppeteer";
 
 export class TruyenQQ extends BaseComic {
   private async getListComic(url: string): Promise<IResponseListComic> {
     let data: IComic[] = [];
-    const root = await this.getHtmlParse(url);
+    const root = await this.getHtmlParse(url, async (page: Page) => {
+      await page.reload();
+    });
     const books = root.querySelectorAll("#main_homepage .book_avatar a");
     books.forEach((item) => {
+      const name = item.querySelector("img")?.getAttribute("alt") ?? "";
       data.push({
-        _bookId: "HOLD",
+        _bookId: this.generateId(this.cleanText(name)),
         imageThumbnail: item.querySelector("img")?.getAttribute("src") ?? "",
-        name: item.querySelector("img")?.getAttribute("alt") ?? "",
-        path: item?.getAttribute("href")?.replace(this.baseUrl, "") ?? "",
+        name,
+        path: this.getPath(item?.getAttribute("href")),
       });
     });
 
@@ -55,7 +59,6 @@ export class TruyenQQ extends BaseComic {
     let allGenres: IGenre[] = [];
     genresRaw?.forEach((item) => {
       const name = item.innerText.trim();
-      console.log(this.cleanText(name));
       allGenres.push({
         _genreId: this.generateId(this.cleanText(name)),
         name,

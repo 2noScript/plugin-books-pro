@@ -1,6 +1,6 @@
 import { comic, truyenqq, saveDataToJson } from ".";
 
-truyenqq.getAllGenres().then((data) => {
+truyenqq.search("vo").then((data) => {
   comic.kill();
   console.log(data);
 });
