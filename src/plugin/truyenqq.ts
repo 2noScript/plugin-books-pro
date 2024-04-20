@@ -50,6 +50,18 @@ export class TruyenQQ extends BaseComic {
       data,
     };
   }
+  private async getTop(path: string): Promise<IResponseListComic> {
+    const topData = await this.getListComic(this.baseUrl + path);
+    const data = topData.data.slice(0, 15);
+    return {
+      ...topData,
+      canNext: false,
+      canPrev: false,
+      totalPage: 1,
+      totalData: data.length,
+      data,
+    };
+  }
   async getAllGenres(): Promise<IGenre[]> {
     const root = await this.getHtmlParse(this.baseUrl);
     const genresRaw = root
@@ -73,19 +85,25 @@ export class TruyenQQ extends BaseComic {
     );
   }
   getListLatestUpdate(page?: number | undefined): Promise<IResponseListComic> {
-    throw new Error("Method not implemented.");
+    return this.getListComic(
+      this.baseUrl + `/truyen-moi-cap-nhat/trang-${page ?? 1}.html`
+    );
   }
   getListComplete(page?: number | undefined): Promise<IResponseListComic> {
-    throw new Error("Method not implemented.");
+    return this.getListComic(
+      this.baseUrl + `/truyen-hoan-thanh/trang-${page ?? 1}.html?status=2`
+    );
   }
   getListNew(page?: number | undefined): Promise<IResponseListComic> {
-    throw new Error("Method not implemented.");
+    return this.getListComic(
+      this.baseUrl + `/truyen-tranh-moi/trang-${page ?? 1}.html`
+    );
   }
   getTopHot(): Promise<IResponseListComic> {
-    throw new Error("Method not implemented.");
+    return this.getTop("/truyen-yeu-thich.html");
   }
   getTopWeek(): Promise<IResponseListComic> {
-    throw new Error("Method not implemented.");
+    return this.getTop("/top-tuan.html");
   }
   getListByGenre(genre: IGenre, page = 1): Promise<IResponseListComic> {
     return this.getListComic(
