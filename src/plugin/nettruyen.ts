@@ -35,7 +35,7 @@ export class NetTruyen extends BaseComic {
           imgAvatar?.getAttribute("src") ??
           "",
         name,
-        path: a?.getAttribute("href")?.replace(this.baseUrl, "") ?? "",
+        path: this.getPath(a?.getAttribute("href")),
       });
     });
 
@@ -61,7 +61,7 @@ export class NetTruyen extends BaseComic {
         all_Genres.push({
           _genreId: this.generateId(name),
           name,
-          path: item.getAttribute("href")?.replace(this.baseUrl, "") ?? "",
+          path: this.getPath(item.getAttribute("href")),
         });
       }
     });
@@ -125,9 +125,9 @@ export class NetTruyen extends BaseComic {
       root
         .querySelectorAll("#item-detail li.author.row a")
         .map((au) => au.innerText.trim()) ?? [];
+
     let status: any = this.cleanText(
-      root.querySelectorAll("#item-detail li.status.row p").pop()?.innerText ??
-        ""
+      root.querySelectorAll("#item-detail li.status.row p").pop()?.innerText
     );
 
     if (status === "dangtienhanh") status = "process";
@@ -139,7 +139,7 @@ export class NetTruyen extends BaseComic {
       .map((g) => ({
         _genreId: this.generateId(g.innerText),
         name: g.innerText.trim(),
-        path: g.getAttribute("href")?.replace(this.baseUrl, ""),
+        path: this.getPath(g.getAttribute("href")),
       })) as IGenre[];
 
     const views = root
@@ -173,10 +173,7 @@ export class NetTruyen extends BaseComic {
       .map((chap) => {
         const chap_text = chap.querySelector("a")?.innerText.split(":") ?? [""];
         return {
-          path: chap
-            .querySelector("a")
-            ?.getAttribute("href")
-            ?.replace(this.baseUrl, ""),
+          path: this.getPath(chap.querySelector("a")?.getAttribute("href")),
           title: chap_text.length > 1 ? chap_text.pop()?.trim() : "",
           chapName: chap_text[0].toLowerCase().replace("chapter", "").trim(),
         };

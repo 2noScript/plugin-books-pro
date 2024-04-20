@@ -50,23 +50,19 @@ export class TruyenQQ extends BaseComic {
     const root = await this.getHtmlParse(this.baseUrl);
     const genresRaw = root
       .querySelectorAll("#header_left_menu li")
-      .find(
-        (item) =>
-          !!this.textMaster(item.innerText)
-            .uses(["removeVietnameseDiacritics", "toLowerCase", "removeSpace"])
-            .includes("theloai")
-      )
+      .find((item) => !!this.cleanText(item.innerText).includes("theloai"))
       ?.querySelectorAll(".book_tags_content a");
-    let all_Genres: IGenre[] = [];
+    let allGenres: IGenre[] = [];
     genresRaw?.forEach((item) => {
-      all_Genres.push({
-        _genreId: "HOLD",
-        url: item.getAttribute("href"),
-        name: item.innerText.trim(),
-        path: item.getAttribute("href")?.replace(this.baseUrl, "") ?? "",
+      const name = item.innerText.trim();
+      console.log(this.cleanText(name));
+      allGenres.push({
+        _genreId: this.generateId(this.cleanText(name)),
+        name,
+        path: this.getPath(item.getAttribute("href")),
       });
     });
-    return all_Genres;
+    return allGenres;
   }
   async search(keyword: string, page = 1): Promise<IResponseListComic> {
     return this.getListComic(

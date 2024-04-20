@@ -33,12 +33,19 @@ export abstract class BaseComic {
   protected generateId(idName: string) {
     return generateIdentifier(this.cleanText(idName));
   }
-  protected cleanText(text: string) {
+  protected cleanText(text: string | null | undefined) {
+    if (!text) return "";
     return this.textMaster(text).uses([
       "toLowerCase",
       "removeVietnameseDiacritics",
       "removeSpace",
+      "removeSpecialCharacters",
     ]);
+  }
+  protected getPath(url: string | undefined | null) {
+    if (!url) return "";
+    if (url.includes(this.baseUrl)) return url.replace(this.baseUrl, "");
+    return url;
   }
   abstract getAllGenres(): Promise<IGenre[]>;
   abstract search(keyword: string, page?: number): Promise<IResponseListComic>;
