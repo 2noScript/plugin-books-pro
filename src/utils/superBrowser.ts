@@ -1,7 +1,7 @@
 import puppeteer from "puppeteer-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
 import randomUserAgent from "./puppeteer-plugin";
-import { Browser, Page } from "puppeteer";
+import { Browser, Page, executablePath } from "puppeteer";
 import parse from "node-html-parser";
 
 puppeteer.use(StealthPlugin());
@@ -36,9 +36,15 @@ export class SuperBrowser {
 
   public async getHtmlParser(url: string, callback?: callbackPageHandle) {
     if (!SuperBrowser.instance)
-      SuperBrowser.instance = await puppeteer.launch({ headless: true });
+      SuperBrowser.instance = await puppeteer.launch({
+        headless: true,
+        executablePath:
+          process.env.NODE_END === "production"
+            ? process.env.PUPPETEER_EXECUTABLE_PATH
+            : executablePath(),
+      });
     const page = await SuperBrowser.instance.newPage();
-    await page.setDefaultNavigationTimeout(600000);
+    page.setDefaultNavigationTimeout(600000);
     await page.goto(url);
 
     if (callback) await callback(page, this.useScroll, this.useSleep);
