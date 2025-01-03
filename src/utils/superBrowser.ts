@@ -22,8 +22,7 @@ export class SuperBrowser {
   }
 
   private async useScroll(page: Page, maxScrolls = 100) {
-    let prevHeight = -1;
-    let scrollCount = 0;
+    let prevHeight = -1; let scrollCount = 0;
     while (scrollCount < maxScrolls) {
       await page.evaluate("window.scrollTo(0, document.body.scrollHeight)");
       let newHeight = await page.evaluate("document.body.scrollHeight");
