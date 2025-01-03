@@ -1,21 +1,21 @@
-import { textMaster } from "text-master-pro";
-import _ from "lodash";
 import {
-  IGenre,
   IResponseListComic,
-  IComicInfo,
+  ISourceInfo,
 } from "./types";
-import { SuperBrowser, callbackPageHandle } from "../utils/superBrowser";
-import { generateIdentifier } from "../utils";
+
+
+import { Page } from "puppeteer";
 
 export abstract class BaseComic {
   protected baseUrl: string;
 
-  constructor(comicInfo: IComicInfo) {
-    this.baseUrl = comicInfo.source;
+  constructor(comicInfo: ISourceInfo) {
+    this.baseUrl = `https://${comicInfo.domain}`;
   }
 
-  abstract getListNew(page?: number): Promise<IResponseListComic>;
-  abstract getTopHot(): Promise<IResponseListComic>; // limit 15
-  abstract getTopWeek(): Promise<IResponseListComic>; // limit 15
+  abstract getTopHot(page: Page): Promise<IResponseListComic>; // max 30
+  abstract getTopWeek(page: Page): Promise<IResponseListComic>; // max 30
+  abstract getTopMonth(page: Page): Promise<IResponseListComic>;
+  abstract getNew(page: Page): Promise<IResponseListComic>;
+  abstract getFavorite(page: Page): Promise<IResponseListComic>;
 }
