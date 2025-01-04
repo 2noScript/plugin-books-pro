@@ -1,13 +1,13 @@
 type TYPE_LANGUAGE = "en" | "vi"
 type TYPE_lOCALE = "en_EN" | "vi_VN"
-type DataType = "TopDay" | "TopWeek" | "TopMonth" | "New" | "favorite"
-type Status = "SUCCESS" | "ERROR"|"WITCH_OUT"
+export type DataType = "TopDay" | "TopWeek" | "TopMonth" | "New" | "favorite"
+type Status = "SUCCESS" | "ERROR" | "WITCH_OUT"
 
 export enum Suppliers {
     NetTuyen = "nettruyen",
     TruyenQQ = "truyenqq",
 }
-    
+
 export interface ISourceInfo {
     key: Suppliers
     name: string
@@ -19,24 +19,28 @@ export interface ISourceInfo {
 }
 
 export interface IComic {
-    _bookId: string
-    imageThumbnail: string
+    identifier: string
+    imageUrlThumbnail: string
+    imagePathThumbnail?: string
+    rank: number
     name: string
-    path: string
-    views?: number
+    view?: number
+    like?: number
+    follow?: number,
+    genres?: string,
+    lastChapter?:number
 }
 
-export interface IResponseListComic {
+export interface IResponseListBook {
     dataType: DataType
     data: IComic[]
     status: Status
 }
 
-
-export interface  IComicInfo{
-   key:Suppliers,
-   name:string
-   language:TYPE_LANGUAGE[],
-   locale:TYPE_lOCALE,
-   avatar:string
+export interface IComicInfo {
+    key: Suppliers
+    name: string
+    language: TYPE_LANGUAGE[]
+    locale: TYPE_lOCALE
+    avatar: string
 }

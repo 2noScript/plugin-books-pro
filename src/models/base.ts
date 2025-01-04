@@ -1,18 +1,19 @@
 import { Page } from "puppeteer"
-import { IResponseListComic } from "./types"
+import { IResponseListBook } from "./types"
 
 export abstract class BaseBook {
     protected baseUrl: string
+    protected LIMIT_ITEMS:number=30
 
     constructor(domain: string) {
         this.baseUrl = `https://${domain}`
     }
     // max 30 items
-    abstract getTopDay(page: Page): Promise<IResponseListComic>
-    abstract getTopWeek(page: Page): Promise<IResponseListComic>
-    abstract getTopMonth(page: Page): Promise<IResponseListComic>
-    abstract getNew(page: Page): Promise<IResponseListComic>
-    abstract getFavorite(page: Page): Promise<IResponseListComic>
+    abstract getTopDay(page: Page): Promise<IResponseListBook>
+    abstract getTopWeek(page: Page): Promise<IResponseListBook>
+    abstract getTopMonth(page: Page): Promise<IResponseListBook>
+    abstract getNew(page: Page): Promise<IResponseListBook>
+    abstract getFavorite(page: Page): Promise<IResponseListBook>
 
     async crawl(page: Page) {
         const topDay = await this.getTopDay(page)
@@ -39,5 +40,20 @@ export abstract class BaseBook {
             }
             scrollCount += 1
         }
+    }
+    protected getIdentifier(str: string) {
+        return str
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/đ/g, "d")
+            .replace(/Đ/g, "D")
+            .replace(/[^a-zA-Z0-9\s]/g, "")
+            .replace(/\s+/g, " ")
+            .trim()
+            .toUpperCase()
+    }
+    
+    protected justNumber(str: string){
+        return Number(str.replace(/\D/g, '')) ?? 0
     }
 }

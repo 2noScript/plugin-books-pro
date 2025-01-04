@@ -13,9 +13,9 @@ const truyenqq = book.build(
 );
 
 
-worker.runTask(truyenqq.getTopDay.bind(truyenqq)).then(res=>{
+worker.runTask(truyenqq.crawl.bind(truyenqq)).then(res=>{
   console.log(res)
-  worker.kill()
+  // worker.kill()
 })
 
 
