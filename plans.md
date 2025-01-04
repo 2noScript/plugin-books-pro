@@ -5,7 +5,8 @@
 - manhuavn (https://manhuavn.top)
 - manhuarock (https://manhuarockz.com)
 - mangatoon (https://mangatooncom.vn)
-
+- comico (https://www.comico.jp)
+- mangadex (https://mangadex.org)
 
 #### Novel
 
@@ -16,6 +17,7 @@
 - truyenfulltv (https://truyenfull.tv)
 - metruyenhot (https://metruyenhot.vn)
 - enovel (https://enovel.mobi)
-
+- truyenyy (https://truyenyy.vip)
+- dtruyen (https://dtruyen.net)
 #### other
 - waka (https://waka.vn)

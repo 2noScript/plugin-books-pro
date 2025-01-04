@@ -3,3 +3,4 @@ yarn.lock
 lib
 test/*.json
 db/*.json
+test/*.html
