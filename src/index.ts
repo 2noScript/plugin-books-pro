@@ -1,7 +1,7 @@
 import { comicSuppliers } from "./constants/suppliers";
-import { IComicInfo, Suppliers } from "./models/types";
+import {  Suppliers } from "./models/types";
 import { NetTruyen, TruyenQQ } from "./plugin";
-import { SuperBrowser } from "./utils/superBrowser";
+import { SuperBrowser } from "./utils/BrowserWorker";
 
 export class Comic {
   constructor() {}
