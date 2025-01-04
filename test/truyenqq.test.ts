@@ -13,7 +13,7 @@ const bk = book.build(
 );
 
 
-worker.runTask(bk.crawl.bind(bk)).then(res=>{
+worker.runTask(bk.getTopDay.bind(bk)).then(res=>{
   console.log(res)
   // worker.kill()
 })
