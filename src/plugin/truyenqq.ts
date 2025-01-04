@@ -3,8 +3,16 @@ import { BaseBook } from "../models/base"
 import { IResponseListComic } from "../models/types"
 
 export default class TruyenQQ extends BaseBook {
-    getTopDay(page: Page): Promise<IResponseListComic> {
-        throw new Error("Method not implemented.")
+
+   async getTopDay(page: Page): Promise<IResponseListComic> {
+
+        await page.goto(this.baseUrl)
+        const result:IResponseListComic={
+            dataType:'TopDay',
+            data:[],
+            status:'ERROR'
+        }
+        return Promise.resolve(result)
     }
     getTopWeek(page: Page): Promise<IResponseListComic> {
         throw new Error("Method not implemented.")

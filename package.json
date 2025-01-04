@@ -10,7 +10,7 @@
   "scripts": {
     "build": "tsc",
     "prepare": "yarn  build",
-    "dev": "nodemon --exec ts-node src/index.ts",
+    "dev": "ts-node src/index.ts",
     "test": "ts-node test/index.ts",
     "test:nettruyen": "nodemon --exec  ts-node test/nettruyen.test.ts",
     "test:truyenqq":"nodemon --exec  ts-node test/truyenqq.test.ts"

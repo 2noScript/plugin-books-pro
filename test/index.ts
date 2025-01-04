@@ -1,13 +1,21 @@
-import { Comic, Suppliers } from "../src";
+import {  Books,Suppliers } from "../src";
 export { saveDataToJson } from "../src/utils";
+import {BrowserWorker} from '../src/utils/BrowserWorker'
 
-export const comic = new Comic();
 
-export const nettruyen = comic.build(
-  Suppliers.NetTuyen,
-  "https://nettruyenco.vn"
-);
-export const truyenqq = comic.build(
+
+const worker=new BrowserWorker({headless:false})
+const  book = new Books();
+
+const truyenqq = book.build(
   Suppliers.TruyenQQ,
-  "https://truyenqqvn.com"
+  "truyenqqto.com"
 );
+
+
+worker.runTask(truyenqq.getTopDay.bind(truyenqq)).then(res=>{
+  console.log(res)
+  worker.kill()
+})
+
+

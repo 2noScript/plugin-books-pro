@@ -1,7 +1,7 @@
 import puppeteer from "puppeteer-extra"
 import StealthPlugin from "puppeteer-extra-plugin-stealth"
 import randomUserAgent from "./puppeteer-plugin"
-import { Browser, Page, LaunchOptions } from "puppeteer"
+import { Browser, Page, BrowserLaunchArgumentOptions } from "puppeteer"
 
 puppeteer.use(StealthPlugin())
 puppeteer.use(randomUserAgent())
@@ -10,13 +10,13 @@ export type callbackPageHandle = (page: Page) => Promise<void>
 
 export class BrowserWorker {
     private static instance: Browser
-    private launchOptions: LaunchOptions
-    constructor(launchOptions: LaunchOptions) {
+    private launchOptions: BrowserLaunchArgumentOptions
+    constructor(launchOptions: BrowserLaunchArgumentOptions) {
         this.launchOptions = launchOptions
-        this.initBrowser()
     }
 
     public async runTask(callback: callbackPageHandle) {
+        if (!BrowserWorker.instance) await this.initBrowser()
         const context = await BrowserWorker.instance.createBrowserContext()
         const page = await context.newPage()
         page.setDefaultNavigationTimeout(600000)
@@ -30,15 +30,14 @@ export class BrowserWorker {
         BrowserWorker.instance = await puppeteer.launch(this.launchOptions)
     }
 
-    public async change(launchOptions: LaunchOptions) {
+    public async change(launchOptions: BrowserLaunchArgumentOptions) {
         BrowserWorker.instance?.close()
         this.launchOptions = launchOptions
         await this.initBrowser()
     }
 
-    public static async kill() {
-        if (BrowserWorker.instance) {
-            await BrowserWorker.instance.close()
-        }
+    public  async kill() {    
+         await BrowserWorker.instance?.close() 
+        
     }
 }

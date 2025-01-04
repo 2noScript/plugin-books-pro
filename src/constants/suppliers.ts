@@ -1,22 +1,20 @@
 import { IComicInfo, Suppliers } from "../models/types";
 
-export const comicSuppliers: IComicInfo[] = [
+export const bookSuppliers: IComicInfo[] = [
   {
     key: Suppliers.NetTuyen,
     name: "nettruyen",
     language: ["vi"],
     locale: "vi_VN",
-    icon: "/data/logos/favicon-nettruyen.png",
-    logo: "/data/logos/logo-nettruyen.png",
-    source: "",
+    avatar: ""
   },
   {
     key: Suppliers.TruyenQQ,
     name: "truyenqq",
     language: ["vi"],
     locale: "vi_VN",
-    icon: "",
-    logo: "",
-    source: "",
+    avatar: ""
   },
 ];
+
+
