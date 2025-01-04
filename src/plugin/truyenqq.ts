@@ -46,7 +46,7 @@ export default class TruyenQQ extends BaseBook {
                         return a.textContent
                     }
                 )
-                const rowGenres = await book.$$eval(
+                const rawTags = await book.$$eval(
                     ".book_info .more-info .list-tags .blue",
                     elements => {
                         return elements.map(el =>
@@ -62,7 +62,7 @@ export default class TruyenQQ extends BaseBook {
                     view: this.justNumber(String(rawView)),
                     follow: this.justNumber(String(rawFollow)),
                     lastChapter: this.justNumber(String(rawLastChapter)),
-                    genres: JSON.stringify(rowGenres, null),
+                    tags: JSON.stringify(rawTags, null),
                 })
             }
         } catch (e) {

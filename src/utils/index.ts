@@ -37,3 +37,35 @@ export function xorDecrypt(encrypted: string, key: string): string {
   }
   return output;
 }
+
+
+
+// private async logInHelper(page: Page) {
+//   if (!this.isisLoggedIn) {
+//       await page.goto(this.baseUrl)
+//       await page.waitForSelector(
+//           "button[data-x-bind=\"OpenModal('login')\"]"
+//       )
+//       await page.click("button[data-x-bind=\"OpenModal('login')\"]")
+
+//       await page.waitForSelector('input[data-x-model="form.email"]')
+//       await page.type(
+//           'input[data-x-model="form.email"]',
+//           xorDecrypt(this.emailLogin, AUTHOR_KEY),
+//           { delay: 100 }
+//       )
+
+//       await page.waitForSelector('input[data-x-model="form.password"]')
+//       await page.type(
+//           'input[data-x-model="form.password"]',
+//           xorDecrypt(this.passwordLogin, AUTHOR_KEY),
+//           { delay: 100 }
+//       )
+
+//       await page.click('button[data-x-bind="Submit"]')
+//       await page.waitForSelector(
+//           "img[data-x-bind=\"UserAvatar($store.account.userData)\"]"
+//       )
+//       this.isisLoggedIn=true
+//   }
+// }

@@ -29,7 +29,7 @@ export interface IComic {
     view?: number
     like?: number
     follow?: number,
-    genres?: string,
+    tags?: string,
     lastChapter?:number,
     author?:string
 }
