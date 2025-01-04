@@ -33,18 +33,7 @@ export class SuperBrowser {
     }
   }
 
-  public async getHtmlParser(url: string, callback?: callbackPageHandle) {
-    if (!SuperBrowser.instance)
-      SuperBrowser.instance = await puppeteer.launch({
-        headless: true,
-        executablePath:
-          process.env.NODE_END === "production"
-            ? process.env.PUPPETEER_EXECUTABLE_PATH
-            : executablePath(),
-      });
-    const page = await SuperBrowser.instance.newPage();
-    page.setDefaultNavigationTimeout(600000);
-    await page.goto(url);
+
 
     if (callback) await callback(page, this.useScroll, this.useSleep);
     const content = await page.content();
