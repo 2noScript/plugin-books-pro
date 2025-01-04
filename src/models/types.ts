@@ -20,7 +20,7 @@ export interface ISourceInfo {
     domain: string
 }
 
-export interface IComic {
+export interface IBook {
     identifier: string
     imageUrlThumbnail: string
     imagePathThumbnail?: string
@@ -36,11 +36,11 @@ export interface IComic {
 
 export interface IResponseListBook {
     dataType: DataType
-    data: IComic[]
+    data: IBook[]
     status: Status
 }
 
-export interface IComicInfo {
+export interface IBookInfo {
     key: Suppliers
     name: string
     language: TYPE_LANGUAGE[]

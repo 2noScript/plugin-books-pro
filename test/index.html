@@ -1,0 +1,2556 @@
+<main data-x-data="books(null)" class="space-y-5 mt-6">
+    <div class="flex justify-between items-center px-4 lg:px-0">
+        <h2 class="text-primary uppercase">Truyện Mới Cập Nhật</h2>
+        <a
+            href="https://metruyencv.com/danh-sach"
+            class="bg-primary text-white text-xs px-2 py-1 rounded uppercase"
+            >Lọc Truyện</a
+        >
+    </div>
+    <div
+        data-x-show="isLoading"
+        class="flex justify-center"
+        style="display: none"
+    >
+        <svg
+            class="inline animate-spin w-8 h-8"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+            data-slot="icon"
+        >
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m21 7.5-2.25-1.313M21 7.5v2.25m0-2.25-2.25 1.313M3 7.5l2.25-1.313M3 7.5l2.25 1.313M3 7.5v2.25m9 3 2.25-1.313M12 12.75l-2.25-1.313M12 12.75V15m0 6.75 2.25-1.313M12 21.75V19.5m0 2.25-2.25-1.313m0-16.875L12 2.25l2.25 1.313M21 14.25v2.25l-2.25 1.313m-13.5 0L3 16.5v-2.25"
+            ></path>
+        </svg>
+    </div>
+    <template data-x-if="!isLoading"
+        ><div>
+            <div data-x-show="!list.length" class="text-center italic">
+                Không có dữ liệu
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 px-4 lg:px-0">
+                <template data-x-for="(book, index) in list"
+                    ><div class="flex space-x-3 pb-6 border-b border-auto">
+                        <div class="flex-shrink-0">
+                            <a
+                                data-x-bind:href="getBookUrl(book)"
+                                target="_blank"
+                                class="text-title font-semibold"
+                                ><img
+                                    data-x-bind:src="book.poster[150]"
+                                    class="h-32 w-24 shadow-xl rounded"
+                                    loading="lazy"
+                            /></a>
+                        </div>
+                        <div class="flex-grow space-y-2">
+                            <div>
+                                <a
+                                    data-x-bind:href="getBookUrl(book)"
+                                    target="_blank"
+                                    data-x-text="book.name"
+                                    class="text-title font-semibold"
+                                ></a>
+                            </div>
+                            <div
+                                data-x-text="book.synopsis.substring(0, 199)"
+                                class="text-gray-500 text-overflow-multiple-lines break-all"
+                            ></div>
+                            <div class="flex justify-between space-x-2 pt-1">
+                                <div class="flex items-center space-x-1">
+                                    <svg
+                                        class="w-4 h-4 text-gray-500"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        fill="currentColor"
+                                        aria-hidden="true"
+                                        data-slot="icon"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+                                            clip-rule="evenodd"
+                                        ></path></svg
+                                    ><span
+                                        data-x-bind="BookAuthor(book)"
+                                        class="text-title text-xs"
+                                    ></span>
+                                </div>
+                                <span
+                                    data-x-text="book.chapter_count + ' chương'"
+                                    class="text-xs"
+                                ></span>
+                            </div>
+                            <div class="flex justify-between text-gray-500">
+                                <div class="flex items-center space-x-1">
+                                    <svg
+                                        class="w-4 h-4"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        fill="currentColor"
+                                        aria-hidden="true"
+                                        data-slot="icon"
+                                    >
+                                        <path
+                                            d="M11.644 1.59a.75.75 0 0 1 .712 0l9.75 5.25a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.712 0l-9.75-5.25a.75.75 0 0 1 0-1.32l9.75-5.25Z"
+                                        ></path>
+                                        <path
+                                            d="m3.265 10.602 7.668 4.129a2.25 2.25 0 0 0 2.134 0l7.668-4.13 1.37.739a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.71 0l-9.75-5.25a.75.75 0 0 1 0-1.32l1.37-.738Z"
+                                        ></path>
+                                        <path
+                                            d="m10.933 19.231-7.668-4.13-1.37.739a.75.75 0 0 0 0 1.32l9.75 5.25c.221.12.489.12.71 0l9.75-5.25a.75.75 0 0 0 0-1.32l-1.37-.738-7.668 4.13a2.25 2.25 0 0 1-2.134-.001Z"
+                                        ></path></svg
+                                    ><span
+                                        data-x-text="book.genres[0].name"
+                                        class="text-xs"
+                                    ></span>
+                                </div>
+                                <div>
+                                    <button
+                                        data-x-on:click="openReview(index)"
+                                        class="text-xs bg-primary text-white py-1 px-2 rounded-md"
+                                    >
+                                        Đọc thử
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div></template
+                >
+            </div>
+            <div
+                data-x-data="pagination(page, next, last)"
+                data-x-modelable="curPage"
+                data-x-model="page"
+                class="flex justify-center items-center space-x-4 my-8"
+            >
+                <button
+                    data-x-bind="FirstPage"
+                    class="disabled:border-gray-500 text-primary disabled:text-gray-500"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M7 6v12"></path>
+                        <path d="M18 6l-6 6l6 6"></path>
+                    </svg></button
+                ><button
+                    data-x-bind="PrevPage"
+                    class="disabled:border-gray-500 text-primary disabled:text-gray-500"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M15 6l-6 6l6 6"></path>
+                    </svg>
+                </button>
+                <div class="relative">
+                    <input
+                        data-x-bind="FormPage"
+                        type="text"
+                        class="border border-primary rounded h-8 w-20 bg-inherit text-black dark:text-white placeholder:text-gray-500 text-sm"
+                    />
+                    <div
+                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"
+                    >
+                        <span
+                            data-x-text="`/${lastPage}`"
+                            class="text-gray-500 text-sm"
+                        ></span>
+                    </div>
+                </div>
+                <button
+                    data-x-bind="NextPage"
+                    class="disabled:border-gray-500 text-primary disabled:text-gray-500"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M9 6l6 6l-6 6"></path>
+                    </svg></button
+                ><button
+                    data-x-bind="LastPage"
+                    class="disabled:border-gray-500 text-primary disabled:text-gray-500"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M6 6l6 6l-6 6"></path>
+                        <path d="M17 5v13"></path>
+                    </svg>
+                </button>
+            </div>
+            <template
+                data-x-data=""
+                data-x-if="$store.modal.preview"
+                data-x-bind="CloseModal"
+                ><div
+                    data-x-data="preview(currentBook)"
+                    class="bg-gray-500 bg-opacity-75 transition-opacity z-40 fixed top-0 left-0 w-full h-full outline-none overflow-x-hidden"
+                    tabindex="-1"
+                >
+                    <div
+                        class="h-full max-w-screen-lg mx-auto relative w-auto pointer-events-none"
+                    >
+                        <div
+                            class="min-h-screen max-h-full overflow-hidden border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-clip-padding bg-panel dark:text-gray-200 outline-none"
+                        >
+                            <div
+                                class="flex flex-shrink-0 items-center justify-between p-4 border-b border-auto"
+                            >
+                                <div class="font-medium">
+                                    <span
+                                        data-x-text="book.name"
+                                        class="font-bold"
+                                    ></span>
+                                </div>
+                                <button
+                                    data-x-bind="CloseModal"
+                                    type="button"
+                                    class="relative rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none"
+                                >
+                                    <span class="absolute -inset-2.5"></span
+                                    ><span class="sr-only">Close panel</span
+                                    ><svg
+                                        class="w-6 h-6"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke-width="1.5"
+                                        stroke="currentColor"
+                                        aria-hidden="true"
+                                        data-slot="icon"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M6 18 18 6M6 6l12 12"
+                                        ></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div
+                                class="flex-auto overflow-y-auto overscroll-none relative px-4 pt-4 pb-12"
+                            >
+                                <div class="space-y-3 text-base break-words">
+                                    <p>
+                                        <span class="font-medium"
+                                            >Giới thiệu:</span
+                                        >
+                                    </p>
+                                    <div
+                                        data-x-html="nl2br(book.synopsis)"
+                                    ></div>
+                                    <p>==============================</p>
+                                    <div
+                                        data-x-show="isLoading"
+                                        class="flex justify-center"
+                                    >
+                                        <svg
+                                            class="inline animate-spin w-8 h-8"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke-width="1.5"
+                                            stroke="currentColor"
+                                            aria-hidden="true"
+                                            data-slot="icon"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                d="m21 7.5-2.25-1.313M21 7.5v2.25m0-2.25-2.25 1.313M3 7.5l2.25-1.313M3 7.5l2.25 1.313M3 7.5v2.25m9 3 2.25-1.313M12 12.75l-2.25-1.313M12 12.75V15m0 6.75 2.25-1.313M12 21.75V19.5m0 2.25-2.25-1.313m0-16.875L12 2.25l2.25 1.313M21 14.25v2.25l-2.25 1.313m-13.5 0L3 16.5v-2.25"
+                                            ></path>
+                                        </svg>
+                                    </div>
+                                    <template
+                                        data-x-if="!isLoading &amp;&amp; chapter"
+                                        ><div>
+                                            <p
+                                                data-x-text="chapter.name"
+                                                class="font-medium mb-3"
+                                            ></p>
+                                            <div
+                                                data-x-html="nl2br(content)"
+                                            ></div></div
+                                    ></template>
+                                </div>
+                            </div>
+                        </div>
+                    </div></div
+            ></template></div
+    ></template>
+    <div>
+        <div
+            data-x-show="!list.length"
+            class="text-center italic"
+            style="display: none"
+        >
+            Không có dữ liệu
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 px-4 lg:px-0">
+            <template data-x-for="(book, index) in list"
+                ><div class="flex space-x-3 pb-6 border-b border-auto">
+                    <div class="flex-shrink-0">
+                        <a
+                            data-x-bind:href="getBookUrl(book)"
+                            target="_blank"
+                            class="text-title font-semibold"
+                            ><img
+                                data-x-bind:src="book.poster[150]"
+                                class="h-32 w-24 shadow-xl rounded"
+                                loading="lazy"
+                        /></a>
+                    </div>
+                    <div class="flex-grow space-y-2">
+                        <div>
+                            <a
+                                data-x-bind:href="getBookUrl(book)"
+                                target="_blank"
+                                data-x-text="book.name"
+                                class="text-title font-semibold"
+                            ></a>
+                        </div>
+                        <div
+                            data-x-text="book.synopsis.substring(0, 199)"
+                            class="text-gray-500 text-overflow-multiple-lines break-all"
+                        ></div>
+                        <div class="flex justify-between space-x-2 pt-1">
+                            <div class="flex items-center space-x-1">
+                                <svg
+                                    class="w-4 h-4 text-gray-500"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                    aria-hidden="true"
+                                    data-slot="icon"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+                                        clip-rule="evenodd"
+                                    ></path></svg
+                                ><span
+                                    data-x-bind="BookAuthor(book)"
+                                    class="text-title text-xs"
+                                ></span>
+                            </div>
+                            <span
+                                data-x-text="book.chapter_count + ' chương'"
+                                class="text-xs"
+                            ></span>
+                        </div>
+                        <div class="flex justify-between text-gray-500">
+                            <div class="flex items-center space-x-1">
+                                <svg
+                                    class="w-4 h-4"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                    aria-hidden="true"
+                                    data-slot="icon"
+                                >
+                                    <path
+                                        d="M11.644 1.59a.75.75 0 0 1 .712 0l9.75 5.25a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.712 0l-9.75-5.25a.75.75 0 0 1 0-1.32l9.75-5.25Z"
+                                    ></path>
+                                    <path
+                                        d="m3.265 10.602 7.668 4.129a2.25 2.25 0 0 0 2.134 0l7.668-4.13 1.37.739a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.71 0l-9.75-5.25a.75.75 0 0 1 0-1.32l1.37-.738Z"
+                                    ></path>
+                                    <path
+                                        d="m10.933 19.231-7.668-4.13-1.37.739a.75.75 0 0 0 0 1.32l9.75 5.25c.221.12.489.12.71 0l9.75-5.25a.75.75 0 0 0 0-1.32l-1.37-.738-7.668 4.13a2.25 2.25 0 0 1-2.134-.001Z"
+                                    ></path></svg
+                                ><span
+                                    data-x-text="book.genres[0].name"
+                                    class="text-xs"
+                                ></span>
+                            </div>
+                            <div>
+                                <button
+                                    data-x-on:click="openReview(index)"
+                                    class="text-xs bg-primary text-white py-1 px-2 rounded-md"
+                                >
+                                    Đọc thử
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div></template
+            >
+            <div class="flex space-x-3 pb-6 border-b border-auto">
+                <div class="flex-shrink-0">
+                    <a
+                        data-x-bind:href="getBookUrl(book)"
+                        target="_blank"
+                        class="text-title font-semibold"
+                        href="https://metruyencv.com/truyen/tu-tien-ta-that-khong-co-muon-lam-liem-cho"
+                        ><img
+                            data-x-bind:src="book.poster[150]"
+                            class="h-32 w-24 shadow-xl rounded"
+                            loading="lazy"
+                            src="https://static.cdnno.com/poster/tu-tien-ta-that-khong-co-muon-lam-liem-cho/150.jpg?1720949130"
+                    /></a>
+                </div>
+                <div class="flex-grow space-y-2">
+                    <div>
+                        <a
+                            data-x-bind:href="getBookUrl(book)"
+                            target="_blank"
+                            data-x-text="book.name"
+                            class="text-title font-semibold"
+                            href="https://metruyencv.com/truyen/tu-tien-ta-that-khong-co-muon-lam-liem-cho"
+                            >Tu Tiên: Ta Thật Không Có Muốn Làm Liếm Chó!</a
+                        >
+                    </div>
+                    <div
+                        data-x-text="book.synopsis.substring(0, 199)"
+                        class="text-gray-500 text-overflow-multiple-lines break-all"
+                    >
+                        "Đưa tặng Tụ Khí Đan, thu hoạch được vạn lần phản hồi,
+                        ban thưởng Cửu Chuyển Kim đan!" "Đưa tặng Hỏa Cầu Thuật,
+                        thu hoạch được vạn lần phản hồi, ban thưởng Diệt Thế
+                        Phật Liên!" "Đưa tặng pháp khí
+                    </div>
+                    <div class="flex justify-between space-x-2 pt-1">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4 text-gray-500"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+                                    clip-rule="evenodd"
+                                ></path></svg
+                            ><span
+                                data-x-bind="BookAuthor(book)"
+                                class="text-title text-xs"
+                                >Vũ Thần Công Công</span
+                            >
+                        </div>
+                        <span
+                            data-x-text="book.chapter_count + ' chương'"
+                            class="text-xs"
+                            >600 chương</span
+                        >
+                    </div>
+                    <div class="flex justify-between text-gray-500">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    d="M11.644 1.59a.75.75 0 0 1 .712 0l9.75 5.25a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.712 0l-9.75-5.25a.75.75 0 0 1 0-1.32l9.75-5.25Z"
+                                ></path>
+                                <path
+                                    d="m3.265 10.602 7.668 4.129a2.25 2.25 0 0 0 2.134 0l7.668-4.13 1.37.739a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.71 0l-9.75-5.25a.75.75 0 0 1 0-1.32l1.37-.738Z"
+                                ></path>
+                                <path
+                                    d="m10.933 19.231-7.668-4.13-1.37.739a.75.75 0 0 0 0 1.32l9.75 5.25c.221.12.489.12.71 0l9.75-5.25a.75.75 0 0 0 0-1.32l-1.37-.738-7.668 4.13a2.25 2.25 0 0 1-2.134-.001Z"
+                                ></path></svg
+                            ><span
+                                data-x-text="book.genres[0].name"
+                                class="text-xs"
+                                >Huyền Huyễn</span
+                            >
+                        </div>
+                        <div>
+                            <button
+                                data-x-on:click="openReview(index)"
+                                class="text-xs bg-primary text-white py-1 px-2 rounded-md"
+                            >
+                                Đọc thử
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex space-x-3 pb-6 border-b border-auto">
+                <div class="flex-shrink-0">
+                    <a
+                        data-x-bind:href="getBookUrl(book)"
+                        target="_blank"
+                        class="text-title font-semibold"
+                        href="https://metruyencv.com/truyen/thi-sinh-tu-quy-si-quan"
+                        ><img
+                            data-x-bind:src="book.poster[150]"
+                            class="h-32 w-24 shadow-xl rounded"
+                            loading="lazy"
+                            src="https://static.cdnno.com/poster/thi-sinh-tu-quy-si-quan/150.jpg?1710429379"
+                    /></a>
+                </div>
+                <div class="flex-grow space-y-2">
+                    <div>
+                        <a
+                            data-x-bind:href="getBookUrl(book)"
+                            target="_blank"
+                            data-x-text="book.name"
+                            class="text-title font-semibold"
+                            href="https://metruyencv.com/truyen/thi-sinh-tu-quy-si-quan"
+                            >Thi Sinh Tử, Quỷ Sĩ Quan</a
+                        >
+                    </div>
+                    <div
+                        data-x-text="book.synopsis.substring(0, 199)"
+                        class="text-gray-500 text-overflow-multiple-lines break-all"
+                    >
+                        Cổ lão địa phương vắng vẻ, kiểu gì cũng sẽ phát sinh rất
+                        nhiều quỷ dị, chuyện kinh khủng. Mà những chuyện này,
+                        liền phát sinh ở Hoa Cửu Nan bên người. Thậm chí Hoa Cửu
+                        Nan chính là những chuyện n
+                    </div>
+                    <div class="flex justify-between space-x-2 pt-1">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4 text-gray-500"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+                                    clip-rule="evenodd"
+                                ></path></svg
+                            ><span
+                                data-x-bind="BookAuthor(book)"
+                                class="text-title text-xs"
+                                >Giới Ngọc</span
+                            >
+                        </div>
+                        <span
+                            data-x-text="book.chapter_count + ' chương'"
+                            class="text-xs"
+                            >1027 chương</span
+                        >
+                    </div>
+                    <div class="flex justify-between text-gray-500">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    d="M11.644 1.59a.75.75 0 0 1 .712 0l9.75 5.25a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.712 0l-9.75-5.25a.75.75 0 0 1 0-1.32l9.75-5.25Z"
+                                ></path>
+                                <path
+                                    d="m3.265 10.602 7.668 4.129a2.25 2.25 0 0 0 2.134 0l7.668-4.13 1.37.739a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.71 0l-9.75-5.25a.75.75 0 0 1 0-1.32l1.37-.738Z"
+                                ></path>
+                                <path
+                                    d="m10.933 19.231-7.668-4.13-1.37.739a.75.75 0 0 0 0 1.32l9.75 5.25c.221.12.489.12.71 0l9.75-5.25a.75.75 0 0 0 0-1.32l-1.37-.738-7.668 4.13a2.25 2.25 0 0 1-2.134-.001Z"
+                                ></path></svg
+                            ><span
+                                data-x-text="book.genres[0].name"
+                                class="text-xs"
+                                >Huyền Huyễn</span
+                            >
+                        </div>
+                        <div>
+                            <button
+                                data-x-on:click="openReview(index)"
+                                class="text-xs bg-primary text-white py-1 px-2 rounded-md"
+                            >
+                                Đọc thử
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex space-x-3 pb-6 border-b border-auto">
+                <div class="flex-shrink-0">
+                    <a
+                        data-x-bind:href="getBookUrl(book)"
+                        target="_blank"
+                        class="text-title font-semibold"
+                        href="https://metruyencv.com/truyen/tu-phong-ba-ngan-nam-xuat-the-tuc-vo-dich"
+                        ><img
+                            data-x-bind:src="book.poster[150]"
+                            class="h-32 w-24 shadow-xl rounded"
+                            loading="lazy"
+                            src="https://static.cdnno.com/poster/tu-phong-ba-ngan-nam-xuat-the-tuc-vo-dich/150.jpg?1733296899"
+                    /></a>
+                </div>
+                <div class="flex-grow space-y-2">
+                    <div>
+                        <a
+                            data-x-bind:href="getBookUrl(book)"
+                            target="_blank"
+                            data-x-text="book.name"
+                            class="text-title font-semibold"
+                            href="https://metruyencv.com/truyen/tu-phong-ba-ngan-nam-xuat-the-tuc-vo-dich"
+                            >Tự Phong Ba Ngàn Năm, Xuất Thế Tức Vô Địch</a
+                        >
+                    </div>
+                    <div
+                        data-x-text="book.synopsis.substring(0, 199)"
+                        class="text-gray-500 text-overflow-multiple-lines break-all"
+                    >
+                        【 bối cảnh, thiên phú vô địch + thiên kiêu tranh bá +
+                        bảng danh sách hàng thế + Hoàng Kim đại thế + trùng
+                        đồng, Hỗn Độn Thần Ma Thể 】 "Ba ngàn năm về sau, Hoàng
+                        Kim đại thế sẽ đến, ta tự phong ba
+                    </div>
+                    <div class="flex justify-between space-x-2 pt-1">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4 text-gray-500"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+                                    clip-rule="evenodd"
+                                ></path></svg
+                            ><span
+                                data-x-bind="BookAuthor(book)"
+                                class="text-title text-xs"
+                                >Mạch Vãng Mạc Vong</span
+                            >
+                        </div>
+                        <span
+                            data-x-text="book.chapter_count + ' chương'"
+                            class="text-xs"
+                            >155 chương</span
+                        >
+                    </div>
+                    <div class="flex justify-between text-gray-500">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    d="M11.644 1.59a.75.75 0 0 1 .712 0l9.75 5.25a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.712 0l-9.75-5.25a.75.75 0 0 1 0-1.32l9.75-5.25Z"
+                                ></path>
+                                <path
+                                    d="m3.265 10.602 7.668 4.129a2.25 2.25 0 0 0 2.134 0l7.668-4.13 1.37.739a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.71 0l-9.75-5.25a.75.75 0 0 1 0-1.32l1.37-.738Z"
+                                ></path>
+                                <path
+                                    d="m10.933 19.231-7.668-4.13-1.37.739a.75.75 0 0 0 0 1.32l9.75 5.25c.221.12.489.12.71 0l9.75-5.25a.75.75 0 0 0 0-1.32l-1.37-.738-7.668 4.13a2.25 2.25 0 0 1-2.134-.001Z"
+                                ></path></svg
+                            ><span
+                                data-x-text="book.genres[0].name"
+                                class="text-xs"
+                                >Huyền Huyễn</span
+                            >
+                        </div>
+                        <div>
+                            <button
+                                data-x-on:click="openReview(index)"
+                                class="text-xs bg-primary text-white py-1 px-2 rounded-md"
+                            >
+                                Đọc thử
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex space-x-3 pb-6 border-b border-auto">
+                <div class="flex-shrink-0">
+                    <a
+                        data-x-bind:href="getBookUrl(book)"
+                        target="_blank"
+                        class="text-title font-semibold"
+                        href="https://metruyencv.com/truyen/tu-tien-tu-hoc-duoc-tieu-phap-thuat-bat-dau-kien-thiet-tong-mon"
+                        ><img
+                            data-x-bind:src="book.poster[150]"
+                            class="h-32 w-24 shadow-xl rounded"
+                            loading="lazy"
+                            src="https://static.cdnno.com/poster/tu-tien-tu-hoc-duoc-tieu-phap-thuat-bat-dau-kien-thiet-tong-mon/150.jpg?1728569166"
+                    /></a>
+                </div>
+                <div class="flex-grow space-y-2">
+                    <div>
+                        <a
+                            data-x-bind:href="getBookUrl(book)"
+                            target="_blank"
+                            data-x-text="book.name"
+                            class="text-title font-semibold"
+                            href="https://metruyencv.com/truyen/tu-tien-tu-hoc-duoc-tieu-phap-thuat-bat-dau-kien-thiet-tong-mon"
+                            >Tu Tiên: Từ Học Được Tiểu Pháp Thuật Bắt Đầu Kiến
+                            Thiết Tông Môn</a
+                        >
+                    </div>
+                    <div
+                        data-x-text="book.synopsis.substring(0, 199)"
+                        class="text-gray-500 text-overflow-multiple-lines break-all"
+                    >
+                        【 tu tiên 】+ 【 làm ruộng 】+ 【 tông môn kiến thiết
+                        】+ 【 hệ thống 】+ 【 không CP 】+ 【 chậm tiết tấu
+                        không thích chớ tiến! 】 Phân tích hỏa diễm ---- đinh!
+                        Chúc mừng lĩnh ngộ biến hóa hỏa diễm ch
+                    </div>
+                    <div class="flex justify-between space-x-2 pt-1">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4 text-gray-500"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+                                    clip-rule="evenodd"
+                                ></path></svg
+                            ><span
+                                data-x-bind="BookAuthor(book)"
+                                class="text-title text-xs"
+                                >Thính Phong</span
+                            >
+                        </div>
+                        <span
+                            data-x-text="book.chapter_count + ' chương'"
+                            class="text-xs"
+                            >368 chương</span
+                        >
+                    </div>
+                    <div class="flex justify-between text-gray-500">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    d="M11.644 1.59a.75.75 0 0 1 .712 0l9.75 5.25a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.712 0l-9.75-5.25a.75.75 0 0 1 0-1.32l9.75-5.25Z"
+                                ></path>
+                                <path
+                                    d="m3.265 10.602 7.668 4.129a2.25 2.25 0 0 0 2.134 0l7.668-4.13 1.37.739a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.71 0l-9.75-5.25a.75.75 0 0 1 0-1.32l1.37-.738Z"
+                                ></path>
+                                <path
+                                    d="m10.933 19.231-7.668-4.13-1.37.739a.75.75 0 0 0 0 1.32l9.75 5.25c.221.12.489.12.71 0l9.75-5.25a.75.75 0 0 0 0-1.32l-1.37-.738-7.668 4.13a2.25 2.25 0 0 1-2.134-.001Z"
+                                ></path></svg
+                            ><span
+                                data-x-text="book.genres[0].name"
+                                class="text-xs"
+                                >Huyền Huyễn</span
+                            >
+                        </div>
+                        <div>
+                            <button
+                                data-x-on:click="openReview(index)"
+                                class="text-xs bg-primary text-white py-1 px-2 rounded-md"
+                            >
+                                Đọc thử
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex space-x-3 pb-6 border-b border-auto">
+                <div class="flex-shrink-0">
+                    <a
+                        data-x-bind:href="getBookUrl(book)"
+                        target="_blank"
+                        class="text-title font-semibold"
+                        href="https://metruyencv.com/truyen/manh-nhat-to-chuc-sat-thu-the-ma-xuyen-qua"
+                        ><img
+                            data-x-bind:src="book.poster[150]"
+                            class="h-32 w-24 shadow-xl rounded"
+                            loading="lazy"
+                            src="https://static.cdnno.com/poster/manh-nhat-to-chuc-sat-thu-the-ma-xuyen-qua/150.jpg?1734601658"
+                    /></a>
+                </div>
+                <div class="flex-grow space-y-2">
+                    <div>
+                        <a
+                            data-x-bind:href="getBookUrl(book)"
+                            target="_blank"
+                            data-x-text="book.name"
+                            class="text-title font-semibold"
+                            href="https://metruyencv.com/truyen/manh-nhat-to-chuc-sat-thu-the-ma-xuyen-qua"
+                            >Mạnh Nhất! Tổ Chức Sát Thủ, Thế Mà Xuyên Qua!</a
+                        >
+                    </div>
+                    <div
+                        data-x-text="book.synopsis.substring(0, 199)"
+                        class="text-gray-500 text-overflow-multiple-lines break-all"
+                    >
+                        【 vô địch ➕ phía sau màn ➕ có thế lực ➕ sát phạt quả
+                        đoán ➕ không thánh mẫu 】 Nghe nói nơi này danh xưng
+                        "Linh thạch mua định không rời tay, tiên giới người nào
+                        không thể giết" ! "Không biết có
+                    </div>
+                    <div class="flex justify-between space-x-2 pt-1">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4 text-gray-500"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+                                    clip-rule="evenodd"
+                                ></path></svg
+                            ><span
+                                data-x-bind="BookAuthor(book)"
+                                class="text-title text-xs"
+                                >Bản Danh Kiệt</span
+                            >
+                        </div>
+                        <span
+                            data-x-text="book.chapter_count + ' chương'"
+                            class="text-xs"
+                            >158 chương</span
+                        >
+                    </div>
+                    <div class="flex justify-between text-gray-500">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    d="M11.644 1.59a.75.75 0 0 1 .712 0l9.75 5.25a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.712 0l-9.75-5.25a.75.75 0 0 1 0-1.32l9.75-5.25Z"
+                                ></path>
+                                <path
+                                    d="m3.265 10.602 7.668 4.129a2.25 2.25 0 0 0 2.134 0l7.668-4.13 1.37.739a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.71 0l-9.75-5.25a.75.75 0 0 1 0-1.32l1.37-.738Z"
+                                ></path>
+                                <path
+                                    d="m10.933 19.231-7.668-4.13-1.37.739a.75.75 0 0 0 0 1.32l9.75 5.25c.221.12.489.12.71 0l9.75-5.25a.75.75 0 0 0 0-1.32l-1.37-.738-7.668 4.13a2.25 2.25 0 0 1-2.134-.001Z"
+                                ></path></svg
+                            ><span
+                                data-x-text="book.genres[0].name"
+                                class="text-xs"
+                                >Huyền Huyễn</span
+                            >
+                        </div>
+                        <div>
+                            <button
+                                data-x-on:click="openReview(index)"
+                                class="text-xs bg-primary text-white py-1 px-2 rounded-md"
+                            >
+                                Đọc thử
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex space-x-3 pb-6 border-b border-auto">
+                <div class="flex-shrink-0">
+                    <a
+                        data-x-bind:href="getBookUrl(book)"
+                        target="_blank"
+                        class="text-title font-semibold"
+                        href="https://metruyencv.com/truyen/nho-dao-cuong-thu-sinh"
+                        ><img
+                            data-x-bind:src="book.poster[150]"
+                            class="h-32 w-24 shadow-xl rounded"
+                            loading="lazy"
+                            src="https://static.cdnno.com/poster/nho-dao-cuong-thu-sinh/150.jpg?1730198708"
+                    /></a>
+                </div>
+                <div class="flex-grow space-y-2">
+                    <div>
+                        <a
+                            data-x-bind:href="getBookUrl(book)"
+                            target="_blank"
+                            data-x-text="book.name"
+                            class="text-title font-semibold"
+                            href="https://metruyencv.com/truyen/nho-dao-cuong-thu-sinh"
+                            >Nho Đạo Cuồng Thư Sinh</a
+                        >
+                    </div>
+                    <div
+                        data-x-text="book.synopsis.substring(0, 199)"
+                        class="text-gray-500 text-overflow-multiple-lines break-all"
+                    >
+                        Lúc gặp loạn thế, cửu quốc cùng tồn tại, yêu ma mọc
+                        thành bụi, bách tính nhiều gian khó. Lục Chính xuyên qua
+                        trở thành An quốc người đọc sách, cùng một đám Nho gia
+                        thư sinh du học, trừ ma vệ đạo.
+                    </div>
+                    <div class="flex justify-between space-x-2 pt-1">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4 text-gray-500"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+                                    clip-rule="evenodd"
+                                ></path></svg
+                            ><span
+                                data-x-bind="BookAuthor(book)"
+                                class="text-title text-xs"
+                                >Tiêu Dao Tiểu Hàm Ngư</span
+                            >
+                        </div>
+                        <span
+                            data-x-text="book.chapter_count + ' chương'"
+                            class="text-xs"
+                            >177 chương</span
+                        >
+                    </div>
+                    <div class="flex justify-between text-gray-500">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    d="M11.644 1.59a.75.75 0 0 1 .712 0l9.75 5.25a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.712 0l-9.75-5.25a.75.75 0 0 1 0-1.32l9.75-5.25Z"
+                                ></path>
+                                <path
+                                    d="m3.265 10.602 7.668 4.129a2.25 2.25 0 0 0 2.134 0l7.668-4.13 1.37.739a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.71 0l-9.75-5.25a.75.75 0 0 1 0-1.32l1.37-.738Z"
+                                ></path>
+                                <path
+                                    d="m10.933 19.231-7.668-4.13-1.37.739a.75.75 0 0 0 0 1.32l9.75 5.25c.221.12.489.12.71 0l9.75-5.25a.75.75 0 0 0 0-1.32l-1.37-.738-7.668 4.13a2.25 2.25 0 0 1-2.134-.001Z"
+                                ></path></svg
+                            ><span
+                                data-x-text="book.genres[0].name"
+                                class="text-xs"
+                                >Huyền Huyễn</span
+                            >
+                        </div>
+                        <div>
+                            <button
+                                data-x-on:click="openReview(index)"
+                                class="text-xs bg-primary text-white py-1 px-2 rounded-md"
+                            >
+                                Đọc thử
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex space-x-3 pb-6 border-b border-auto">
+                <div class="flex-shrink-0">
+                    <a
+                        data-x-bind:href="getBookUrl(book)"
+                        target="_blank"
+                        class="text-title font-semibold"
+                        href="https://metruyencv.com/truyen/pokemon-bat-dau-phat-hien-volcarona-trung"
+                        ><img
+                            data-x-bind:src="book.poster[150]"
+                            class="h-32 w-24 shadow-xl rounded"
+                            loading="lazy"
+                            src="https://static.cdnno.com/poster/pokemon-bat-dau-phat-hien-volcarona-trung/150.jpg?1735386997"
+                    /></a>
+                </div>
+                <div class="flex-grow space-y-2">
+                    <div>
+                        <a
+                            data-x-bind:href="getBookUrl(book)"
+                            target="_blank"
+                            data-x-text="book.name"
+                            class="text-title font-semibold"
+                            href="https://metruyencv.com/truyen/pokemon-bat-dau-phat-hien-volcarona-trung"
+                            >Pokemon: Bắt Đầu Phát Hiện Volcarona Trứng</a
+                        >
+                    </div>
+                    <div
+                        data-x-text="book.synopsis.substring(0, 199)"
+                        class="text-gray-500 text-overflow-multiple-lines break-all"
+                    >
+                        【 Pokemon + Thế giới thực + Sảng văn + Hệ thống + Nhẹ
+                        nhõm + Thường ngày + Không nữ chính + Thu thập + Dưỡng
+                        thành + Trường thiên 】 Evander xuyên qua Pokemon thế
+                        giới sau, phát hiện một khỏa sắp chế
+                    </div>
+                    <div class="flex justify-between space-x-2 pt-1">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4 text-gray-500"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+                                    clip-rule="evenodd"
+                                ></path></svg
+                            ><span
+                                data-x-bind="BookAuthor(book)"
+                                class="text-title text-xs"
+                                >Đột Tutu</span
+                            >
+                        </div>
+                        <span
+                            data-x-text="book.chapter_count + ' chương'"
+                            class="text-xs"
+                            >351 chương</span
+                        >
+                    </div>
+                    <div class="flex justify-between text-gray-500">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    d="M11.644 1.59a.75.75 0 0 1 .712 0l9.75 5.25a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.712 0l-9.75-5.25a.75.75 0 0 1 0-1.32l9.75-5.25Z"
+                                ></path>
+                                <path
+                                    d="m3.265 10.602 7.668 4.129a2.25 2.25 0 0 0 2.134 0l7.668-4.13 1.37.739a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.71 0l-9.75-5.25a.75.75 0 0 1 0-1.32l1.37-.738Z"
+                                ></path>
+                                <path
+                                    d="m10.933 19.231-7.668-4.13-1.37.739a.75.75 0 0 0 0 1.32l9.75 5.25c.221.12.489.12.71 0l9.75-5.25a.75.75 0 0 0 0-1.32l-1.37-.738-7.668 4.13a2.25 2.25 0 0 1-2.134-.001Z"
+                                ></path></svg
+                            ><span
+                                data-x-text="book.genres[0].name"
+                                class="text-xs"
+                                >Đồng Nhân</span
+                            >
+                        </div>
+                        <div>
+                            <button
+                                data-x-on:click="openReview(index)"
+                                class="text-xs bg-primary text-white py-1 px-2 rounded-md"
+                            >
+                                Đọc thử
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex space-x-3 pb-6 border-b border-auto">
+                <div class="flex-shrink-0">
+                    <a
+                        data-x-bind:href="getBookUrl(book)"
+                        target="_blank"
+                        class="text-title font-semibold"
+                        href="https://metruyencv.com/truyen/trach-ta-thien-phu-qua-manh-chi-co-vo-dich-quet-ngang-het-thay"
+                        ><img
+                            data-x-bind:src="book.poster[150]"
+                            class="h-32 w-24 shadow-xl rounded"
+                            loading="lazy"
+                            src="https://static.cdnno.com/poster/trach-ta-thien-phu-qua-manh-chi-co-vo-dich-quet-ngang-het-thay/150.jpg?1679539811"
+                    /></a>
+                </div>
+                <div class="flex-grow space-y-2">
+                    <div>
+                        <a
+                            data-x-bind:href="getBookUrl(book)"
+                            target="_blank"
+                            data-x-text="book.name"
+                            class="text-title font-semibold"
+                            href="https://metruyencv.com/truyen/trach-ta-thien-phu-qua-manh-chi-co-vo-dich-quet-ngang-het-thay"
+                            >Trách Ta Thiên Phú Quá Mạnh, Chỉ Có Vô Địch Quét
+                            Ngang Hết Thảy</a
+                        >
+                    </div>
+                    <div
+                        data-x-text="book.synopsis.substring(0, 199)"
+                        class="text-gray-500 text-overflow-multiple-lines break-all"
+                    >
+                        Xuyên qua Tu Tiên Giới, bắt đầu thức tỉnh vô thượng
+                        thiên phú? Diệp Thần: Kỳ thật, ta liền một nhục thể phàm
+                        thai, một người bình thường, chỉ là thiên phú có chút
+                        mạnh mà thôi! Ba ngàn đại đạo?
+                    </div>
+                    <div class="flex justify-between space-x-2 pt-1">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4 text-gray-500"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+                                    clip-rule="evenodd"
+                                ></path></svg
+                            ><span
+                                data-x-bind="BookAuthor(book)"
+                                class="text-title text-xs"
+                                >Mãn Hán Toàn Tịch</span
+                            >
+                        </div>
+                        <span
+                            data-x-text="book.chapter_count + ' chương'"
+                            class="text-xs"
+                            >1581 chương</span
+                        >
+                    </div>
+                    <div class="flex justify-between text-gray-500">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    d="M11.644 1.59a.75.75 0 0 1 .712 0l9.75 5.25a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.712 0l-9.75-5.25a.75.75 0 0 1 0-1.32l9.75-5.25Z"
+                                ></path>
+                                <path
+                                    d="m3.265 10.602 7.668 4.129a2.25 2.25 0 0 0 2.134 0l7.668-4.13 1.37.739a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.71 0l-9.75-5.25a.75.75 0 0 1 0-1.32l1.37-.738Z"
+                                ></path>
+                                <path
+                                    d="m10.933 19.231-7.668-4.13-1.37.739a.75.75 0 0 0 0 1.32l9.75 5.25c.221.12.489.12.71 0l9.75-5.25a.75.75 0 0 0 0-1.32l-1.37-.738-7.668 4.13a2.25 2.25 0 0 1-2.134-.001Z"
+                                ></path></svg
+                            ><span
+                                data-x-text="book.genres[0].name"
+                                class="text-xs"
+                                >Huyền Huyễn</span
+                            >
+                        </div>
+                        <div>
+                            <button
+                                data-x-on:click="openReview(index)"
+                                class="text-xs bg-primary text-white py-1 px-2 rounded-md"
+                            >
+                                Đọc thử
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex space-x-3 pb-6 border-b border-auto">
+                <div class="flex-shrink-0">
+                    <a
+                        data-x-bind:href="getBookUrl(book)"
+                        target="_blank"
+                        class="text-title font-semibold"
+                        href="https://metruyencv.com/truyen/1979-thoi-dai-hoang-kim"
+                        ><img
+                            data-x-bind:src="book.poster[150]"
+                            class="h-32 w-24 shadow-xl rounded"
+                            loading="lazy"
+                            src="https://static.cdnno.com/poster/1979-thoi-dai-hoang-kim/150.jpg?1722566147"
+                    /></a>
+                </div>
+                <div class="flex-grow space-y-2">
+                    <div>
+                        <a
+                            data-x-bind:href="getBookUrl(book)"
+                            target="_blank"
+                            data-x-text="book.name"
+                            class="text-title font-semibold"
+                            href="https://metruyencv.com/truyen/1979-thoi-dai-hoang-kim"
+                            >1979 Thời Đại Hoàng Kim</a
+                        >
+                    </div>
+                    <div
+                        data-x-text="book.synopsis.substring(0, 199)"
+                        class="text-gray-500 text-overflow-multiple-lines break-all"
+                    >
+                        Đây là một có chút hoài niệm câu chuyện... ... ... ...
+                    </div>
+                    <div class="flex justify-between space-x-2 pt-1">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4 text-gray-500"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+                                    clip-rule="evenodd"
+                                ></path></svg
+                            ><span
+                                data-x-bind="BookAuthor(book)"
+                                class="text-title text-xs"
+                                >Thụy Giác Hội Biến Bạch</span
+                            >
+                        </div>
+                        <span
+                            data-x-text="book.chapter_count + ' chương'"
+                            class="text-xs"
+                            >705 chương</span
+                        >
+                    </div>
+                    <div class="flex justify-between text-gray-500">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    d="M11.644 1.59a.75.75 0 0 1 .712 0l9.75 5.25a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.712 0l-9.75-5.25a.75.75 0 0 1 0-1.32l9.75-5.25Z"
+                                ></path>
+                                <path
+                                    d="m3.265 10.602 7.668 4.129a2.25 2.25 0 0 0 2.134 0l7.668-4.13 1.37.739a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.71 0l-9.75-5.25a.75.75 0 0 1 0-1.32l1.37-.738Z"
+                                ></path>
+                                <path
+                                    d="m10.933 19.231-7.668-4.13-1.37.739a.75.75 0 0 0 0 1.32l9.75 5.25c.221.12.489.12.71 0l9.75-5.25a.75.75 0 0 0 0-1.32l-1.37-.738-7.668 4.13a2.25 2.25 0 0 1-2.134-.001Z"
+                                ></path></svg
+                            ><span
+                                data-x-text="book.genres[0].name"
+                                class="text-xs"
+                                >Đô Thị</span
+                            >
+                        </div>
+                        <div>
+                            <button
+                                data-x-on:click="openReview(index)"
+                                class="text-xs bg-primary text-white py-1 px-2 rounded-md"
+                            >
+                                Đọc thử
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex space-x-3 pb-6 border-b border-auto">
+                <div class="flex-shrink-0">
+                    <a
+                        data-x-bind:href="getBookUrl(book)"
+                        target="_blank"
+                        class="text-title font-semibold"
+                        href="https://metruyencv.com/truyen/ren-sat-ba-nam-xuat-the-vo-dao-thong-than"
+                        ><img
+                            data-x-bind:src="book.poster[150]"
+                            class="h-32 w-24 shadow-xl rounded"
+                            loading="lazy"
+                            src="https://static.cdnno.com/poster/ren-sat-ba-nam-xuat-the-vo-dao-thong-than/150.jpg?1731225934"
+                    /></a>
+                </div>
+                <div class="flex-grow space-y-2">
+                    <div>
+                        <a
+                            data-x-bind:href="getBookUrl(book)"
+                            target="_blank"
+                            data-x-text="book.name"
+                            class="text-title font-semibold"
+                            href="https://metruyencv.com/truyen/ren-sat-ba-nam-xuat-the-vo-dao-thong-than"
+                            >Rèn Sắt Ba Năm, Xuất Thế Võ Đạo Thông Thần</a
+                        >
+                    </div>
+                    <div
+                        data-x-text="book.synopsis.substring(0, 199)"
+                        class="text-gray-500 text-overflow-multiple-lines break-all"
+                    >
+                        Tô Triết xuyên qua võ đạo thế giới, trở thành Lư Huyện
+                        Thiết Tượng bang học đồ, học nghệ ba năm, mới có sờ
+                        xương truyền công cơ hội. Không có tiền, không có thiên
+                        phú Tô Triết, chú định võ đạo khó có
+                    </div>
+                    <div class="flex justify-between space-x-2 pt-1">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4 text-gray-500"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+                                    clip-rule="evenodd"
+                                ></path></svg
+                            ><span
+                                data-x-bind="BookAuthor(book)"
+                                class="text-title text-xs"
+                                >Cảm Thương Đích Thu Quý</span
+                            >
+                        </div>
+                        <span
+                            data-x-text="book.chapter_count + ' chương'"
+                            class="text-xs"
+                            >396 chương</span
+                        >
+                    </div>
+                    <div class="flex justify-between text-gray-500">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    d="M11.644 1.59a.75.75 0 0 1 .712 0l9.75 5.25a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.712 0l-9.75-5.25a.75.75 0 0 1 0-1.32l9.75-5.25Z"
+                                ></path>
+                                <path
+                                    d="m3.265 10.602 7.668 4.129a2.25 2.25 0 0 0 2.134 0l7.668-4.13 1.37.739a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.71 0l-9.75-5.25a.75.75 0 0 1 0-1.32l1.37-.738Z"
+                                ></path>
+                                <path
+                                    d="m10.933 19.231-7.668-4.13-1.37.739a.75.75 0 0 0 0 1.32l9.75 5.25c.221.12.489.12.71 0l9.75-5.25a.75.75 0 0 0 0-1.32l-1.37-.738-7.668 4.13a2.25 2.25 0 0 1-2.134-.001Z"
+                                ></path></svg
+                            ><span
+                                data-x-text="book.genres[0].name"
+                                class="text-xs"
+                                >Huyền Huyễn</span
+                            >
+                        </div>
+                        <div>
+                            <button
+                                data-x-on:click="openReview(index)"
+                                class="text-xs bg-primary text-white py-1 px-2 rounded-md"
+                            >
+                                Đọc thử
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex space-x-3 pb-6 border-b border-auto">
+                <div class="flex-shrink-0">
+                    <a
+                        data-x-bind:href="getBookUrl(book)"
+                        target="_blank"
+                        class="text-title font-semibold"
+                        href="https://metruyencv.com/truyen/dien-thoai-lien-tuong-lai-pha-san-lai-co-lam-sao"
+                        ><img
+                            data-x-bind:src="book.poster[150]"
+                            class="h-32 w-24 shadow-xl rounded"
+                            loading="lazy"
+                            src="https://static.cdnno.com/poster/dien-thoai-lien-tuong-lai-pha-san-lai-co-lam-sao/150.jpg?1734549229"
+                    /></a>
+                </div>
+                <div class="flex-grow space-y-2">
+                    <div>
+                        <a
+                            data-x-bind:href="getBookUrl(book)"
+                            target="_blank"
+                            data-x-text="book.name"
+                            class="text-title font-semibold"
+                            href="https://metruyencv.com/truyen/dien-thoai-lien-tuong-lai-pha-san-lai-co-lam-sao"
+                            >Điện Thoại Liền Tương Lai, Phá Sản Lại Có Làm
+                            Sao</a
+                        >
+                    </div>
+                    <div
+                        data-x-text="book.synopsis.substring(0, 199)"
+                        class="text-gray-500 text-overflow-multiple-lines break-all"
+                    >
+                        Chơi tìm kiếm người phụ cận, tương lai chính mình chào
+                        hỏi tới, cho Lục Phàm một cái phất nhanh cơ hội. Lục
+                        Phàm gom góp 6 triệu, giết tiến vào quốc tế ngoại hối
+                        thị trường. Thế nhưng là trong t
+                    </div>
+                    <div class="flex justify-between space-x-2 pt-1">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4 text-gray-500"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+                                    clip-rule="evenodd"
+                                ></path></svg
+                            ><span
+                                data-x-bind="BookAuthor(book)"
+                                class="text-title text-xs"
+                                >Thu Phân Chi Thời</span
+                            >
+                        </div>
+                        <span
+                            data-x-text="book.chapter_count + ' chương'"
+                            class="text-xs"
+                            >1747 chương</span
+                        >
+                    </div>
+                    <div class="flex justify-between text-gray-500">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    d="M11.644 1.59a.75.75 0 0 1 .712 0l9.75 5.25a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.712 0l-9.75-5.25a.75.75 0 0 1 0-1.32l9.75-5.25Z"
+                                ></path>
+                                <path
+                                    d="m3.265 10.602 7.668 4.129a2.25 2.25 0 0 0 2.134 0l7.668-4.13 1.37.739a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.71 0l-9.75-5.25a.75.75 0 0 1 0-1.32l1.37-.738Z"
+                                ></path>
+                                <path
+                                    d="m10.933 19.231-7.668-4.13-1.37.739a.75.75 0 0 0 0 1.32l9.75 5.25c.221.12.489.12.71 0l9.75-5.25a.75.75 0 0 0 0-1.32l-1.37-.738-7.668 4.13a2.25 2.25 0 0 1-2.134-.001Z"
+                                ></path></svg
+                            ><span
+                                data-x-text="book.genres[0].name"
+                                class="text-xs"
+                                >Đô Thị</span
+                            >
+                        </div>
+                        <div>
+                            <button
+                                data-x-on:click="openReview(index)"
+                                class="text-xs bg-primary text-white py-1 px-2 rounded-md"
+                            >
+                                Đọc thử
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex space-x-3 pb-6 border-b border-auto">
+                <div class="flex-shrink-0">
+                    <a
+                        data-x-bind:href="getBookUrl(book)"
+                        target="_blank"
+                        class="text-title font-semibold"
+                        href="https://metruyencv.com/truyen/truong-sinh-van-nam-ta-dua-vao-tu-dau-tu-tien"
+                        ><img
+                            data-x-bind:src="book.poster[150]"
+                            class="h-32 w-24 shadow-xl rounded"
+                            loading="lazy"
+                            src="https://static.cdnno.com/poster/truong-sinh-van-nam-ta-dua-vao-tu-dau-tu-tien/150.jpg?1727711597"
+                    /></a>
+                </div>
+                <div class="flex-grow space-y-2">
+                    <div>
+                        <a
+                            data-x-bind:href="getBookUrl(book)"
+                            target="_blank"
+                            data-x-text="book.name"
+                            class="text-title font-semibold"
+                            href="https://metruyencv.com/truyen/truong-sinh-van-nam-ta-dua-vao-tu-dau-tu-tien"
+                            >Trường Sinh Vạn Năm: Ta Dựa Vào Từ Đầu Tu Tiên</a
+                        >
+                    </div>
+                    <div
+                        data-x-text="book.synopsis.substring(0, 199)"
+                        class="text-gray-500 text-overflow-multiple-lines break-all"
+                    >
+                        【 sảng văn + siêu cấp thiên tài + việc vui sảng văn +
+                        tu tiên + từ đầu + khôi hài + sát phạt quả đoán 】 Trần
+                        Phàm xuyên qua một phương Tu Chân giới, còn có một đầu
+                        tinh thông nhân tính con lừa.
+                    </div>
+                    <div class="flex justify-between space-x-2 pt-1">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4 text-gray-500"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+                                    clip-rule="evenodd"
+                                ></path></svg
+                            ><span
+                                data-x-bind="BookAuthor(book)"
+                                class="text-title text-xs"
+                                >Thính Lại Bảo Đích Thoại</span
+                            >
+                        </div>
+                        <span
+                            data-x-text="book.chapter_count + ' chương'"
+                            class="text-xs"
+                            >380 chương</span
+                        >
+                    </div>
+                    <div class="flex justify-between text-gray-500">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    d="M11.644 1.59a.75.75 0 0 1 .712 0l9.75 5.25a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.712 0l-9.75-5.25a.75.75 0 0 1 0-1.32l9.75-5.25Z"
+                                ></path>
+                                <path
+                                    d="m3.265 10.602 7.668 4.129a2.25 2.25 0 0 0 2.134 0l7.668-4.13 1.37.739a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.71 0l-9.75-5.25a.75.75 0 0 1 0-1.32l1.37-.738Z"
+                                ></path>
+                                <path
+                                    d="m10.933 19.231-7.668-4.13-1.37.739a.75.75 0 0 0 0 1.32l9.75 5.25c.221.12.489.12.71 0l9.75-5.25a.75.75 0 0 0 0-1.32l-1.37-.738-7.668 4.13a2.25 2.25 0 0 1-2.134-.001Z"
+                                ></path></svg
+                            ><span
+                                data-x-text="book.genres[0].name"
+                                class="text-xs"
+                                >Huyền Huyễn</span
+                            >
+                        </div>
+                        <div>
+                            <button
+                                data-x-on:click="openReview(index)"
+                                class="text-xs bg-primary text-white py-1 px-2 rounded-md"
+                            >
+                                Đọc thử
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex space-x-3 pb-6 border-b border-auto">
+                <div class="flex-shrink-0">
+                    <a
+                        data-x-bind:href="getBookUrl(book)"
+                        target="_blank"
+                        class="text-title font-semibold"
+                        href="https://metruyencv.com/truyen/noi-ta-la-nhan-vat-phan-dien-noi-xau-vay-ma-thanh-su-that"
+                        ><img
+                            data-x-bind:src="book.poster[150]"
+                            class="h-32 w-24 shadow-xl rounded"
+                            loading="lazy"
+                            src="https://static.cdnno.com/poster/noi-ta-la-nhan-vat-phan-dien-noi-xau-vay-ma-thanh-su-that/150.jpg?1717758917"
+                    /></a>
+                </div>
+                <div class="flex-grow space-y-2">
+                    <div>
+                        <a
+                            data-x-bind:href="getBookUrl(book)"
+                            target="_blank"
+                            data-x-text="book.name"
+                            class="text-title font-semibold"
+                            href="https://metruyencv.com/truyen/noi-ta-la-nhan-vat-phan-dien-noi-xau-vay-ma-thanh-su-that"
+                            >Nói Ta Là Nhân Vật Phản Diện, Nói Xấu Vậy Mà Thành
+                            Sự Thật!</a
+                        >
+                    </div>
+                    <div
+                        data-x-text="book.synopsis.substring(0, 199)"
+                        class="text-gray-500 text-overflow-multiple-lines break-all"
+                    >
+                        【 huyền huyễn não động + hệ thống + nhân vật phản diện
+                        + không Thánh Mẫu + sát phạt quả đoán 】 Tần Lạc xuyên
+                        qua đến dị thế, trở thành ngay tại gặp thẩm phán Thái
+                        Khư Thánh Địa Thánh tử. Bị ánh
+                    </div>
+                    <div class="flex justify-between space-x-2 pt-1">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4 text-gray-500"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+                                    clip-rule="evenodd"
+                                ></path></svg
+                            ><span
+                                data-x-bind="BookAuthor(book)"
+                                class="text-title text-xs"
+                                >Vi Huân Đích Kê Tử</span
+                            >
+                        </div>
+                        <span
+                            data-x-text="book.chapter_count + ' chương'"
+                            class="text-xs"
+                            >816 chương</span
+                        >
+                    </div>
+                    <div class="flex justify-between text-gray-500">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    d="M11.644 1.59a.75.75 0 0 1 .712 0l9.75 5.25a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.712 0l-9.75-5.25a.75.75 0 0 1 0-1.32l9.75-5.25Z"
+                                ></path>
+                                <path
+                                    d="m3.265 10.602 7.668 4.129a2.25 2.25 0 0 0 2.134 0l7.668-4.13 1.37.739a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.71 0l-9.75-5.25a.75.75 0 0 1 0-1.32l1.37-.738Z"
+                                ></path>
+                                <path
+                                    d="m10.933 19.231-7.668-4.13-1.37.739a.75.75 0 0 0 0 1.32l9.75 5.25c.221.12.489.12.71 0l9.75-5.25a.75.75 0 0 0 0-1.32l-1.37-.738-7.668 4.13a2.25 2.25 0 0 1-2.134-.001Z"
+                                ></path></svg
+                            ><span
+                                data-x-text="book.genres[0].name"
+                                class="text-xs"
+                                >Huyền Huyễn</span
+                            >
+                        </div>
+                        <div>
+                            <button
+                                data-x-on:click="openReview(index)"
+                                class="text-xs bg-primary text-white py-1 px-2 rounded-md"
+                            >
+                                Đọc thử
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex space-x-3 pb-6 border-b border-auto">
+                <div class="flex-shrink-0">
+                    <a
+                        data-x-bind:href="getBookUrl(book)"
+                        target="_blank"
+                        class="text-title font-semibold"
+                        href="https://metruyencv.com/truyen/ngao-the-cuu-trong-thien"
+                        ><img
+                            data-x-bind:src="book.poster[150]"
+                            class="h-32 w-24 shadow-xl rounded"
+                            loading="lazy"
+                            src="https://static.cdnno.com/poster/ngao-the-cuu-trong-thien/150.jpg?1735183568"
+                    /></a>
+                </div>
+                <div class="flex-grow space-y-2">
+                    <div>
+                        <a
+                            data-x-bind:href="getBookUrl(book)"
+                            target="_blank"
+                            data-x-text="book.name"
+                            class="text-title font-semibold"
+                            href="https://metruyencv.com/truyen/ngao-the-cuu-trong-thien"
+                            >Ngạo Thế Cửu Trọng Thiên</a
+                        >
+                    </div>
+                    <div
+                        data-x-text="book.synopsis.substring(0, 199)"
+                        class="text-gray-500 text-overflow-multiple-lines break-all"
+                    >
+                        Một người một kiếm, kiêu ngạo cấp chín! Lục địa Cửu
+                        Thiên là một không gian giả tưởng đặc biệt lấy bối cảnh
+                        trong "Cửu Thiên kiêu ngạo". Ở thế giới này, Cửu Kiếp
+                        Kiếm là một vũ khí thần kỳ có sức mạ
+                    </div>
+                    <div class="flex justify-between space-x-2 pt-1">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4 text-gray-500"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+                                    clip-rule="evenodd"
+                                ></path></svg
+                            ><span
+                                data-x-bind="BookAuthor(book)"
+                                class="text-title text-xs"
+                                >Phong Lăng Thiên Hạ</span
+                            >
+                        </div>
+                        <span
+                            data-x-text="book.chapter_count + ' chương'"
+                            class="text-xs"
+                            >142 chương</span
+                        >
+                    </div>
+                    <div class="flex justify-between text-gray-500">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    d="M11.644 1.59a.75.75 0 0 1 .712 0l9.75 5.25a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.712 0l-9.75-5.25a.75.75 0 0 1 0-1.32l9.75-5.25Z"
+                                ></path>
+                                <path
+                                    d="m3.265 10.602 7.668 4.129a2.25 2.25 0 0 0 2.134 0l7.668-4.13 1.37.739a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.71 0l-9.75-5.25a.75.75 0 0 1 0-1.32l1.37-.738Z"
+                                ></path>
+                                <path
+                                    d="m10.933 19.231-7.668-4.13-1.37.739a.75.75 0 0 0 0 1.32l9.75 5.25c.221.12.489.12.71 0l9.75-5.25a.75.75 0 0 0 0-1.32l-1.37-.738-7.668 4.13a2.25 2.25 0 0 1-2.134-.001Z"
+                                ></path></svg
+                            ><span
+                                data-x-text="book.genres[0].name"
+                                class="text-xs"
+                                >Tiên Hiệp</span
+                            >
+                        </div>
+                        <div>
+                            <button
+                                data-x-on:click="openReview(index)"
+                                class="text-xs bg-primary text-white py-1 px-2 rounded-md"
+                            >
+                                Đọc thử
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex space-x-3 pb-6 border-b border-auto">
+                <div class="flex-shrink-0">
+                    <a
+                        data-x-bind:href="getBookUrl(book)"
+                        target="_blank"
+                        class="text-title font-semibold"
+                        href="https://metruyencv.com/truyen/ta-chi-la-mot-pham-nhan-vi-cai-gi-cac-nguoi-deu-phung-ta-lam-thanh"
+                        ><img
+                            data-x-bind:src="book.poster[150]"
+                            class="h-32 w-24 shadow-xl rounded"
+                            loading="lazy"
+                            src="https://static.cdnno.com/poster/ta-chi-la-mot-pham-nhan-vi-cai-gi-cac-nguoi-deu-phung-ta-lam-thanh/150.jpg?1727847980"
+                    /></a>
+                </div>
+                <div class="flex-grow space-y-2">
+                    <div>
+                        <a
+                            data-x-bind:href="getBookUrl(book)"
+                            target="_blank"
+                            data-x-text="book.name"
+                            class="text-title font-semibold"
+                            href="https://metruyencv.com/truyen/ta-chi-la-mot-pham-nhan-vi-cai-gi-cac-nguoi-deu-phung-ta-lam-thanh"
+                            >Ta Chỉ Là Một Phàm Nhân, Vì Cái Gì Các Ngươi Đều
+                            Phụng Ta Làm Thánh</a
+                        >
+                    </div>
+                    <div
+                        data-x-text="book.synopsis.substring(0, 199)"
+                        class="text-gray-500 text-overflow-multiple-lines break-all"
+                    >
+                        【 địch hóa + tương phản + giả heo ăn thịt hổ + huyền
+                        huyễn não động 】 Cố Hoành xuyên qua hai mươi năm, rác
+                        rưởi hệ thống lầm cả đời, tu hành vô vọng, chỉ có thể
+                        làm người phàm nho nhỏ. Mặc dù là
+                    </div>
+                    <div class="flex justify-between space-x-2 pt-1">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4 text-gray-500"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+                                    clip-rule="evenodd"
+                                ></path></svg
+                            ><span
+                                data-x-bind="BookAuthor(book)"
+                                class="text-title text-xs"
+                                >Kim Thuộc Hàn Sương</span
+                            >
+                        </div>
+                        <span
+                            data-x-text="book.chapter_count + ' chương'"
+                            class="text-xs"
+                            >805 chương</span
+                        >
+                    </div>
+                    <div class="flex justify-between text-gray-500">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    d="M11.644 1.59a.75.75 0 0 1 .712 0l9.75 5.25a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.712 0l-9.75-5.25a.75.75 0 0 1 0-1.32l9.75-5.25Z"
+                                ></path>
+                                <path
+                                    d="m3.265 10.602 7.668 4.129a2.25 2.25 0 0 0 2.134 0l7.668-4.13 1.37.739a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.71 0l-9.75-5.25a.75.75 0 0 1 0-1.32l1.37-.738Z"
+                                ></path>
+                                <path
+                                    d="m10.933 19.231-7.668-4.13-1.37.739a.75.75 0 0 0 0 1.32l9.75 5.25c.221.12.489.12.71 0l9.75-5.25a.75.75 0 0 0 0-1.32l-1.37-.738-7.668 4.13a2.25 2.25 0 0 1-2.134-.001Z"
+                                ></path></svg
+                            ><span
+                                data-x-text="book.genres[0].name"
+                                class="text-xs"
+                                >Huyền Huyễn</span
+                            >
+                        </div>
+                        <div>
+                            <button
+                                data-x-on:click="openReview(index)"
+                                class="text-xs bg-primary text-white py-1 px-2 rounded-md"
+                            >
+                                Đọc thử
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex space-x-3 pb-6 border-b border-auto">
+                <div class="flex-shrink-0">
+                    <a
+                        data-x-bind:href="getBookUrl(book)"
+                        target="_blank"
+                        class="text-title font-semibold"
+                        href="https://metruyencv.com/truyen/tu-hai-dao-lanh-chua-bat-dau"
+                        ><img
+                            data-x-bind:src="book.poster[150]"
+                            class="h-32 w-24 shadow-xl rounded"
+                            loading="lazy"
+                            src="https://static.cdnno.com/poster/tu-hai-dao-lanh-chua-bat-dau/150.jpg?1726236687"
+                    /></a>
+                </div>
+                <div class="flex-grow space-y-2">
+                    <div>
+                        <a
+                            data-x-bind:href="getBookUrl(book)"
+                            target="_blank"
+                            data-x-text="book.name"
+                            class="text-title font-semibold"
+                            href="https://metruyencv.com/truyen/tu-hai-dao-lanh-chua-bat-dau"
+                            >Từ Hải Đảo Lãnh Chúa Bắt Đầu</a
+                        >
+                    </div>
+                    <div
+                        data-x-text="book.synopsis.substring(0, 199)"
+                        class="text-gray-500 text-overflow-multiple-lines break-all"
+                    >
+                        Một cái không có Thuật Pháp vĩ lực thế giới muốn thay
+                        đổi thế giới, làm sao bây giờ? Làm ruộng làm lãnh chúa!
+                        Một cái không có cao quý thân phận làm không được đại
+                        lãnh chúa thế giới, làm sao bây
+                    </div>
+                    <div class="flex justify-between space-x-2 pt-1">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4 text-gray-500"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+                                    clip-rule="evenodd"
+                                ></path></svg
+                            ><span
+                                data-x-bind="BookAuthor(book)"
+                                class="text-title text-xs"
+                                >Mặc Hương</span
+                            >
+                        </div>
+                        <span
+                            data-x-text="book.chapter_count + ' chương'"
+                            class="text-xs"
+                            >245 chương</span
+                        >
+                    </div>
+                    <div class="flex justify-between text-gray-500">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    d="M11.644 1.59a.75.75 0 0 1 .712 0l9.75 5.25a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.712 0l-9.75-5.25a.75.75 0 0 1 0-1.32l9.75-5.25Z"
+                                ></path>
+                                <path
+                                    d="m3.265 10.602 7.668 4.129a2.25 2.25 0 0 0 2.134 0l7.668-4.13 1.37.739a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.71 0l-9.75-5.25a.75.75 0 0 1 0-1.32l1.37-.738Z"
+                                ></path>
+                                <path
+                                    d="m10.933 19.231-7.668-4.13-1.37.739a.75.75 0 0 0 0 1.32l9.75 5.25c.221.12.489.12.71 0l9.75-5.25a.75.75 0 0 0 0-1.32l-1.37-.738-7.668 4.13a2.25 2.25 0 0 1-2.134-.001Z"
+                                ></path></svg
+                            ><span
+                                data-x-text="book.genres[0].name"
+                                class="text-xs"
+                                >Khoa Huyễn</span
+                            >
+                        </div>
+                        <div>
+                            <button
+                                data-x-on:click="openReview(index)"
+                                class="text-xs bg-primary text-white py-1 px-2 rounded-md"
+                            >
+                                Đọc thử
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex space-x-3 pb-6 border-b border-auto">
+                <div class="flex-shrink-0">
+                    <a
+                        data-x-bind:href="getBookUrl(book)"
+                        target="_blank"
+                        class="text-title font-semibold"
+                        href="https://metruyencv.com/truyen/bat-dau-doat-xa-ma-hoang-danh-nat-chu-thien-van-gioi"
+                        ><img
+                            data-x-bind:src="book.poster[150]"
+                            class="h-32 w-24 shadow-xl rounded"
+                            loading="lazy"
+                            src="https://static.cdnno.com/poster/bat-dau-doat-xa-ma-hoang-danh-nat-chu-thien-van-gioi/150.jpg?1733500078"
+                    /></a>
+                </div>
+                <div class="flex-grow space-y-2">
+                    <div>
+                        <a
+                            data-x-bind:href="getBookUrl(book)"
+                            target="_blank"
+                            data-x-text="book.name"
+                            class="text-title font-semibold"
+                            href="https://metruyencv.com/truyen/bat-dau-doat-xa-ma-hoang-danh-nat-chu-thien-van-gioi"
+                            >Bắt Đầu Đoạt Xá Ma Hoàng, Đánh Nát Chư Thiên Vạn
+                            Giới!</a
+                        >
+                    </div>
+                    <div
+                        data-x-text="book.synopsis.substring(0, 199)"
+                        class="text-gray-500 text-overflow-multiple-lines break-all"
+                    >
+                        Bắt đầu xuyên qua, trở thành Ma giáo Ma Hoàng. Công lực
+                        hoàn toàn biến mất, Ma giáo trưởng lão nhìn chằm chằm,
+                        nguy cơ trùng trùng! Mở ra hệ thống, đánh dấu công pháp,
+                        thần đan, Ma Binh. Tích l
+                    </div>
+                    <div class="flex justify-between space-x-2 pt-1">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4 text-gray-500"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+                                    clip-rule="evenodd"
+                                ></path></svg
+                            ><span
+                                data-x-bind="BookAuthor(book)"
+                                class="text-title text-xs"
+                                >Phong Lạc Giang Nam</span
+                            >
+                        </div>
+                        <span
+                            data-x-text="book.chapter_count + ' chương'"
+                            class="text-xs"
+                            >83 chương</span
+                        >
+                    </div>
+                    <div class="flex justify-between text-gray-500">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    d="M11.644 1.59a.75.75 0 0 1 .712 0l9.75 5.25a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.712 0l-9.75-5.25a.75.75 0 0 1 0-1.32l9.75-5.25Z"
+                                ></path>
+                                <path
+                                    d="m3.265 10.602 7.668 4.129a2.25 2.25 0 0 0 2.134 0l7.668-4.13 1.37.739a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.71 0l-9.75-5.25a.75.75 0 0 1 0-1.32l1.37-.738Z"
+                                ></path>
+                                <path
+                                    d="m10.933 19.231-7.668-4.13-1.37.739a.75.75 0 0 0 0 1.32l9.75 5.25c.221.12.489.12.71 0l9.75-5.25a.75.75 0 0 0 0-1.32l-1.37-.738-7.668 4.13a2.25 2.25 0 0 1-2.134-.001Z"
+                                ></path></svg
+                            ><span
+                                data-x-text="book.genres[0].name"
+                                class="text-xs"
+                                >Huyền Huyễn</span
+                            >
+                        </div>
+                        <div>
+                            <button
+                                data-x-on:click="openReview(index)"
+                                class="text-xs bg-primary text-white py-1 px-2 rounded-md"
+                            >
+                                Đọc thử
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex space-x-3 pb-6 border-b border-auto">
+                <div class="flex-shrink-0">
+                    <a
+                        data-x-bind:href="getBookUrl(book)"
+                        target="_blank"
+                        class="text-title font-semibold"
+                        href="https://metruyencv.com/truyen/la-ma-tat-tu-vong"
+                        ><img
+                            data-x-bind:src="book.poster[150]"
+                            class="h-32 w-24 shadow-xl rounded"
+                            loading="lazy"
+                            src="https://static.cdnno.com/poster/la-ma-tat-tu-vong/150.jpg?1735996918"
+                    /></a>
+                </div>
+                <div class="flex-grow space-y-2">
+                    <div>
+                        <a
+                            data-x-bind:href="getBookUrl(book)"
+                            target="_blank"
+                            data-x-text="book.name"
+                            class="text-title font-semibold"
+                            href="https://metruyencv.com/truyen/la-ma-tat-tu-vong"
+                            >La Mã Tất Phải Vong</a
+                        >
+                    </div>
+                    <div
+                        data-x-text="book.synopsis.substring(0, 199)"
+                        class="text-gray-500 text-overflow-multiple-lines break-all"
+                    >
+                        Nhân vật chính trọng sinh tại Cộng hòa La Mã thời kỳ
+                        cuối, trở thành thủ hạ của Spartacus một tên giác đấu
+                        sĩ, hắn như thế nào chạy thoát bị đóng đinh thập tự giá
+                        bi thảm vận mệnh, lại như thế nào ở
+                    </div>
+                    <div class="flex justify-between space-x-2 pt-1">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4 text-gray-500"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+                                    clip-rule="evenodd"
+                                ></path></svg
+                            ><span
+                                data-x-bind="BookAuthor(book)"
+                                class="text-title text-xs"
+                                >Trần Thụy</span
+                            >
+                        </div>
+                        <span
+                            data-x-text="book.chapter_count + ' chương'"
+                            class="text-xs"
+                            >220 chương</span
+                        >
+                    </div>
+                    <div class="flex justify-between text-gray-500">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    d="M11.644 1.59a.75.75 0 0 1 .712 0l9.75 5.25a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.712 0l-9.75-5.25a.75.75 0 0 1 0-1.32l9.75-5.25Z"
+                                ></path>
+                                <path
+                                    d="m3.265 10.602 7.668 4.129a2.25 2.25 0 0 0 2.134 0l7.668-4.13 1.37.739a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.71 0l-9.75-5.25a.75.75 0 0 1 0-1.32l1.37-.738Z"
+                                ></path>
+                                <path
+                                    d="m10.933 19.231-7.668-4.13-1.37.739a.75.75 0 0 0 0 1.32l9.75 5.25c.221.12.489.12.71 0l9.75-5.25a.75.75 0 0 0 0-1.32l-1.37-.738-7.668 4.13a2.25 2.25 0 0 1-2.134-.001Z"
+                                ></path></svg
+                            ><span
+                                data-x-text="book.genres[0].name"
+                                class="text-xs"
+                                >Dã Sử</span
+                            >
+                        </div>
+                        <div>
+                            <button
+                                data-x-on:click="openReview(index)"
+                                class="text-xs bg-primary text-white py-1 px-2 rounded-md"
+                            >
+                                Đọc thử
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex space-x-3 pb-6 border-b border-auto">
+                <div class="flex-shrink-0">
+                    <a
+                        data-x-bind:href="getBookUrl(book)"
+                        target="_blank"
+                        class="text-title font-semibold"
+                        href="https://metruyencv.com/truyen/doan-the-xong-len-troi-ta-truoc-vo-dich-lai-tu-tien"
+                        ><img
+                            data-x-bind:src="book.poster[150]"
+                            class="h-32 w-24 shadow-xl rounded"
+                            loading="lazy"
+                            src="https://static.cdnno.com/poster/doan-the-xong-len-troi-ta-truoc-vo-dich-lai-tu-tien/150.jpg?1734543027"
+                    /></a>
+                </div>
+                <div class="flex-grow space-y-2">
+                    <div>
+                        <a
+                            data-x-bind:href="getBookUrl(book)"
+                            target="_blank"
+                            data-x-text="book.name"
+                            class="text-title font-semibold"
+                            href="https://metruyencv.com/truyen/doan-the-xong-len-troi-ta-truoc-vo-dich-lai-tu-tien"
+                            >Đoán Thể Xông Lên Trời! Ta Trước Vô Địch Lại Tu
+                            Tiên!</a
+                        >
+                    </div>
+                    <div
+                        data-x-text="book.synopsis.substring(0, 199)"
+                        class="text-gray-500 text-overflow-multiple-lines break-all"
+                    >
+                        【 trang B giới thiệu vắn tắt 】 Vương Lục xuyên qua đến
+                        yêu ma quái dị cùng tồn tại thế giới. Ngoài ý muốn phát
+                        hiện mình tại Đoán Thể cảnh có thể vô hạn đột phá! Tố
+                        chất thân thể vô thượng hạn
+                    </div>
+                    <div class="flex justify-between space-x-2 pt-1">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4 text-gray-500"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+                                    clip-rule="evenodd"
+                                ></path></svg
+                            ><span
+                                data-x-bind="BookAuthor(book)"
+                                class="text-title text-xs"
+                                >Đạo Hương Oa Ba</span
+                            >
+                        </div>
+                        <span
+                            data-x-text="book.chapter_count + ' chương'"
+                            class="text-xs"
+                            >151 chương</span
+                        >
+                    </div>
+                    <div class="flex justify-between text-gray-500">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    d="M11.644 1.59a.75.75 0 0 1 .712 0l9.75 5.25a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.712 0l-9.75-5.25a.75.75 0 0 1 0-1.32l9.75-5.25Z"
+                                ></path>
+                                <path
+                                    d="m3.265 10.602 7.668 4.129a2.25 2.25 0 0 0 2.134 0l7.668-4.13 1.37.739a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.71 0l-9.75-5.25a.75.75 0 0 1 0-1.32l1.37-.738Z"
+                                ></path>
+                                <path
+                                    d="m10.933 19.231-7.668-4.13-1.37.739a.75.75 0 0 0 0 1.32l9.75 5.25c.221.12.489.12.71 0l9.75-5.25a.75.75 0 0 0 0-1.32l-1.37-.738-7.668 4.13a2.25 2.25 0 0 1-2.134-.001Z"
+                                ></path></svg
+                            ><span
+                                data-x-text="book.genres[0].name"
+                                class="text-xs"
+                                >Huyền Huyễn</span
+                            >
+                        </div>
+                        <div>
+                            <button
+                                data-x-on:click="openReview(index)"
+                                class="text-xs bg-primary text-white py-1 px-2 rounded-md"
+                            >
+                                Đọc thử
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex space-x-3 pb-6 border-b border-auto">
+                <div class="flex-shrink-0">
+                    <a
+                        data-x-bind:href="getBookUrl(book)"
+                        target="_blank"
+                        class="text-title font-semibold"
+                        href="https://metruyencv.com/truyen/chinh-la-tieu-tu-nguoi-cho-tieu-su-muoi-nhom-viet-thu-tinh"
+                        ><img
+                            data-x-bind:src="book.poster[150]"
+                            class="h-32 w-24 shadow-xl rounded"
+                            loading="lazy"
+                            src="https://static.cdnno.com/poster/chinh-la-tieu-tu-nguoi-cho-tieu-su-muoi-nhom-viet-thu-tinh/150.jpg?1727424711"
+                    /></a>
+                </div>
+                <div class="flex-grow space-y-2">
+                    <div>
+                        <a
+                            data-x-bind:href="getBookUrl(book)"
+                            target="_blank"
+                            data-x-text="book.name"
+                            class="text-title font-semibold"
+                            href="https://metruyencv.com/truyen/chinh-la-tieu-tu-nguoi-cho-tieu-su-muoi-nhom-viet-thu-tinh"
+                            >Chính Là Tiểu Tử Ngươi, Cho Tiểu Sư Muội Nhóm Viết
+                            Thư Tình?</a
+                        >
+                    </div>
+                    <div
+                        data-x-text="book.synopsis.substring(0, 199)"
+                        class="text-gray-500 text-overflow-multiple-lines break-all"
+                    >
+                        "Thân yêu Thương Dao tiểu sư muội, gặp chữ như mặt... ."
+                        "Thân yêu Chỉ Nguyệt Đại sư tỷ, gặp chữ như mặt..."
+                        "Thân yêu..." "Thân yêu..." Bạch Hoài Trần xuyên qua đến
+                        tu tiên thế giới, có được
+                    </div>
+                    <div class="flex justify-between space-x-2 pt-1">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4 text-gray-500"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+                                    clip-rule="evenodd"
+                                ></path></svg
+                            ><span
+                                data-x-bind="BookAuthor(book)"
+                                class="text-title text-xs"
+                                >Tiền Trần Thính Phong</span
+                            >
+                        </div>
+                        <span
+                            data-x-text="book.chapter_count + ' chương'"
+                            class="text-xs"
+                            >419 chương</span
+                        >
+                    </div>
+                    <div class="flex justify-between text-gray-500">
+                        <div class="flex items-center space-x-1">
+                            <svg
+                                class="w-4 h-4"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                data-slot="icon"
+                            >
+                                <path
+                                    d="M11.644 1.59a.75.75 0 0 1 .712 0l9.75 5.25a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.712 0l-9.75-5.25a.75.75 0 0 1 0-1.32l9.75-5.25Z"
+                                ></path>
+                                <path
+                                    d="m3.265 10.602 7.668 4.129a2.25 2.25 0 0 0 2.134 0l7.668-4.13 1.37.739a.75.75 0 0 1 0 1.32l-9.75 5.25a.75.75 0 0 1-.71 0l-9.75-5.25a.75.75 0 0 1 0-1.32l1.37-.738Z"
+                                ></path>
+                                <path
+                                    d="m10.933 19.231-7.668-4.13-1.37.739a.75.75 0 0 0 0 1.32l9.75 5.25c.221.12.489.12.71 0l9.75-5.25a.75.75 0 0 0 0-1.32l-1.37-.738-7.668 4.13a2.25 2.25 0 0 1-2.134-.001Z"
+                                ></path></svg
+                            ><span
+                                data-x-text="book.genres[0].name"
+                                class="text-xs"
+                                >Huyền Huyễn</span
+                            >
+                        </div>
+                        <div>
+                            <button
+                                data-x-on:click="openReview(index)"
+                                class="text-xs bg-primary text-white py-1 px-2 rounded-md"
+                            >
+                                Đọc thử
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div
+            data-x-data="pagination(page, next, last)"
+            data-x-modelable="curPage"
+            data-x-model="page"
+            class="flex justify-center items-center space-x-4 my-8"
+        >
+            <button
+                data-x-bind="FirstPage"
+                class="disabled:border-gray-500 text-primary disabled:text-gray-500"
+                disabled="disabled"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <path d="M7 6v12"></path>
+                    <path d="M18 6l-6 6l6 6"></path>
+                </svg></button
+            ><button
+                data-x-bind="PrevPage"
+                class="disabled:border-gray-500 text-primary disabled:text-gray-500"
+                disabled="disabled"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <path d="M15 6l-6 6l6 6"></path>
+                </svg>
+            </button>
+            <div class="relative">
+                <input
+                    data-x-bind="FormPage"
+                    type="text"
+                    class="border border-primary rounded h-8 w-20 bg-inherit text-black dark:text-white placeholder:text-gray-500 text-sm"
+                    placeholder="1"
+                />
+                <div
+                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"
+                >
+                    <span
+                        data-x-text="`/${lastPage}`"
+                        class="text-gray-500 text-sm"
+                        >/879</span
+                    >
+                </div>
+            </div>
+            <button
+                data-x-bind="NextPage"
+                class="disabled:border-gray-500 text-primary disabled:text-gray-500"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <path d="M9 6l6 6l-6 6"></path>
+                </svg></button
+            ><button
+                data-x-bind="LastPage"
+                class="disabled:border-gray-500 text-primary disabled:text-gray-500"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <path d="M6 6l6 6l-6 6"></path>
+                    <path d="M17 5v13"></path>
+                </svg>
+            </button>
+        </div>
+        <template
+            data-x-data=""
+            data-x-if="$store.modal.preview"
+            data-x-bind="CloseModal"
+            ><div
+                data-x-data="preview(currentBook)"
+                class="bg-gray-500 bg-opacity-75 transition-opacity z-40 fixed top-0 left-0 w-full h-full outline-none overflow-x-hidden"
+                tabindex="-1"
+            >
+                <div
+                    class="h-full max-w-screen-lg mx-auto relative w-auto pointer-events-none"
+                >
+                    <div
+                        class="min-h-screen max-h-full overflow-hidden border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-clip-padding bg-panel dark:text-gray-200 outline-none"
+                    >
+                        <div
+                            class="flex flex-shrink-0 items-center justify-between p-4 border-b border-auto"
+                        >
+                            <div class="font-medium">
+                                <span
+                                    data-x-text="book.name"
+                                    class="font-bold"
+                                ></span>
+                            </div>
+                            <button
+                                data-x-bind="CloseModal"
+                                type="button"
+                                class="relative rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none"
+                            >
+                                <span class="absolute -inset-2.5"></span
+                                ><span class="sr-only">Close panel</span
+                                ><svg
+                                    class="w-6 h-6"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    aria-hidden="true"
+                                    data-slot="icon"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M6 18 18 6M6 6l12 12"
+                                    ></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div
+                            class="flex-auto overflow-y-auto overscroll-none relative px-4 pt-4 pb-12"
+                        >
+                            <div class="space-y-3 text-base break-words">
+                                <p>
+                                    <span class="font-medium">Giới thiệu:</span>
+                                </p>
+                                <div data-x-html="nl2br(book.synopsis)"></div>
+                                <p>==============================</p>
+                                <div
+                                    data-x-show="isLoading"
+                                    class="flex justify-center"
+                                >
+                                    <svg
+                                        class="inline animate-spin w-8 h-8"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke-width="1.5"
+                                        stroke="currentColor"
+                                        aria-hidden="true"
+                                        data-slot="icon"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="m21 7.5-2.25-1.313M21 7.5v2.25m0-2.25-2.25 1.313M3 7.5l2.25-1.313M3 7.5l2.25 1.313M3 7.5v2.25m9 3 2.25-1.313M12 12.75l-2.25-1.313M12 12.75V15m0 6.75 2.25-1.313M12 21.75V19.5m0 2.25-2.25-1.313m0-16.875L12 2.25l2.25 1.313M21 14.25v2.25l-2.25 1.313m-13.5 0L3 16.5v-2.25"
+                                        ></path>
+                                    </svg>
+                                </div>
+                                <template
+                                    data-x-if="!isLoading &amp;&amp; chapter"
+                                    ><div>
+                                        <p
+                                            data-x-text="chapter.name"
+                                            class="font-medium mb-3"
+                                        ></p>
+                                        <div
+                                            data-x-html="nl2br(content)"
+                                        ></div></div
+                                ></template>
+                            </div>
+                        </div>
+                    </div>
+                </div></div
+        ></template>
+    </div>
+</main>
