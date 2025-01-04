@@ -1,12 +1,12 @@
 import { Suppliers } from "./models/types"
-import { TruyenQQ } from "./plugin"
+import { TruyenQQ,Metruyencv } from "./plugin"
 
 export class Books {
     protected bookStore: { [key in Suppliers]: any }
     constructor() {
         this.bookStore = {
             [Suppliers.TruyenQQ]: TruyenQQ,
-            [Suppliers.NetTuyen]: undefined,
+            [Suppliers.Metruyencv]:Metruyencv 
         }
     }
 
@@ -15,4 +15,4 @@ export class Books {
     }
 }
 
-export { Suppliers } from "./models/types"
+export { Suppliers } 

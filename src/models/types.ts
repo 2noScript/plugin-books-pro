@@ -1,10 +1,12 @@
 type TYPE_LANGUAGE = "en" | "vi"
 type TYPE_lOCALE = "en_EN" | "vi_VN"
-export type DataType = "TopDay" | "TopWeek" | "TopMonth" | "New" | "favorite"
 type Status = "SUCCESS" | "ERROR" | "WITCH_OUT"
 
+export type DataType = "TopDay" | "TopWeek" | "TopMonth" | "New" | "favorite"
+
+export type BookType="Comic"|"Novel"
 export enum Suppliers {
-    NetTuyen = "nettruyen",
+    Metruyencv = "Metruyencv",
     TruyenQQ = "truyenqq",
 }
 
@@ -28,7 +30,8 @@ export interface IComic {
     like?: number
     follow?: number,
     genres?: string,
-    lastChapter?:number
+    lastChapter?:number,
+    author?:string
 }
 
 export interface IResponseListBook {
@@ -43,4 +46,5 @@ export interface IComicInfo {
     language: TYPE_LANGUAGE[]
     locale: TYPE_lOCALE
     avatar: string
+    bookType:BookType
 }

@@ -1,4 +1,4 @@
-import TruyenQQ from './truyenqq'
+import TruyenQQ from "./truyenqq"
+import Metruyencv from "./metruyencv"
 
-
-export {TruyenQQ}
+export { TruyenQQ, Metruyencv }

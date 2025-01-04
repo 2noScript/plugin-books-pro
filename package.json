@@ -12,7 +12,7 @@
     "prepare": "yarn  build",
     "dev": "ts-node src/index.ts",
     "test": "nodemon --exec  ts-node  test/index.ts",
-    "test:nettruyen": "nodemon --exec  ts-node test/nettruyen.test.ts",
+    "test:metruyencv": "nodemon --exec  ts-node test/metruyencv.test.ts",
     "test:truyenqq":"nodemon --exec  ts-node test/truyenqq.test.ts"
   },
   "dependencies": {

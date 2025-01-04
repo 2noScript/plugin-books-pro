@@ -8,12 +8,12 @@ const worker=new BrowserWorker({headless:false})
 const  book = new Books();
 
 const bk = book.build(
-  Suppliers.TruyenQQ,
-  "truyenqqto.com"
+  Suppliers.Metruyencv,
+  "metruyencv.com"
 );
 
 
-worker.runTask(bk.crawl.bind(bk)).then(res=>{
+worker.runTask(bk.getNew.bind(bk)).then(res=>{
   console.log(res)
   // worker.kill()
 })

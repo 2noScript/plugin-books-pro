@@ -1,9 +1,9 @@
 import { Page } from "puppeteer"
-import { IResponseListBook } from "./types"
+import { DataType, IResponseListBook } from "./types"
 
 export abstract class BaseBook {
     protected baseUrl: string
-    protected LIMIT_ITEMS:number=30
+    protected LIMIT_ITEMS: number = 30
 
     constructor(domain: string) {
         this.baseUrl = `https://${domain}`
@@ -52,8 +52,18 @@ export abstract class BaseBook {
             .trim()
             .toUpperCase()
     }
-    
-    protected justNumber(str: string){
-        return Number(str.replace(/\D/g, '')) ?? 0
+
+    protected justNumber(str: string) {
+        return Number(str.replace(/\D/g, "")) ?? 0
+    }
+
+    protected async EmptyIResponseListBook(
+        dataType: DataType
+    ): Promise<IResponseListBook> {
+        return Promise.resolve({
+            dataType,
+            data: [],
+            status: "WITCH_OUT",
+        })
     }
 }

@@ -18,3 +18,22 @@ export const saveDataToJson = (data: any, pathFile: string) => {
     console.error(`save data fail ${error}`);
   }
 };
+
+
+
+ export function xorEncrypt(input: string, key: string): string {
+  let output = '';
+  for (let i = 0; i < input.length; i++) {
+    output += String.fromCharCode(input.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+  }
+  return btoa(output); 
+}
+
+export function xorDecrypt(encrypted: string, key: string): string {
+  const decoded = atob(encrypted); 
+  let output = '';
+  for (let i = 0; i < decoded.length; i++) {
+    output += String.fromCharCode(decoded.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+  }
+  return output;
+}

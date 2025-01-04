@@ -1,21 +1,9 @@
-import {  Books,Suppliers } from "../src";
-export { saveDataToJson } from "../src/utils";
-import {BrowserWorker} from '../src/utils/BrowserWorker'
+
+import {xorEncrypt,xorDecrypt} from '../src/utils'
 
 
+const a=xorEncrypt("thangmk7@gmail.com","2noScript")
 
-const worker=new BrowserWorker({headless:false})
-const  book = new Books();
-
-const truyenqq = book.build(
-  Suppliers.TruyenQQ,
-  "truyenqqto.com"
-);
-
-
-worker.runTask(truyenqq.crawl.bind(truyenqq)).then(res=>{
-  console.log(res)
-  // worker.kill()
-})
+const x=xorDecrypt("RgYOHQQfAkc0VQMOGg9cCh8Z","2noscript")
 
 
