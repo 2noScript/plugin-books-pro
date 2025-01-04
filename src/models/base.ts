@@ -1,17 +1,14 @@
 import { Page } from "puppeteer";
 import {
   IResponseListComic,
-  ISourceInfo,
 } from "./types";
 
 
 export abstract class BaseBook {
   protected baseUrl: string;
-  protected store:Record<string,any>
 
-  constructor(comicInfo: ISourceInfo) {
-    this.baseUrl = `https://${comicInfo.domain}`;
-    this.store={}
+  constructor(domain:string) {
+    this.baseUrl = `https://${domain}`;
   }
   // max 30 items
   abstract getTopDay(page: Page): Promise<IResponseListComic>; 
@@ -26,13 +23,10 @@ export abstract class BaseBook {
     const topMonth=await this.getTopMonth(page)
     const bookNew=await this.getNew(page)
     const bookFavorite=await this.getFavorite(page)
-    this.store={topDay,topWeek,topMonth,bookNew,bookFavorite}
+    return {topDay,topWeek,topMonth,bookNew,bookFavorite}
   }
 
-  async getResults(){
-    return this.store
-  }
-  
+
   protected useSleep(s:number){
     return new Promise((resolve) => setTimeout(resolve, s * 1000));
   }

@@ -1,34 +1,18 @@
-import { comicSuppliers } from "./constants/suppliers";
-import {  Suppliers } from "./models/types";
-import { NetTruyen, TruyenQQ } from "./plugin";
-import { SuperBrowser } from "./utils/BrowserWorker";
+import { Suppliers } from "./models/types"
+import { TruyenQQ } from "./plugin"
 
-export class Comic {
-  constructor() {}
-  build(supplier: Suppliers, baseUrl: string) {
-    const comicInfo: IComicInfo = this.getComicInfoBySupplier(
-      supplier,
-      baseUrl
-    );
-    switch (supplier) {
-      case Suppliers.NetTuyen:
-        return new NetTruyen(comicInfo);
-      case Suppliers.TruyenQQ:
-        return new TruyenQQ(comicInfo);
+export class Books {
+    protected bookStore: { [key in Suppliers]: any }
+    constructor() {
+        this.bookStore = {
+            [Suppliers.TruyenQQ]: TruyenQQ,
+            [Suppliers.NetTuyen]: undefined,
+        }
     }
-  }
 
-  private getComicInfoBySupplier = (supplier: Suppliers, baseUrl: string) => {
-    const comicInfo = comicSuppliers.find((item) => item.key === supplier);
-    return {
-      ...comicInfo,
-      source: baseUrl,
-    } as IComicInfo;
-  };
-
-  public async kill() {
-    SuperBrowser.killProcess();
-  }
+    build(supplier: Suppliers, domain: string) {
+        return new this.bookStore[supplier](domain)
+    }
 }
 
-export { Suppliers } from "./models/types";
+export { Suppliers } from "./models/types"
