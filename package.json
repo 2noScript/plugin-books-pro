@@ -6,19 +6,16 @@
   "repository": "git@github.com:2noScript/plugin-comic-pro.git",
   "author": "2noScript <thangmk7@gmail.com>",
   "license": "MIT",
-  
   "scripts": {
     "build": "tsc",
     "prepare": "yarn  build",
-    "dev": "ts-node src/index.ts",
-    "test": "nodemon --exec  ts-node  test/index.ts",
-    "test:metruyencv": "nodemon --exec  ts-node test/metruyencv.test.ts",
-    "test:truyenqq":"nodemon --exec  ts-node test/truyenqq.test.ts"
+    "dev": "nodemon --exec  ts-node  test/index.ts",
+    "dev:metruyencv": "nodemon --exec  ts-node test/metruyencv.test.ts",
+    "dev:truyenqq": "nodemon --exec  ts-node test/truyenqq.test.ts"
   },
   "dependencies": {
     "axios": "^1.6.7",
     "fake-browser-headers": "^0.0.2",
-    "lodash": "^4.17.21",
     "node-html-parser": "^6.1.11",
     "puppeteer": "^22.0.0",
     "puppeteer-extra": "^3.3.6",
@@ -33,5 +30,13 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   },
-  "keywords": ["nettruyen","truyenqq","manga-library","nettruyen api","comic api","manga-scapper","blog truyen"]
+  "keywords": [
+    "nettruyen",
+    "truyenqq",
+    "manga-library",
+    "nettruyen api",
+    "comic api",
+    "manga-scapper",
+    "blog truyen"
+  ]
 }
