@@ -2,7 +2,7 @@ type TYPE_LANGUAGE = "en" | "vi"
 type TYPE_lOCALE = "en_EN" | "vi_VN"
 type Status = "SUCCESS" | "ERROR" | "WITCH_OUT"
 
-export type DataType = "TopDay" | "TopWeek" | "TopMonth" | "New" | "favorite"
+export type DataType = "TopDay" | "TopWeek" | "TopMonth" | "New" | "Favorite"
 
 export type BookType="Comic"|"Novel"
 export enum Suppliers {

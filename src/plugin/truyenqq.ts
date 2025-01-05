@@ -91,6 +91,6 @@ export default class TruyenQQ extends BaseBook {
     }
     async getFavorite(page: Page): Promise<IResponseListBook> {
         await page.goto(this.baseUrl + '/truyen-yeu-thich')
-        return this.subGetBook(page,'favorite')
+        return this.subGetBook(page,'Favorite')
     }
 }
