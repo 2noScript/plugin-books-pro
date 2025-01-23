@@ -1,5 +1,6 @@
 import crypto from "crypto";
 import fs from "fs";
+import  path from 'path';
 
 export const generateIdentifier = (text: string) => {
   const secretKey = "2noScript";
@@ -38,6 +39,22 @@ export function xorDecrypt(encrypted: string, key: string): string {
   return output;
 }
 
+
+
+function findRootDirectory() {
+
+  let currentDir = path.resolve(__dirname);
+  while (!fs.existsSync(path.join(currentDir, 'package.json'))) {
+    const parentDir = path.dirname(currentDir);
+    if (currentDir === parentDir) break;
+    currentDir = parentDir;
+  }
+
+  return currentDir;
+}
+
+
+export const ROOT_PATH=findRootDirectory()
 
 
 // private async logInHelper(page: Page) {
