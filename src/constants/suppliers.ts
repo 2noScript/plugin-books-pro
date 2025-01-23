@@ -1,6 +1,6 @@
-import { IComicInfo, Suppliers } from "../models/types"
+import { IBookInfo, Suppliers } from "../models/types"
 
-export const bookSuppliers: IComicInfo[] = [
+export const bookSuppliers: IBookInfo[] = [
     {
         key: Suppliers.TruyenQQ,
         name: "truyenqq",

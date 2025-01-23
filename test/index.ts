@@ -1,9 +1,15 @@
+import puppeteer from "puppeteer";
 
-import {xorEncrypt,xorDecrypt} from '../src/utils'
+(async () => {
+  const browser = await puppeteer.launch({
+    product: 'firefox', // Chạy với Firefox
+    headless: false,    // Hiển thị trình duyệt (hoặc true để chạy ẩn)
+  });
 
+  const page = await browser.newPage();
+  await page.goto('https://example.com');
 
-const a=xorEncrypt("thangmk7@gmail.com","2noScript")
+  console.log(await page.title());
 
-const x=xorDecrypt("RgYOHQQfAkc0VQMOGg9cCh8Z","2noscript")
-
-
+  await browser.close();
+})();
