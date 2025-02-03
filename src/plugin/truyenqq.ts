@@ -1,4 +1,4 @@
-import { Page } from "puppeteer"
+import { Page } from "playwright"
 import { BaseBook } from "../models/base"
 import { IResponseListBook, DataType } from "../models/types"
 
@@ -13,47 +13,29 @@ export default class TruyenQQ extends BaseBook {
             status: "SUCCESS",
         }
 
-        await page.waitForSelector("#main_homepage .list_grid_out")
-
-        const bookItems = await page.$$("#main_homepage .list_grid_out li")
+        // await this.useSleep(60);
+        const bookItems = await page.$$("#main_homepage .list_grid_out li");
         try {
             for (const [index, book] of bookItems.entries()) {
-                if (index === this.LIMIT_ITEMS) break
-                const imageUrlThumbnail = await book.$eval(
-                    ".book_avatar img",
-                    img => img.getAttribute("src")
-                )
-                const name = await book.$eval(
-                    ".book_info .book_name a",
-                    book_name => book_name.getAttribute("title")
-                )
-
-                const rawView = await book.$eval(
-                    ".book_info .text_detail span:nth-child(1)",
-                    span => {
-                        return span.textContent
-                    }
-                )
-                const rawFollow = await book.$eval(
-                    ".book_info .text_detail span:nth-child(2)",
-                    span => {
-                        return span.textContent
-                    }
-                )
-                const rawLastChapter = await book.$eval(
-                    ".book_info .last_chapter a",
-                    a => {
-                        return a.textContent
-                    }
-                )
-                const rawTags = await book.$$eval(
-                    ".book_info .more-info .list-tags .blue",
-                    elements => {
-                        return elements.map(el =>
-                            el.textContent?.trim()
-                        ) as string[]
-                    }
-                )
+                if (index === this.LIMIT_ITEMS) break;
+                const imageElement = await book.$(".book_avatar img");
+                const nameElement = await book.$(".book_info .book_name a");
+                const viewElement = await book.$(".book_info .text_detail span:nth-child(1)");
+                const followElement = await book.$(".book_info .text_detail span:nth-child(2)");
+                const lastChapterElement = await book.$(".book_info .last_chapter a");
+                const tagElements = await book.$$(".book_info .more-info .list-tags .blue");
+        
+                const imageUrlThumbnail = imageElement ? await imageElement.getAttribute("src") : "";
+                const name = nameElement ? await nameElement.getAttribute("title") : "";
+                const rawView = viewElement ? await viewElement.textContent() : "";
+                const rawFollow = followElement ? await followElement.textContent() : "";
+                const rawLastChapter = lastChapterElement ? await lastChapterElement.textContent() : "";
+        
+                // Lấy danh sách text từ tất cả các tag
+                const rawTags = await Promise.all(tagElements.map(async (tag) => {
+                    return tag.textContent();
+                }));
+        
                 result.data.push({
                     rank: index + 1,
                     identifier: this.getIdentifier(String(name)),
@@ -63,13 +45,13 @@ export default class TruyenQQ extends BaseBook {
                     follow: this.justNumber(String(rawFollow)),
                     lastChapter: this.justNumber(String(rawLastChapter)),
                     tags: JSON.stringify(rawTags, null),
-                })
+                });
             }
         } catch (e) {
-            console.error(e)
-            result.status = "ERROR"
+            console.error(e);
+            result.status = "ERROR";
         }
-
+        
         return result
     }
 
@@ -77,20 +59,24 @@ export default class TruyenQQ extends BaseBook {
         await page.goto(this.baseUrl + "/top-ngay")
         return this.subGetBook(page, "TopDay")
     }
+
     async getTopWeek(page: Page): Promise<IResponseListBook> {
-        await page.goto(this.baseUrl + '/top-tuan')
-        return this.subGetBook(page,'TopWeek')
+        await page.goto(this.baseUrl + "/top-tuan")
+        return this.subGetBook(page, "TopWeek")
     }
+
     async getTopMonth(page: Page): Promise<IResponseListBook> {
-        await page.goto(this.baseUrl + '/top-thang')
-        return this.subGetBook(page,'TopMonth')
+        await page.goto(this.baseUrl + "/top-thang")
+        return this.subGetBook(page, "TopMonth")
     }
+
     async getNew(page: Page): Promise<IResponseListBook> {
-        await page.goto(this.baseUrl + '/truyen-tranh-moi')
-        return this.subGetBook(page,'New')
+        await page.goto(this.baseUrl + "/truyen-tranh-moi")
+        return this.subGetBook(page, "New")
     }
+
     async getFavorite(page: Page): Promise<IResponseListBook> {
-        await page.goto(this.baseUrl + '/truyen-yeu-thich')
-        return this.subGetBook(page,'Favorite')
+        await page.goto(this.baseUrl + "/truyen-yeu-thich")
+        return this.subGetBook(page, "Favorite")
     }
 }

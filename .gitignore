@@ -6,3 +6,4 @@ db/*.json
 test/*.html
 .venv
 profile/dir
+*/Camoufox.app

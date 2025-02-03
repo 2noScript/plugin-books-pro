@@ -1,14 +1,7 @@
-import { firefox } from 'playwright';
+import BrowserWorker from "browser-worker"
 
-(async () => {
-  const browser = await firefox.connect(
-    'ws://localhost:51183/e3f3412829dfd664f6345d30b433f7be' 
-  );
+const br=new BrowserWorker()
 
-  const page = await browser.newPage();
-  await page.goto('http://example.com');
-
-  console.log(await page.title());
-
-  await browser.close();
-})();
+br.runTask(async (page:any)=>{
+    await page.goto("https://manhuarock1.com")
+})

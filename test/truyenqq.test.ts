@@ -1,10 +1,10 @@
 import {  Books,Suppliers } from "../src";
 export { saveDataToJson } from "../src/utils";
-import {BrowserWorker} from '../src/utils/BrowserWorker'
+import BrowserWorker from "browser-worker"
 
 
 
-const worker=new BrowserWorker({headless:false})
+const worker=new BrowserWorker()
 const  book = new Books();
 
 const bk = book.build(
@@ -15,7 +15,6 @@ const bk = book.build(
 
 worker.runTask(bk.getTopDay.bind(bk)).then(res=>{
   console.log(res)
-  // worker.kill()
 })
 
 
