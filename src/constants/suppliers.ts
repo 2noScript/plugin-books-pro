@@ -1,7 +1,7 @@
 import { IBookInfo, Suppliers } from "../models/types"
 
-export const bookSuppliers: IBookInfo[] = [
-    {
+export const bookSuppliers: Record<Suppliers, IBookInfo> = {
+    [Suppliers.TruyenQQ]: {
         key: Suppliers.TruyenQQ,
         name: "truyenqq",
         language: ["vi"],
@@ -9,7 +9,7 @@ export const bookSuppliers: IBookInfo[] = [
         avatar: "",
         bookType: "Comic",
     },
-    {
+    [Suppliers.Metruyencv]: {
         key: Suppliers.Metruyencv,
         name: "metruyencv",
         language: ["vi"],
@@ -17,5 +17,4 @@ export const bookSuppliers: IBookInfo[] = [
         avatar: "",
         bookType: "Novel",
     },
-]
-
+}

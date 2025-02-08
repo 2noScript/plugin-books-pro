@@ -13,7 +13,6 @@ export default class TruyenQQ extends BaseBook {
             status: "SUCCESS",
         }
 
-        // await this.useSleep(60);
         const bookItems = await page.$$("#main_homepage .list_grid_out li");
         try {
             for (const [index, book] of bookItems.entries()) {
@@ -31,7 +30,6 @@ export default class TruyenQQ extends BaseBook {
                 const rawFollow = followElement ? await followElement.textContent() : "";
                 const rawLastChapter = lastChapterElement ? await lastChapterElement.textContent() : "";
         
-                // Lấy danh sách text từ tất cả các tag
                 const rawTags = await Promise.all(tagElements.map(async (tag) => {
                     return tag.textContent();
                 }));

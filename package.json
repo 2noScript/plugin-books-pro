@@ -11,16 +11,14 @@
     "prepare": "yarn  build",
     "dev": "nodemon --exec  ts-node  test/index.ts",
     "dev:metruyencv": "nodemon --exec  ts-node test/metruyencv.test.ts",
-    "dev:truyenqq": "nodemon --exec  ts-node test/truyenqq.test.ts",
-    "dev:br": "nodemon --exec  ts-node test/browser.test.ts"
+    "dev:truyenqq": "nodemon --exec  ts-node test/truyenqq.test.ts"
   },
-  "dependencies": {
-    "playwright": "1.49"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/jest": "^29.5.12",
     "@types/lodash": "^4.14.202",
     "nodemon": "^3.0.3",
+    "playwright": "^1.50.1",
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
