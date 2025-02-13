@@ -1,6 +1,6 @@
 import { Books, Suppliers } from "../src"
 export { saveDataToJson } from "../src/utils"
-import { BrowserWorker } from "browser-worker"
+import { BrowserWorker } from "t2-browser-worker"
 
 const worker = new BrowserWorker()
 const book = new Books()

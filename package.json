@@ -13,7 +13,6 @@
     "dev:metruyencv": "nodemon --exec  ts-node test/metruyencv.test.ts",
     "dev:truyenqq": "nodemon --exec  ts-node test/truyenqq.test.ts"
   },
-  "dependencies": {},
   "devDependencies": {
     "@types/jest": "^29.5.12",
     "@types/lodash": "^4.14.202",
@@ -31,5 +30,8 @@
     "comic api",
     "manga-scapper",
     "blog truyen"
-  ]
+  ],
+  "dependencies": {
+    "t2-browser-worker": "^0.0.4"
+  }
 }
