@@ -1,4 +1,4 @@
-import { Page } from "playwright"
+import { Page } from "t2-browser-worker"
 import { DataType, IResponseListBook } from "./types"
 
 export abstract class BaseBook {
@@ -63,7 +63,7 @@ export abstract class BaseBook {
         return Promise.resolve({
             dataType,
             data: [],
-            status: "WITCH_OUT",
+            status: "WITHOUT",
         })
     }
 }

@@ -1,4 +1,4 @@
-import { Page } from "playwright"
+import { Page } from "t2-browser-worker"
 import { BaseBook } from "../models/base"
 import { IResponseListBook, DataType } from "../models/types"
 
@@ -12,7 +12,7 @@ export default class TruyenQQ extends BaseBook {
             data: [],
             status: "SUCCESS",
         }
-
+        await page.waitForLoadState("domcontentloaded")
         const bookItems = await page.$$("#main_homepage .list_grid_out li");
         try {
             for (const [index, book] of bookItems.entries()) {

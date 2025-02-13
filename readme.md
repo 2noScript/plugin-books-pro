@@ -3,16 +3,12 @@
 
 ### Mode Develop 
 ```shell
-
 yarn dev:[supplier-name]
-
-
 ```
 
 ### Build
 
 ```shell
-
 yarn build
 ```
 

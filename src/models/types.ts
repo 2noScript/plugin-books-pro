@@ -1,6 +1,6 @@
 type TYPE_LANGUAGE = "en" | "vi"
 type TYPE_lOCALE = "en_EN" | "vi_VN"
-type Status = "SUCCESS" | "ERROR" | "WITCH_OUT"
+type Status = "SUCCESS" | "ERROR" | "WITHOUT"
 
 export type DataType = "TopDay" | "TopWeek" | "TopMonth" | "New" | "Favorite"
 

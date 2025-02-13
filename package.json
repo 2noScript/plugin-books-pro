@@ -14,11 +14,8 @@
     "dev:truyenqq": "nodemon --exec  ts-node test/truyenqq.test.ts"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.12",
-    "@types/lodash": "^4.14.202",
     "nodemon": "^3.0.3",
-    "playwright": "^1.50.1",
-    "ts-jest": "^29.1.2",
+    "t2-browser-worker": "^0.0.7",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   },
@@ -31,7 +28,5 @@
     "manga-scapper",
     "blog truyen"
   ],
-  "dependencies": {
-    "t2-browser-worker": "^0.0.4"
-  }
+  "dependencies": {}
 }
