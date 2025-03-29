@@ -23,7 +23,7 @@ yarn build
 - [ ] mangatoon (https://mangatooncom.vn)
 - [ ] comico (https://www.comico.jp)
 - [ ] mangadex (https://mangadex.org)
-
+- [ ] comic.naver (https://comic.naver.com)
 #### Novel
 
 - [ ] metruyencv (https://metruyencv.com)

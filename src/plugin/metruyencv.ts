@@ -10,6 +10,17 @@ export default class Metruyencv extends BaseBook {
         await page.goto(this.baseUrl,{waitUntil:"domcontentloaded"})
     }
 
+
+    private async pageResApi(page: Page, url: string) {
+        const response = await page.context().request.fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        return response.json(); 
+    }
+
     private async getInfoABook(page: Page, url: string) {
         await page.goto(url, { waitUntil: "domcontentloaded" })
     }
@@ -33,30 +44,8 @@ export default class Metruyencv extends BaseBook {
             status: "SUCCESS",
         }
         
-        const baseURL = "https://backend.metruyencv.com/api/books"
-        const params = new URLSearchParams({
-            "filter[gender]": String(1), 
-            "filter[state]": "published",
-            include: "author,genres,creator",
-            limit: String(20),
-            page: String(1), 
-            sort: "-new_chap_at",
-        });
-        
-        const url = `${baseURL}?${params.toString()}`
-        console.log(url)
-        const res= await page.evaluate((url) => {
-            return fetch(url, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            })
-            .then(response => response.json())
-            .catch(error => console.error("Fetch error:", error));
-        }, url);
+        const res=await this.pageResApi(page,"https://backend.metruyencv.com/api/books?filter[gender]=1&filter[state]=published&include=author,genres,creator&limit=20&page=1&sort=-new_chap_at")
         console.log(res)
-
         await this.useSleep(30)
         return this.EmptyIResponseListBook("New")
     }
