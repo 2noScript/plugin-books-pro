@@ -102,7 +102,7 @@ Example response:
 ### Novel Sources
 | Status | Source | URL |
 |--------|---------|-----|
-| | Metruyencv | https://metruyencv.com |
+|✅| Metruyencv | https://metruyencv.com |
 | | TruyenFull | https://truyenfull.io |
 | | XaloSach | https://xalosach.com |
 | | SSTruyen | https://sstruyen.vn |
