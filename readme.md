@@ -35,6 +35,55 @@ const result = await worker.runTask(async (page) => {
     return await crawler.crawl(page);
 });
 ```
+## Crawl Response Data
+
+Example response:
+```ts
+{
+    top: {
+        dataType: "Top",
+        status: "SUCCESS",
+        data: [
+            {
+                identifier: "ONE PIECE",
+                name: "One Piece",
+                rank: 1,
+                view: 1500000,
+                like: 50000,
+                follow: 100000,
+                tags: "Action,Adventure,Comedy,Fantasy,Shounen",
+                lastChapter: 1108,
+                author: "Oda Eiichiro",
+                comment: 3000,
+                imageUrlThumbnail: "https://example.com/one-piece.jpg",
+                imagePathThumbnail: "/images/manga/one-piece.jpg",
+                description: "Gol D. Roger was known as the Pirate King..."
+            },
+            // ... more items
+        ]
+    },
+    bookNew: {
+        dataType: "New",
+        status: "SUCCESS",
+        data: [
+            {
+                identifier: "JUJUTSU KAISEN",
+                name: "Jujutsu Kaisen",
+                rank: 1,
+                view: 500000,
+                like: 20000,
+                follow: 50000,
+                tags: "Action,Supernatural,School Life,Shounen",
+                lastChapter: 253,
+                author: "Gege Akutami",
+                comment: 1500,
+                imageUrlThumbnail: "https://example.com/jjk.jpg",
+                imagePathThumbnail: "/images/manga/jujutsu-kaisen.jpg",
+                description: "A boy fights... to help people..."
+            }
+        },
+}
+```
 
 #### Comic
 

@@ -1,5 +1,4 @@
 import { Books, Suppliers } from "../src"
-export { saveDataToJson } from "../src/utils"
 
 import { BrowserWorker,Page } from "t2-browser-worker"
 
