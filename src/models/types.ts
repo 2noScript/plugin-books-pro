@@ -2,7 +2,7 @@ type TYPE_LANGUAGE = "en" | "vi"
 type TYPE_lOCALE = "en_EN" | "vi_VN"
 type Status = "SUCCESS" | "ERROR" | "WITHOUT"
 
-export type DataType = "TopDay" | "TopWeek" | "TopMonth" | "New" | "Favorite"
+export type DataType ="Top" | "New" | "Favorite"
 
 export type BookType="Comic"|"Novel"
 export enum Suppliers {
@@ -22,16 +22,18 @@ export interface ISourceInfo {
 
 export interface IBook {
     identifier: string
-    imageUrlThumbnail: string
-    imagePathThumbnail?: string
-    rank: number
     name: string
+    rank: number
     view?: number
     like?: number
     follow?: number,
     tags?: string,
     lastChapter?:number,
-    author?:string
+    author?:string,
+    comment?:number,
+    imageUrlThumbnail: string
+    imagePathThumbnail?: string
+    description?: string
 }
 
 export interface IResponseListBook {

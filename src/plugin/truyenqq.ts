@@ -14,9 +14,7 @@ export default class TruyenQQ extends BaseBook {
     };
 
     private readonly ROUTES = {
-        TOP_DAY: "/top-ngay",
-        TOP_WEEK: "/top-tuan",
-        TOP_MONTH: "/top-thang",
+        TOP: "/top-ngay",
         NEW: "/truyen-tranh-moi",
         FAVORITE: "/truyen-yeu-thich"
     };
@@ -82,18 +80,9 @@ export default class TruyenQQ extends BaseBook {
         return this.subGetBook(page, dataType);
     }
 
-    async getTopDay(page: Page): Promise<IResponseListBook> {
-        return this.navigateAndFetch(page, this.ROUTES.TOP_DAY, "TopDay");
+    async getTop(page: Page): Promise<IResponseListBook> {
+        return this.navigateAndFetch(page, this.ROUTES.TOP, "Top");
     }
-
-    async getTopWeek(page: Page): Promise<IResponseListBook> {
-        return this.navigateAndFetch(page, this.ROUTES.TOP_WEEK, "TopWeek");
-    }
-
-    async getTopMonth(page: Page): Promise<IResponseListBook> {
-        return this.navigateAndFetch(page, this.ROUTES.TOP_MONTH, "TopMonth");
-    }
-
     async getNew(page: Page): Promise<IResponseListBook> {
         return this.navigateAndFetch(page, this.ROUTES.NEW, "New");
     }

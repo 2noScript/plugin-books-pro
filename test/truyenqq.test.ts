@@ -10,7 +10,7 @@ worker.runTask(async (page:Page)=>{
     const res=await bk.crawl(page)
     return res
 },{
-    headless:false
+    headless:true
 }).then(res=>{
     console.log(JSON.stringify(res,null,2))
 })

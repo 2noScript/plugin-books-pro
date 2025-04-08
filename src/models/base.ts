@@ -9,19 +9,15 @@ export abstract class BaseBook {
         this.baseUrl = `https://${domain}`
     }
     // max 30 items
-    abstract getTopDay(page: Page): Promise<IResponseListBook>
-    abstract getTopWeek(page: Page): Promise<IResponseListBook>
-    abstract getTopMonth(page: Page): Promise<IResponseListBook>
     abstract getNew(page: Page): Promise<IResponseListBook>
     abstract getFavorite(page: Page): Promise<IResponseListBook>
+    abstract getTop(page: Page): Promise<IResponseListBook>
     
     async crawl(page: Page) {
-        const topDay = await this.getTopDay(page)
-        const topWeek = await this.getTopWeek(page)
-        const topMonth = await this.getTopMonth(page)
         const bookNew = await this.getNew(page)
+        const top=await this.getTop(page)
         const bookFavorite = await this.getFavorite(page)
-        return { topDay, topWeek, topMonth, bookNew, bookFavorite }
+        return { top, bookNew, bookFavorite }
     }
 
     protected getIdentifier(str: string) {
@@ -40,7 +36,7 @@ export abstract class BaseBook {
         return Number(str.replace(/\D/g, "")) ?? 0
     }
 
-    protected async EmptyIResponseListBook(
+    protected EmptyIResponseListBook(
         dataType: DataType
     ): Promise<IResponseListBook> {
         return Promise.resolve({
