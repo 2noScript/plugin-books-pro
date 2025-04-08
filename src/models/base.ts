@@ -4,8 +4,10 @@ import { DataType, IResponseListBook } from "./types"
 export abstract class BaseBook {
     protected baseUrl: string
     protected LIMIT_ITEMS: number = 30
+    protected domain: string
 
     constructor(domain: string) {
+        this.domain = domain
         this.baseUrl = `https://${domain}`
     }
     // max 30 items

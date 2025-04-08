@@ -1,92 +1,112 @@
-import { Page ,usePageFetch,useBlockResource} from "t2-browser-worker"
+import { Page, usePageFetch, useBlockResource } from "t2-browser-worker"
 import { BaseBook } from "../models/base"
-import { IResponseListBook } from "../models/types"
+import { DataType, IResponseListBook } from "../models/types"
 
 export default class Metruyencv extends BaseBook {
+    private readonly API_ENDPOINTS = {
+        RANKING: (month: number, year: number, type: 'view' | 'vote') => 
+            `https://backend.${this.domain}/api/books/ranking?gender=1&kind=1&limit=${this.LIMIT_ITEMS}&month=${month}&page=1&type=${type}&year=${year}`,
+        NEW: `https://backend.${this.domain}/api/books?filter[gender]=1&filter[state]=published&include=author,genres,creator&limit=${this.LIMIT_ITEMS}&page=1&sort=-new_chap_at`
+    };
+
+    private getCurrentDate() {
+        const date = new Date();
+        return {
+            month: date.getMonth() + 1,
+            year: date.getFullYear()
+        };
+    }
+
     private async passLogin(page: Page) {
         await page.setExtraHTTPHeaders({
             "User-Agent": "Googlebot/2.1 (+http://www.google.com/bot.html)",
-        })
-        await page.goto(this.baseUrl,{waitUntil:"domcontentloaded"})
+        });
+        await page.goto(this.baseUrl, { waitUntil: "domcontentloaded" });
     }
 
-
-
-
-    private async getInfoABook(page: Page, url: string) {
-        await page.goto(url, { waitUntil: "domcontentloaded" })
+    private transformBookData(book: any, index: number) {
+        const bookData = book.book || book;
+        return {
+            identifier: this.getIdentifier(bookData.name),
+            name: bookData.name,
+            rank: index + 1,
+            view: bookData.view_count,
+            like: bookData.like_count,
+            comment: bookData.comment_count,
+            follow: bookData.bookmark_count,
+            author: bookData.author?.name,
+            tags: bookData.genres.map((item: any) => item.name).join(","),
+            imageUrlThumbnail: bookData.poster.default,
+            description: bookData.synopsis,
+        };
     }
 
-
-
-
-   async getTop(page: Page): Promise<IResponseListBook> {
+    private async getInfoABook(page: Page, url: string, dataType: DataType): Promise<IResponseListBook> {
         const result: IResponseListBook = {
-            dataType: "Top",
+            dataType,
             data: [],
             status: "SUCCESS",
-        }
-        return result
+        };
+
+        try {
+            const res = await usePageFetch(page, url);
+            result.data = res.data.map((book: any, index: number) => 
+                this.transformBookData(book, index)
+            );
+        } catch (error) {
+            console.error(`Error fetching ${dataType}:`, error);
+            result.status = "ERROR";
         }
 
+        return result;
+    }
+
+    async getTop(page: Page): Promise<IResponseListBook> {
+        const { month, year } = this.getCurrentDate();
+        return this.getInfoABook(
+            page,
+            this.API_ENDPOINTS.RANKING(month, year, 'view'),
+            "Top"
+        );
+    }
 
     async getNew(page: Page): Promise<IResponseListBook> {
-        const result: IResponseListBook = {
-            dataType: "New",
-            data: [],
-            status: "SUCCESS",
-        }
-        
-        const res=await usePageFetch(page,"https://backend.metruyencv.com/api/books?filter[gender]=1&filter[state]=published&include=author,genres,creator&limit=20&page=1&sort=-new_chap_at")
-        const re2=await usePageFetch(page,"https://backend.metruyencv.com/api/books?filter[gender]=1&filter[state]=published&include=author,genres,creator&limit=20&page=2&sort=-new_chap_at")
-
-        for(const [index, book] of [...res.data.entries(),...re2.data.entries()]){
-            const identifier=this.getIdentifier(book.name)
-            const name=book.name
-            const rank=index+1
-            const view=book.view_count
-            const like=book.like_count
-            const comment=book.comment_count
-            const follow=book.bookmark_count
-            const author=book.author?.name
-            const tags=book.genres.map((item:any)=>item.name).join(",")
-            const imageUrlThumbnail=book.poster.default
-            const description=book.synopsis
-
-            result.data.push({
-                identifier,
-                name,
-                rank,
-                view,
-                like,
-                comment,
-                follow,
-                author,
-                tags,
-                imageUrlThumbnail,
-                description
-            })
-        
-        }
-        return result
+        return this.getInfoABook(
+            page,
+            this.API_ENDPOINTS.NEW,
+            "New"
+        );
     }
 
     async getFavorite(page: Page): Promise<IResponseListBook> {
-        return this.EmptyIResponseListBook("New")
+        const { month, year } = this.getCurrentDate();
+        return this.getInfoABook(
+            page,
+            this.API_ENDPOINTS.RANKING(month, year, 'vote'),
+            "Favorite"
+        );
     }
 
-
-
-    async crawl(page: Page){
+    async crawl(page: Page) {
         useBlockResource(page, [
             "image",
             "media",
             "font",
             "script",
             "stylesheet",
-            "xhr"
         ]);
-        await this.passLogin(page)
-        return super.crawl(page);
+        await this.passLogin(page);
+        const baseResult = await super.crawl(page);
+        
+        return {
+            ...baseResult,
+            timestamp: Date.now(),
+            source: "Metruyencv",
+            version: "1.0.0",
+            meta: {
+                url: this.baseUrl,
+                limitItems: this.LIMIT_ITEMS
+            }
+        };
     }
 }
