@@ -1,6 +1,6 @@
 {
   "name": "plugin-comic-pro",
-  "version": "1.0.10",
+  "version": "0.0.10",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "repository": "git@github.com:2noScript/plugin-comic-pro.git",
@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "prepare": "yarn  build",
+    "prepare": "yarn build",
     "dev": "nodemon --exec  ts-node  test/index.ts",
     "dev:metruyencv": "nodemon --exec  ts-node test/metruyencv.test.ts",
     "dev:truyenqq": "nodemon --exec  ts-node test/truyenqq.test.ts"
@@ -26,7 +26,8 @@
     "nettruyen api",
     "comic api",
     "manga-scapper",
-    "blog truyen"
+    "blog truyen",
+    "metruyencv"
   ],
   "dependencies": {
     "t2-browser-worker": "^0.0.13"

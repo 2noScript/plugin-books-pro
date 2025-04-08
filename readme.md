@@ -1,4 +1,6 @@
-
+# Plugin Comic Pro
+[![npm version](https://badge.fury.io/js/plugin-comic-pro.svg)](https://badge.fury.io/js/plugin-comic-pro)
+A powerful library for crawling manga and novel content from various sources.
 
 
 ### Mode Develop 
@@ -12,28 +14,59 @@ yarn dev:[supplier-name]
 yarn build
 ```
 
+## Installation
 
+```bash
+yarn add plugin-comic-pro
+```
+
+## Usage
+```ts
+import { Books, Suppliers } from 'plugin-comic-pro';
+import { BrowserWorker } from 't2-browser-worker';
+
+const worker = new BrowserWorker();
+const books = new Books();
+
+const crawler = books.build(Suppliers.TruyenQQ);
+
+// Start crawling
+const result = await worker.runTask(async (page) => {
+    return await crawler.crawl(page);
+});
+```
 
 #### Comic
 
-- [x] truyenqq (https://truyenqqto.com)
-- [ ] pops (https://pops.vn)
-- [ ] manhuavn (https://manhuavn.top)
-- [ ] manhuarock (https://manhuarockz.com)
-- [ ] mangatoon (https://mangatooncom.vn)
-- [ ] comico (https://www.comico.jp)
-- [ ] mangadex (https://mangadex.org)
-- [ ] comic.naver (https://comic.naver.com)
-#### Novel
+### Manga Sources
+| Source | Status | URL |
+|--------|---------|-----|
+| TruyenQQ | ✅ | https://truyenqqto.com |
+| Pops | | https://pops.vn |
+| ManhuaVN | | https://manhuavn.top |
+| ManhuaRock | | https://manhuarockz.com |
+| MangaToon | | https://mangatooncom.vn |
+| Comico | | https://www.comico.jp |
+| MangaDex | | https://mangadex.org |
+| Naver Comic | | https://comic.naver.com |
 
-- [ ] metruyencv (https://metruyencv.com)
-- [ ] truyenfull (https://truyenfull.io)
-- [ ] xalosach (https://xalosach.com)
-- [ ] sstruyen (https://sstruyen.vn)
-- [ ] truyenfulltv (https://truyenfull.tv)
-- [ ] metruyenhot (https://metruyenhot.vn)
-- [ ] enovel (https://enovel.mobi)
-- [ ] truyenyy (https://truyenyy.vip)
-- [ ] dtruyen (https://dtruyen.net)
-#### Other
-- [ ] waka (https://waka.vn)
+### Novel Sources
+| Source | Status | URL |
+|--------|---------|-----|
+| Metruyencv | | https://metruyencv.com |
+| TruyenFull | | https://truyenfull.io |
+| XaloSach | | https://xalosach.com |
+| SSTruyen | | https://sstruyen.vn |
+| TruyenFullTV | | https://truyenfull.tv |
+| MeTruyenHot | | https://metruyenhot.vn |
+| eNovel | | https://enovel.mobi |
+| TruyenYY | | https://truyenyy.vip |
+| DTruyen | | https://dtruyen.net |
+
+### Other Sources
+| Source | Status | URL |
+|--------|---------|-----|
+| Waka | | https://waka.vn |
+
+Legend:
+- ✅ Completed
