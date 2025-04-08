@@ -39,34 +39,34 @@ const result = await worker.runTask(async (page) => {
 #### Comic
 
 ### Manga Sources
-| Source | Status | URL |
+| Status | Source | URL |
 |--------|---------|-----|
-| TruyenQQ | ✅ | https://truyenqqto.com |
-| Pops | | https://pops.vn |
-| ManhuaVN | | https://manhuavn.top |
-| ManhuaRock | | https://manhuarockz.com |
-| MangaToon | | https://mangatooncom.vn |
-| Comico | | https://www.comico.jp |
-| MangaDex | | https://mangadex.org |
-| Naver Comic | | https://comic.naver.com |
+| ✅ | TruyenQQ | https://truyenqqto.com |
+| | Pops | https://pops.vn |
+| | ManhuaVN | https://manhuavn.top |
+| | ManhuaRock | https://manhuarockz.com |
+| | MangaToon | https://mangatooncom.vn |
+| | Comico | https://www.comico.jp |
+| | MangaDex | https://mangadex.org |
+| | Naver Comic | https://comic.naver.com |
 
 ### Novel Sources
-| Source | Status | URL |
+| Status | Source | URL |
 |--------|---------|-----|
-| Metruyencv | | https://metruyencv.com |
-| TruyenFull | | https://truyenfull.io |
-| XaloSach | | https://xalosach.com |
-| SSTruyen | | https://sstruyen.vn |
-| TruyenFullTV | | https://truyenfull.tv |
-| MeTruyenHot | | https://metruyenhot.vn |
-| eNovel | | https://enovel.mobi |
-| TruyenYY | | https://truyenyy.vip |
-| DTruyen | | https://dtruyen.net |
+| | Metruyencv | https://metruyencv.com |
+| | TruyenFull | https://truyenfull.io |
+| | XaloSach | https://xalosach.com |
+| | SSTruyen | https://sstruyen.vn |
+| | TruyenFullTV | https://truyenfull.tv |
+| | MeTruyenHot | https://metruyenhot.vn |
+| | eNovel | https://enovel.mobi |
+| | TruyenYY | https://truyenyy.vip |
+| | DTruyen | https://dtruyen.net |
 
 ### Other Sources
-| Source | Status | URL |
+| Status | Source | URL |
 |--------|---------|-----|
-| Waka | | https://waka.vn |
+| | Waka | https://waka.vn |
 
 Legend:
 - ✅ Completed
