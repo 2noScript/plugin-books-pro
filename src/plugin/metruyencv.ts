@@ -96,17 +96,6 @@ export default class Metruyencv extends BaseBook {
             "stylesheet",
         ]);
         await this.passLogin(page);
-        const baseResult = await super.crawl(page);
-        
-        return {
-            ...baseResult,
-            timestamp: Date.now(),
-            source: "Metruyencv",
-            version: "1.0.0",
-            meta: {
-                url: this.baseUrl,
-                limitItems: this.LIMIT_ITEMS
-            }
-        };
+        return super.crawl(page);
     }
 }
