@@ -8,6 +8,7 @@ export const bookSuppliers: Record<Suppliers, IBookInfo> = {
         locale: "vi_VN",
         avatar: "",
         bookType: "Comic",
+        domain: "truyenqqto.com",
     },
     [Suppliers.Metruyencv]: {
         key: Suppliers.Metruyencv,
@@ -16,5 +17,6 @@ export const bookSuppliers: Record<Suppliers, IBookInfo> = {
         locale: "vi_VN",
         avatar: "",
         bookType: "Novel",
+        domain: "metruyencv.com",
     },
 }

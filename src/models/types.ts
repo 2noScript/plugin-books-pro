@@ -46,5 +46,6 @@ export interface IBookInfo {
     language: TYPE_LANGUAGE[]
     locale: TYPE_lOCALE
     avatar: string
-    bookType:BookType
+    bookType:BookType,
+    domain:string
 }

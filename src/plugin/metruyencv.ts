@@ -45,8 +45,6 @@ export default class Metruyencv extends BaseBook {
         }
         
         const res=await this.pageResApi(page,"https://backend.metruyencv.com/api/books?filter[gender]=1&filter[state]=published&include=author,genres,creator&limit=20&page=1&sort=-new_chap_at")
-        console.log(res)
-        await this.useSleep(30)
         return this.EmptyIResponseListBook("New")
     }
 

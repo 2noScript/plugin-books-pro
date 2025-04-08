@@ -1,8 +1,55 @@
-import { Page } from "t2-browser-worker"
+import { Page, useBlockResource } from "t2-browser-worker"
 import { BaseBook } from "../models/base"
 import { IResponseListBook, DataType } from "../models/types"
 
 export default class TruyenQQ extends BaseBook {
+    private readonly SELECTORS = {
+        BOOK_ITEMS: "#main_homepage .list_grid_out li",
+        IMAGE: ".book_avatar img",
+        NAME: ".book_info .book_name a",
+        VIEW: ".book_info .text_detail span:nth-child(1)",
+        FOLLOW: ".book_info .text_detail span:nth-child(2)",
+        LAST_CHAPTER: ".book_info .last_chapter a",
+        TAGS: ".book_info .more-info .list-tags .blue"
+    };
+
+    private readonly ROUTES = {
+        TOP_DAY: "/top-ngay",
+        TOP_WEEK: "/top-tuan",
+        TOP_MONTH: "/top-thang",
+        NEW: "/truyen-tranh-moi",
+        FAVORITE: "/truyen-yeu-thich"
+    };
+
+    private async extractBookData(book: any, index: number): Promise<any> {
+        const imageElement = await book.$(this.SELECTORS.IMAGE);
+        const nameElement = await book.$(this.SELECTORS.NAME);
+        const viewElement = await book.$(this.SELECTORS.VIEW);
+        const followElement = await book.$(this.SELECTORS.FOLLOW);
+        const lastChapterElement = await book.$(this.SELECTORS.LAST_CHAPTER);
+        const tagElements = await book.$$(this.SELECTORS.TAGS);
+
+        const imageUrlThumbnail = await imageElement?.getAttribute("src") || "";
+        const name = await nameElement?.getAttribute("title") || "";
+        const rawView = await viewElement?.textContent() || "";
+        const rawFollow = await followElement?.textContent() || "";
+        const rawLastChapter = await lastChapterElement?.textContent() || "";
+        const rawTags = await Promise.all(
+            tagElements.map((tag: any) => tag.textContent())
+        );
+
+        return {
+            rank: index + 1,
+            identifier: this.getIdentifier(String(name)),
+            imageUrlThumbnail: String(imageUrlThumbnail),
+            name: String(name),
+            view: this.justNumber(String(rawView)),
+            follow: this.justNumber(String(rawFollow)),
+            lastChapter: this.justNumber(String(rawLastChapter)),
+            tags: JSON.stringify(rawTags, null)
+        };
+    }
+
     private async subGetBook(
         page: Page,
         dataType: DataType
@@ -10,71 +57,60 @@ export default class TruyenQQ extends BaseBook {
         const result: IResponseListBook = {
             dataType,
             data: [],
-            status: "SUCCESS",
-        }
-        await page.waitForLoadState("domcontentloaded")
-        const bookItems = await page.$$("#main_homepage .list_grid_out li");
+            status: "SUCCESS"
+        };
+
         try {
+            await page.waitForLoadState("domcontentloaded");
+            const bookItems = await page.$$(this.SELECTORS.BOOK_ITEMS);
+
             for (const [index, book] of bookItems.entries()) {
                 if (index === this.LIMIT_ITEMS) break;
-                const imageElement = await book.$(".book_avatar img");
-                const nameElement = await book.$(".book_info .book_name a");
-                const viewElement = await book.$(".book_info .text_detail span:nth-child(1)");
-                const followElement = await book.$(".book_info .text_detail span:nth-child(2)");
-                const lastChapterElement = await book.$(".book_info .last_chapter a");
-                const tagElements = await book.$$(".book_info .more-info .list-tags .blue");
-        
-                const imageUrlThumbnail = imageElement ? await imageElement.getAttribute("src") : "";
-                const name = nameElement ? await nameElement.getAttribute("title") : "";
-                const rawView = viewElement ? await viewElement.textContent() : "";
-                const rawFollow = followElement ? await followElement.textContent() : "";
-                const rawLastChapter = lastChapterElement ? await lastChapterElement.textContent() : "";
-        
-                const rawTags = await Promise.all(tagElements.map(async (tag) => {
-                    return tag.textContent();
-                }));
-        
-                result.data.push({
-                    rank: index + 1,
-                    identifier: this.getIdentifier(String(name)),
-                    imageUrlThumbnail: String(imageUrlThumbnail),
-                    name: String(name),
-                    view: this.justNumber(String(rawView)),
-                    follow: this.justNumber(String(rawFollow)),
-                    lastChapter: this.justNumber(String(rawLastChapter)),
-                    tags: JSON.stringify(rawTags, null),
-                });
+                const bookData = await this.extractBookData(book, index);
+                result.data.push(bookData);
             }
-        } catch (e) {
-            console.error(e);
+        } catch (error) {
+            console.error(`Error in subGetBook for ${dataType}:`, error);
             result.status = "ERROR";
         }
-        
-        return result
+
+        return result;
+    }
+
+    private async navigateAndFetch(page: Page, route: string, dataType: DataType): Promise<IResponseListBook> {
+        await page.goto(`${this.baseUrl}${route}`);
+        return this.subGetBook(page, dataType);
     }
 
     async getTopDay(page: Page): Promise<IResponseListBook> {
-        await page.goto(this.baseUrl + "/top-ngay")
-        return this.subGetBook(page, "TopDay")
+        return this.navigateAndFetch(page, this.ROUTES.TOP_DAY, "TopDay");
     }
 
     async getTopWeek(page: Page): Promise<IResponseListBook> {
-        await page.goto(this.baseUrl + "/top-tuan")
-        return this.subGetBook(page, "TopWeek")
+        return this.navigateAndFetch(page, this.ROUTES.TOP_WEEK, "TopWeek");
     }
 
     async getTopMonth(page: Page): Promise<IResponseListBook> {
-        await page.goto(this.baseUrl + "/top-thang")
-        return this.subGetBook(page, "TopMonth")
+        return this.navigateAndFetch(page, this.ROUTES.TOP_MONTH, "TopMonth");
     }
 
     async getNew(page: Page): Promise<IResponseListBook> {
-        await page.goto(this.baseUrl + "/truyen-tranh-moi")
-        return this.subGetBook(page, "New")
+        return this.navigateAndFetch(page, this.ROUTES.NEW, "New");
     }
 
     async getFavorite(page: Page): Promise<IResponseListBook> {
-        await page.goto(this.baseUrl + "/truyen-yeu-thich")
-        return this.subGetBook(page, "Favorite")
+        return this.navigateAndFetch(page, this.ROUTES.FAVORITE, "Favorite");
+    }
+
+    async crawl(page: Page) {
+        useBlockResource(page, [
+            "image",
+            "media",
+            "font",
+            "script",
+            "stylesheet",
+            "xhr"
+        ]);
+        return  super.crawl(page);
     }
 }

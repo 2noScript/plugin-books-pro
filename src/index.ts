@@ -1,17 +1,18 @@
 import { Suppliers } from "./models/types"
-import { TruyenQQ, Metruyencv } from "./plugin"
+import * as PluginBooks from "./plugin"
+import {bookSuppliers} from "./constants/suppliers"
 
 export class Books {
     protected bookStore: Record<Suppliers, any>
     constructor() {
         this.bookStore = {
-            [Suppliers.TruyenQQ]: TruyenQQ,
-            [Suppliers.Metruyencv]: Metruyencv,
+            [Suppliers.TruyenQQ]: PluginBooks.TruyenQQ,
+            [Suppliers.Metruyencv]: PluginBooks.Metruyencv,
         }
     }
 
-    build(supplier: Suppliers, domain: string) {
-        return new this.bookStore[supplier](domain)
+    build(supplier: Suppliers) {
+        return new this.bookStore[supplier](bookSuppliers[supplier].domain)
     }
 }
 

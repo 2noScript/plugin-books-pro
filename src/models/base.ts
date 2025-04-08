@@ -14,7 +14,7 @@ export abstract class BaseBook {
     abstract getTopMonth(page: Page): Promise<IResponseListBook>
     abstract getNew(page: Page): Promise<IResponseListBook>
     abstract getFavorite(page: Page): Promise<IResponseListBook>
-
+    
     async crawl(page: Page) {
         const topDay = await this.getTopDay(page)
         const topWeek = await this.getTopWeek(page)
@@ -24,23 +24,6 @@ export abstract class BaseBook {
         return { topDay, topWeek, topMonth, bookNew, bookFavorite }
     }
 
-    protected useSleep(s: number) {
-        return new Promise(resolve => setTimeout(resolve, s * 1000))
-    }
-    protected async useScroll(page: Page, maxScrolls = 100) {
-        let prevHeight = -1
-        let scrollCount = 0
-        while (scrollCount < maxScrolls) {
-            await page.evaluate(
-                "window.scrollTo(0, document.body.scrollHeight)"
-            )
-            let newHeight = await page.evaluate("document.body.scrollHeight")
-            if (newHeight == prevHeight) {
-                break
-            }
-            scrollCount += 1
-        }
-    }
     protected getIdentifier(str: string) {
         return str
             .normalize("NFD")
