@@ -131,11 +131,7 @@ Example response:
 |        | TruyenFull   | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/truyenfull.ico" width="20">   | https://truyenfull.vision |
 |        | XaloSach     | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/xalosach.ico" width="20">     | https://xalosach.com      |
 |        | SSTruyen     | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/sstruyen.ico" width="20">     | https://sstruyen.vn       |
-|        | TruyenFullTV | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/truyenfulltv.ico" width="20"> | https://truyenfull.tv     |
-|        | MeTruyenHot  | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/metruyenhot.ico" width="20">  | https://metruyenhot.vn    |
-|        | eNovel       | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/enovel.ico" width="20">       | https://enovel.mobi       |
-|        | TruyenYY     | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/truyenyy.ico" width="20">     | https://truyenyy.vip      |
-|        | DTruyen      | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/dtruyen.ico" width="20">      | https://dtruyen.net       |
+|        | TruyenYY     | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/truyenyy.ico" width="20">     | https://truyenyy.xyz     |
 
 <!-- ### Other Sources
 

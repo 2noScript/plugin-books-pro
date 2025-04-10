@@ -1,0 +1,5 @@
+- https://www.qidian.com
+- https://www.17k.com
+- http://www.zongheng.com
+- https://www.69shu.com
+- https://www.630shu.net
