@@ -27,9 +27,9 @@ export default class Metruyencv extends BaseBook {
     private transformBookData(book: any, index: number) {
         const bookData = book.book || book;
         return {
+            rank: index + 1,
             identifier: this.getIdentifier(bookData.name),
             name: bookData.name,
-            rank: index + 1,
             view: bookData.view_count,
             like: bookData.like_count,
             comment: bookData.comment_count,

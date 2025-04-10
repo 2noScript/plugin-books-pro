@@ -90,13 +90,13 @@ Example response:
 ### Manga Sources
 | Status | Source | URL |
 |--------|---------|-----|
-| ✅ | TruyenQQ | https://truyenqqto.com |
+|✅| TruyenQQ | https://truyenqqto.com |
 | | Pops | https://pops.vn |
 | | ManhuaVN | https://manhuavn.top |
 | | ManhuaRock | https://manhuarockz.com |
 | | MangaToon | https://mangatooncom.vn |
 | | Comico | https://www.comico.jp |
-| | MangaDex | https://mangadex.org |
+|✅| MangaDex | https://mangadex.org |
 | | Naver Comic | https://comic.naver.com |
 
 ### Novel Sources

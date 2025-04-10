@@ -14,9 +14,9 @@ export default class Mangadex extends BaseBook {
         const title =
             book.attributes.title.en || Object.values(book.attributes.title)[0]
         return {
+            rank: index + 1,
             identifier: this.getIdentifier(title),
             name: title,
-            rank: index + 1,
             follow: stat.follows,
             comment: stat.comments?.repliesCount ?? 0,
             rating: stat.rating?.average ? (stat.rating.average / 10) * 5 : 0,
