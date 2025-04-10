@@ -12,7 +12,8 @@
     "dev": "nodemon --exec  ts-node  test/index.ts",
     "dev:metruyencv": "nodemon --exec  ts-node test/metruyencv.test.ts",
     "dev:truyenqq": "nodemon --exec  ts-node test/truyenqq.test.ts",
-    "dev:mangadex": "nodemon --exec  ts-node test/mangadex.test.ts"
+    "dev:mangadex": "nodemon --exec  ts-node test/mangadex.test.ts",
+    "dev:manhuavn": "nodemon --exec  ts-node test/manhuavn.test.ts"
   },
   "devDependencies": {
     "@types/node": "^22.13.3",
