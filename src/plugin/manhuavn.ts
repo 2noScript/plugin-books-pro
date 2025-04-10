@@ -3,7 +3,7 @@ import { BaseBook } from "../models/base"
 import { IResponseListBook, DataType } from "../models/types"
 
 
-class Manhuavn extends BaseBook {
+export default class Manhuavn extends BaseBook {
     
     getNew(page: Page): Promise<IResponseListBook> {
         throw new Error("Method not implemented.")
