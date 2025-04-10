@@ -9,6 +9,7 @@ export class Books {
             [Suppliers.TruyenQQ]: PluginBooks.TruyenQQ,
             [Suppliers.Metruyencv]: PluginBooks.Metruyencv,
             [Suppliers.Mangadex]: PluginBooks.Mangadex,
+            [Suppliers.Manhuavn]: PluginBooks.Manhuavn,
         }
     }
 
