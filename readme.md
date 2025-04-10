@@ -1,7 +1,8 @@
 # Plugin Comic Pro
-[![npm version](https://badge.fury.io/js/plugin-comic-pro.svg)](https://badge.fury.io/js/plugin-comic-pro)
-A powerful library for crawling manga and novel content from various sources.
 
+[![npm version](https://badge.fury.io/js/plugin-comic-pro.svg)](https://badge.fury.io/js/plugin-comic-pro)
+
+A powerful library for crawling manga and novel content from various sources.
 
 ### Mode Develop 
 ```shell
