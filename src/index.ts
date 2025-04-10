@@ -8,6 +8,7 @@ export class Books {
         this.bookStore = {
             [Suppliers.TruyenQQ]: PluginBooks.TruyenQQ,
             [Suppliers.Metruyencv]: PluginBooks.Metruyencv,
+            [Suppliers.Mangadex]: PluginBooks.Mangadex,
         }
     }
 

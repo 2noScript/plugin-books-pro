@@ -7,7 +7,8 @@ export type DataType ="Top" | "New" | "Favorite"
 export type BookType="Comic"|"Novel"
 export enum Suppliers {
     Metruyencv = "Metruyencv",
-    TruyenQQ = "truyenqq",
+    TruyenQQ = "Truyenqq",
+    Mangadex = "Mangadex",
 }
 
 export interface ISourceInfo {
@@ -33,7 +34,8 @@ export interface IBook {
     comment?:number,
     imageUrlThumbnail: string
     imagePathThumbnail?: string
-    description?: string
+    description?: string,
+    rating?:number
 }
 
 export interface IResponseListBook {

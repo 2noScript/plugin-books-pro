@@ -103,7 +103,7 @@ Example response:
 | Status | Source | URL |
 |--------|---------|-----|
 |✅| Metruyencv | https://metruyencv.com |
-| | TruyenFull | https://truyenfull.io |
+| | TruyenFull | https://truyenfull.vision |
 | | XaloSach | https://xalosach.com |
 | | SSTruyen | https://sstruyen.vn |
 | | TruyenFullTV | https://truyenfull.tv |

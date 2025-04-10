@@ -47,4 +47,14 @@ export abstract class BaseBook {
             status: "WITHOUT",
         })
     }
+
+    protected ErrorIResponseListBook(
+        dataType: DataType
+    ): Promise<IResponseListBook> {
+        return Promise.resolve({
+            dataType,
+            data: [],
+            status: "ERROR",
+        })
+    }
 }
