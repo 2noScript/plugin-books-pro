@@ -146,5 +146,8 @@ Example response:
 |        | Waka | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/waka.ico" width="20"> | https://waka.vn |
 
 Legend:
-
 -   ✅ Completed
+
+## Dependencies
+- [t2-browser-worker](https://www.npmjs.com/package/t2-browser-worker) 
+- [playwright](https://www.npmjs.com/package/playwright) 
