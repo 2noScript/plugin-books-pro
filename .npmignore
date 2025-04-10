@@ -34,3 +34,5 @@ __tests__/
 # Other
 .DS_Store
 browser
+assets
+

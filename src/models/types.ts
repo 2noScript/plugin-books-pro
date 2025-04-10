@@ -9,6 +9,7 @@ export enum Suppliers {
     Metruyencv = "Metruyencv",
     TruyenQQ = "Truyenqq",
     Mangadex = "Mangadex",
+    Manhuavn = "Manhuavn",
 }
 
 export interface ISourceInfo {
