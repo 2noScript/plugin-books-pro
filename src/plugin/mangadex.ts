@@ -24,7 +24,7 @@ export default class Mangadex extends BaseBook {
                 .map((tag: any) => tag.attributes.name.en)
                 .filter(Boolean)
                 .join(","),
-            imageUrlThumbnail: book.attributes.coverUrl,
+            imageUrlThumbnail: `https://mangadex.org/title/${book.id}/${book.attributes.links.ap}`,
             description:
                 book.attributes.description?.en ||
                 Object.values(book.attributes.description || {})[0] ||
