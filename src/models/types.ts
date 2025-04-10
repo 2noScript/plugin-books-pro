@@ -22,9 +22,11 @@ export interface ISourceInfo {
 }
 
 export interface IBook {
+    rank: number,
     identifier: string
     name: string
-    rank: number
+    link: string,
+    imageUrlThumbnail: string
     view?: number
     like?: number
     follow?: number,
@@ -32,7 +34,6 @@ export interface IBook {
     lastChapter?:number,
     author?:string,
     comment?:number,
-    imageUrlThumbnail: string
     imagePathThumbnail?: string
     description?: string,
     rating?:number

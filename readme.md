@@ -58,7 +58,8 @@ Example response:
                 comment: 3000,
                 imageUrlThumbnail: "https://example.com/one-piece.jpg",
                 imagePathThumbnail: "/images/manga/one-piece.jpg",
-                description: "Gol D. Roger was known as the Pirate King..."
+                description: "Gol D. Roger was known as the Pirate King...",
+                link: "https://mangadex.org/title/a1c7c817-4e59-43b7-9365-09675a149a6f"
             },
             // ... more items
         ]
@@ -80,13 +81,30 @@ Example response:
                 comment: 1500,
                 imageUrlThumbnail: "https://example.com/jjk.jpg",
                 imagePathThumbnail: "/images/manga/jujutsu-kaisen.jpg",
-                description: "A boy fights... to help people..."
+                description: "A boy fights... to help people...",
+                link: "https://mangadex.org/title/c52b2ce3-7f95-469c-96b0-479524fb7a1a"
             }
         },
 }
 ```
-
-#### Comic
+### Book Fields
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| rank | number | ✓ | Position in the list |
+| identifier | string | ✓ | Unique identifier (normalized name) |
+| name | string | ✓ | Book title |
+| link | string | ✓ | URL to book page |
+| imageUrlThumbnail | string | ✓ | Cover image URL |
+| view | number | | View count |
+| like | number | | Like count |
+| follow | number | | Follow/bookmark count |
+| tags | string | | Categories/genres (comma-separated) |
+| lastChapter | number | | Latest chapter number |
+| author | string | | Author name |
+| comment | number | | Comment count |
+| imagePathThumbnail | string | | Local path to cover image |
+| description | string | | Book synopsis |
+| rating | number | | Rating score (0-5) |
 
 ### Manga Sources
 | Status | Source | URL |

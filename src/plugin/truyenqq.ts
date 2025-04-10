@@ -10,7 +10,8 @@ export default class TruyenQQ extends BaseBook {
         VIEW: ".book_info .text_detail span:nth-child(1)",
         FOLLOW: ".book_info .text_detail span:nth-child(2)",
         LAST_CHAPTER: ".book_info .last_chapter a",
-        TAGS: ".book_info .more-info .list-tags .blue"
+        TAGS: ".book_info .more-info .list-tags .blue",
+        Link: ".book_avatar a"
     };
 
     private readonly ROUTES = {
@@ -26,6 +27,7 @@ export default class TruyenQQ extends BaseBook {
         const followElement = await book.$(this.SELECTORS.FOLLOW);
         const lastChapterElement = await book.$(this.SELECTORS.LAST_CHAPTER);
         const tagElements = await book.$$(this.SELECTORS.TAGS);
+        const linkElement = await book.$(this.SELECTORS.Link);
 
         const imageUrlThumbnail = await imageElement?.getAttribute("src") || "";
         const name = await nameElement?.getAttribute("title") || "";
@@ -35,16 +37,18 @@ export default class TruyenQQ extends BaseBook {
         const rawTags = await Promise.all(
             tagElements.map((tag: any) => tag.textContent())
         );
+        const link = await linkElement?.getAttribute("href") || "";
 
         return {
             rank: index + 1,
             identifier: this.getIdentifier(String(name)),
-            imageUrlThumbnail: String(imageUrlThumbnail),
             name: String(name),
+            link: String(link),
+            imageUrlThumbnail: String(imageUrlThumbnail),
             view: this.justNumber(String(rawView)),
             follow: this.justNumber(String(rawFollow)),
             lastChapter: this.justNumber(String(rawLastChapter)),
-            tags: JSON.stringify(rawTags, null)
+            tags: JSON.stringify(rawTags, null),
         };
     }
 

@@ -30,13 +30,14 @@ export default class Metruyencv extends BaseBook {
             rank: index + 1,
             identifier: this.getIdentifier(bookData.name),
             name: bookData.name,
+            link: bookData.link,
+            imageUrlThumbnail: bookData.poster.default,
             view: bookData.view_count,
             like: bookData.like_count,
             comment: bookData.comment_count,
             follow: bookData.bookmark_count,
             author: bookData.author?.name,
             tags: bookData.genres.map((item: any) => item.name).join(","),
-            imageUrlThumbnail: bookData.poster.default,
             description: bookData.synopsis,
         };
     }
