@@ -4,7 +4,8 @@
 
 A powerful library for crawling manga and novel content from various sources.
 
-### Mode Develop 
+### Mode Develop
+
 ```shell
 yarn dev:[supplier-name]
 ```
@@ -22,23 +23,26 @@ yarn add plugin-comic-pro
 ```
 
 ## Usage
+
 ```ts
-import { Books, Suppliers } from 'plugin-comic-pro';
-import { BrowserWorker } from 't2-browser-worker';
+import { Books, Suppliers } from "plugin-comic-pro"
+import { BrowserWorker } from "t2-browser-worker"
 
-const worker = new BrowserWorker();
-const books = new Books();
+const worker = new BrowserWorker()
+const books = new Books()
 
-const crawler = books.build(Suppliers.TruyenQQ);
+const crawler = books.build(Suppliers.TruyenQQ)
 
 // Start crawling
-const result = await worker.runTask(async (page) => {
-    return await crawler.crawl(page);
-});
+const result = await worker.runTask(async page => {
+    return await crawler.crawl(page)
+})
 ```
+
 ## Crawl Response Data
 
 Example response:
+
 ```ts
 {
     top: {
@@ -87,54 +91,60 @@ Example response:
         },
 }
 ```
+
 ### Book Fields
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| rank | number | ✓ | Position in the list |
-| identifier | string | ✓ | Unique identifier (normalized name) |
-| name | string | ✓ | Book title |
-| link | string | ✓ | URL to book page |
-| imageUrlThumbnail | string | ✓ | Cover image URL |
-| view | number | | View count |
-| like | number | | Like count |
-| follow | number | | Follow/bookmark count |
-| tags | string | | Categories/genres (comma-separated) |
-| lastChapter | number | | Latest chapter number |
-| author | string | | Author name |
-| comment | number | | Comment count |
-| imagePathThumbnail | string | | Local path to cover image |
-| description | string | | Book synopsis |
-| rating | number | | Rating score (0-5) |
+
+| Field              | Type   | Required | Description                         |
+| ------------------ | ------ | -------- | ----------------------------------- |
+| rank               | number | ✓        | Position in the list                |
+| identifier         | string | ✓        | Unique identifier (normalized name) |
+| name               | string | ✓        | Book title                          |
+| link               | string | ✓        | URL to book page                    |
+| imageUrlThumbnail  | string | ✓        | Cover image URL                     |
+| view               | number |          | View count                          |
+| like               | number |          | Like count                          |
+| follow             | number |          | Follow/bookmark count               |
+| tags               | string |          | Categories/genres (comma-separated) |
+| lastChapter        | number |          | Latest chapter number               |
+| author             | string |          | Author name                         |
+| comment            | number |          | Comment count                       |
+| imagePathThumbnail | string |          | Local path to cover image           |
+| description        | string |          | Book synopsis                       |
+| rating             | number |          | Rating score (0-5)                  |
 
 ### Manga Sources
-| Status | Source | URL |
-|--------|---------|-----|
-|✅| TruyenQQ | https://truyenqqto.com |
-| | Pops | https://pops.vn |
-| | ManhuaVN | https://manhuavn.top |
-| | ManhuaRock | https://manhuarockz.com |
-| | MangaToon | https://mangatooncom.vn |
-| | Comico | https://www.comico.jp |
-|✅| MangaDex | https://mangadex.org |
-| | Naver Comic | https://comic.naver.com |
+
+| Status | Key         | Icon | URL                     |
+| ------ | ----------- | ---- | ----------------------- |
+| ✅     | TruyenQQ    | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/truyenqq.ico" width="20"> | https://truyenqqto.com  |
+|        | Pops        | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/pops.ico" width="20"> | https://pops.vn         |
+|        | Manhuavn    | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/manhuavn.ico" width="20"> | https://manhuavn.top    |
+|        | ManhuaRock  | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/manhuarock.ico" width="20"> | https://manhuarockz.com |
+|        | MangaToon   | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/mangatoon.ico" width="20"> | https://mangatooncom.vn |
+|        | Comico      | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/comico.ico" width="20"> | https://www.comico.jp   |
+| ✅     | Mangadex    | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/mangadex.ico" width="20"> | https://mangadex.org    |
+|        | Naver Comic | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/naver.ico" width="20"> | https://comic.naver.com |
 
 ### Novel Sources
-| Status | Source | URL |
-|--------|---------|-----|
-|✅| Metruyencv | https://metruyencv.com |
-| | TruyenFull | https://truyenfull.vision |
-| | XaloSach | https://xalosach.com |
-| | SSTruyen | https://sstruyen.vn |
-| | TruyenFullTV | https://truyenfull.tv |
-| | MeTruyenHot | https://metruyenhot.vn |
-| | eNovel | https://enovel.mobi |
-| | TruyenYY | https://truyenyy.vip |
-| | DTruyen | https://dtruyen.net |
+
+| Status | Key          | Icon | URL                       |
+| ------ | ------------ | ---- | ------------------------- |
+| ✅     | Metruyencv   | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/metruyencv.ico" width="20"> | https://metruyencv.com    |
+|        | TruyenFull   | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/truyenfull.ico" width="20"> | https://truyenfull.vision |
+|        | XaloSach     | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/xalosach.ico" width="20"> | https://xalosach.com      |
+|        | SSTruyen     | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/sstruyen.ico" width="20"> | https://sstruyen.vn       |
+|        | TruyenFullTV | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/truyenfulltv.ico" width="20"> | https://truyenfull.tv     |
+|        | MeTruyenHot  | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/metruyenhot.ico" width="20"> | https://metruyenhot.vn    |
+|        | eNovel       | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/enovel.ico" width="20"> | https://enovel.mobi       |
+|        | TruyenYY     | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/truyenyy.ico" width="20"> | https://truyenyy.vip      |
+|        | DTruyen      | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/dtruyen.ico" width="20"> | https://dtruyen.net       |
 
 ### Other Sources
-| Status | Source | URL |
-|--------|---------|-----|
-| | Waka | https://waka.vn |
+
+| Status | Key  | Icon | URL             |
+| ------ | ---- | ---- | --------------- |
+|        | Waka | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/waka.ico" width="20"> | https://waka.vn |
 
 Legend:
-- ✅ Completed
+
+-   ✅ Completed
