@@ -42,13 +42,13 @@ export default class TruyenQQ extends BaseBook {
         return {
             rank: index + 1,
             identifier: this.getIdentifier(String(name)),
-            imageUrlThumbnail: String(imageUrlThumbnail),
             name: String(name),
+            link: String(link),
+            imageUrlThumbnail: String(imageUrlThumbnail),
             view: this.justNumber(String(rawView)),
             follow: this.justNumber(String(rawFollow)),
             lastChapter: this.justNumber(String(rawLastChapter)),
             tags: JSON.stringify(rawTags, null),
-            link: String(link)
         };
     }
 
