@@ -1,9 +1,9 @@
 {
-  "name": "plugin-Books-pro",
+  "name": "plugin-books-pro",
   "version": "0.0.1",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "repository": "git@github.com:2noScript/plugin-Books-pro.git",
+  "repository": "git@github.com:2noScript/plugin-books-pro.git",
   "author": "2noScript <thangmk7@gmail.com>",
   "license": "MIT",
   "scripts": {

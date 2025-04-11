@@ -1,6 +1,6 @@
 # Plugin Books Pro
 
-[![npm version](https://badge.fury.io/js/plugin-Books-pro.svg)](https://badge.fury.io/js/plugin-Books-pro)
+[![npm version](https://badge.fury.io/js/plugin-books-pro.svg)](https://badge.fury.io/js/plugin-books-pro)
 
 A powerful library for crawling manga and novel content from various sources.
 
@@ -19,13 +19,13 @@ yarn build
 ## Installation
 
 ```bash
-yarn add plugin-Books-pro
+yarn add plugin-books-pro
 ```
 
 ## Usage
 
 ```ts
-import { Books, Suppliers } from "plugin-Books-pro"
+import { Books, Suppliers } from "plugin-books-pro"
 import { BrowserWorker } from "t2-browser-worker"
 
 const worker = new BrowserWorker()
