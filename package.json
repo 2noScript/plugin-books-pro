@@ -1,6 +1,6 @@
 {
   "name": "plugin-comic-pro",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "repository": "git@github.com:2noScript/plugin-comic-pro.git",

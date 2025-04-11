@@ -114,24 +114,24 @@ Example response:
 
 ### Manga Sources
 
-| Status | Key         | Icon                                                                                                                | URL                     |
-| ------ | ----------- | ------------------------------------------------------------------------------------------------------------------- | ----------------------- |
-| ✓      | TruyenQQ    | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/truyenqq.ico" width="20">   | https://truyenqqto.com  |
-| ✓      | Manhuavn    | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/manhuavn.ico" width="20">   | https://manhuavn.top    |
-|        | ManhuaRock  | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/manhuarock.ico" width="20"> | https://manhuarock2.site |
-|        | MangaToon   | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/mangatoon.ico" width="20">  | https://mangatooncom.vn |
-| ✓      | Mangadex    | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/mangadex.ico" width="20">   | https://mangadex.org    |
-|        | NaverComic | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/naver_comic.ico" width="20">      | https://comic.naver.com |
+| Status | Icon                                                                                                                 | Key        | URL                      |
+| ------ | -------------------------------------------------------------------------------------------------------------------- | ---------- | ------------------------ |
+| ✓      | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/truyenqq.ico" width="20">    | TruyenQQ   | https://truyenqqto.com   |
+| ✓      | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/manhuavn.ico" width="20">    | Manhuavn   | https://manhuavn.top     |
+|        | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/manhuarock.ico" width="20">  | ManhuaRock | https://manhuarock2.site |
+|        | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/mangatoon.ico" width="20">   | MangaToon  | https://mangatooncom.vn  |
+| ✓      | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/mangadex.ico" width="20">    | Mangadex   | https://mangadex.org     |
+|        | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/naver_comic.ico" width="20"> | NaverComic | https://comic.naver.com  |
 
 ### Novel Sources
 
-| Status | Key          | Icon                                                                                                                  | URL                       |
-| ------ | ------------ | --------------------------------------------------------------------------------------------------------------------- | ------------------------- |
-| ✓      | Metruyencv   | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/metruyencv.ico" width="20">   | https://metruyencv.com    |
-|        | TruyenFull   | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/truyenfull.ico" width="20">   | https://truyenfull.vision |
-|        | XaloSach     | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/xalosach.ico" width="20">     | https://xalosach.com      |
-|        | SSTruyen     | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/sstruyen.ico" width="20">     | https://sstruyen.vn       |
-|        | TruyenYY     | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/truyenyy.ico" width="20">     | https://truyenyy.xyz     |
+| Status | Icon                                                                                                                | Key        | URL                       |
+| ------ | ------------------------------------------------------------------------------------------------------------------- | ---------- | ------------------------- |
+| ✓      | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/metruyencv.ico" width="20"> | Metruyencv | https://metruyencv.com    |
+|        | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/truyenfull.ico" width="20"> | TruyenFull | https://truyenfull.vision |
+|        | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/xalosach.ico" width="20">   | XaloSach   | https://xalosach.com      |
+|        | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/sstruyen.ico" width="20">   | SSTruyen   | https://sstruyen.vn       |
+|        | <img src="https://raw.githubusercontent.com/2noScript/plugin-books-pro/main/assets/icon/truyenyy.ico" width="20">   | TruyenYY   | https://truyenyy.xyz      |
 
 <!-- ### Other Sources
 
