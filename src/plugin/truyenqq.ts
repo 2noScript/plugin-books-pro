@@ -48,7 +48,7 @@ export default class TruyenQQ extends BaseBook {
             view: this.justNumber(String(rawView)),
             follow: this.justNumber(String(rawFollow)),
             lastChapter: this.justNumber(String(rawLastChapter)),
-            tags: JSON.stringify(rawTags, null),
+            tags: rawTags.filter(Boolean).map(tag => tag.trim()).join(','),
         };
     }
 
